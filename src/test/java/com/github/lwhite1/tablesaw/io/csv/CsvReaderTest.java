@@ -1,7 +1,6 @@
 package com.github.lwhite1.tablesaw.io.csv;
 
 import com.github.lwhite1.tablesaw.api.ColumnType;
-import com.github.lwhite1.tablesaw.api.ShortColumn;
 import com.github.lwhite1.tablesaw.api.Table;
 import com.github.lwhite1.tablesaw.columns.Column;
 import org.junit.Ignore;

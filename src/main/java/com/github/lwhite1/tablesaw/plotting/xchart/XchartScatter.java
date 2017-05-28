@@ -1,6 +1,6 @@
 package com.github.lwhite1.tablesaw.plotting.xchart;
 
-import com.github.lwhite1.tablesaw.api.NumericColumn;
+import com.github.lwhite1.tablesaw.api.DoubleColumn;
 import com.github.lwhite1.tablesaw.table.TemporaryView;
 import com.github.lwhite1.tablesaw.table.ViewGroup;
 import com.github.lwhite1.tablesaw.util.DoubleArrays;
@@ -21,21 +21,21 @@ public class XchartScatter {
 
     private static final String WINDOW_TITLE = "Tablesaw";
 
-    public static void show(String chartTitle, NumericColumn yColumn) {
+    public static void show(String chartTitle, DoubleColumn yColumn) {
         double[] x = DoubleArrays.toN(yColumn.size());
         show(chartTitle, x, yColumn, DEFAULT_WIDTH, DEFAULT_HEIGHT);
     }
 
-    public static void show(String chartTitle, NumericColumn xColumn, NumericColumn yColumn, int markerSize) {
+    public static void show(String chartTitle, DoubleColumn xColumn, DoubleColumn yColumn, int markerSize) {
         show(chartTitle, xColumn, yColumn, DEFAULT_WIDTH, DEFAULT_HEIGHT, markerSize);
     }
 
-    public static void show(String chartTitle, NumericColumn xColumn, NumericColumn yColumn) {
+    public static void show(String chartTitle, DoubleColumn xColumn, DoubleColumn yColumn) {
         int markerSize = 3;
         show(chartTitle, xColumn, yColumn, DEFAULT_WIDTH, DEFAULT_HEIGHT, markerSize);
     }
 
-    public static void show(String chartTitle, NumericColumn xColumn, NumericColumn yColumn, ViewGroup group) {
+    public static void show(String chartTitle, DoubleColumn xColumn, DoubleColumn yColumn, ViewGroup group) {
         XYChart chart = new XYChart(DEFAULT_WIDTH, DEFAULT_HEIGHT);
         chart.setTitle(chartTitle);
         chart.setXAxisTitle(xColumn.name());
@@ -56,8 +56,8 @@ public class XchartScatter {
     }
 
     public static void show(String chartTitle,
-                            NumericColumn xColumn,
-                            NumericColumn yColumn,
+                            DoubleColumn xColumn,
+                            DoubleColumn yColumn,
                             ViewGroup group,
                             int markerSize) {
         XYChart chart = new XYChart(DEFAULT_WIDTH, DEFAULT_HEIGHT);
@@ -79,8 +79,8 @@ public class XchartScatter {
     }
 
     public static void show(String chartTitle,
-                            NumericColumn xColumn,
-                            NumericColumn yColumn,
+                            DoubleColumn xColumn,
+                            DoubleColumn yColumn,
                             int width,
                             int height,
                             int markerSize) {
@@ -101,7 +101,7 @@ public class XchartScatter {
         new SwingWrapper<>(chart).displayChart(WINDOW_TITLE);
     }
 
-    public static void show(String chartTitle, double[] xData, NumericColumn yColumn, int width, int height) {
+    public static void show(String chartTitle, double[] xData, DoubleColumn yColumn, int width, int height) {
         double[] yData = yColumn.toDoubleArray();
 
         // Create Chart

@@ -1,7 +1,6 @@
 package com.github.lwhite1.tablesaw.store;
 
-import com.github.lwhite1.tablesaw.api.FloatColumn;
-import com.github.lwhite1.tablesaw.api.IntColumn;
+import com.github.lwhite1.tablesaw.api.DoubleColumn;
 import com.github.lwhite1.tablesaw.api.Table;
 import com.github.lwhite1.tablesaw.testutil.DirectoryUtils;
 import com.github.lwhite1.tablesaw.testutil.NanoBench;
@@ -24,7 +23,7 @@ public class SnappyCompressionBenchmark {
 
         File TEST_FOLDER = Paths.get("testfolder").toFile();
         Table t = Table.create("Test");
-        final FloatColumn c = new FloatColumn("fc");
+        final DoubleColumn c = new DoubleColumn("fc");
         t.addColumn(c);
 
         Path path = Paths.get("testfolder");
@@ -56,7 +55,7 @@ public class SnappyCompressionBenchmark {
 
         File TEST_FOLDER = Paths.get("testfolder").toFile();
         Table t = Table.create("Test");
-        final IntColumn c = IntColumn.create("fc", 10_000_000);
+        final DoubleColumn c = DoubleColumn.create("fc", 10_000_000);
         t.addColumn(c);
         RandomDataGenerator randomDataGenerator = new RandomDataGenerator();
 

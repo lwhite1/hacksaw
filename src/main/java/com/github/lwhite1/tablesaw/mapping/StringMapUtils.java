@@ -1,7 +1,7 @@
 package com.github.lwhite1.tablesaw.mapping;
 
 import com.github.lwhite1.tablesaw.api.CategoryColumn;
-import com.github.lwhite1.tablesaw.api.FloatColumn;
+import com.github.lwhite1.tablesaw.api.DoubleColumn;
 import com.github.lwhite1.tablesaw.columns.Column;
 import com.google.common.base.Strings;
 import org.apache.commons.lang3.StringUtils;
@@ -158,7 +158,7 @@ public interface StringMapUtils extends Column {
      */
     default Column distance(Column column2) {
 
-        FloatColumn newColumn = FloatColumn.create(name() + column2.name() + "[distance]");
+        DoubleColumn newColumn = DoubleColumn.create(name() + column2.name() + "[distance]");
 
         for (int r = 0; r < size(); r++) {
             String value1 = getString(r);

@@ -2,9 +2,7 @@ package com.github.lwhite1.tablesaw.examples;
 
 import com.github.lwhite1.tablesaw.api.CategoryColumn;
 import com.github.lwhite1.tablesaw.api.ColumnType;
-import com.github.lwhite1.tablesaw.api.FloatColumn;
-import com.github.lwhite1.tablesaw.api.IntColumn;
-import com.github.lwhite1.tablesaw.api.ShortColumn;
+import com.github.lwhite1.tablesaw.api.DoubleColumn;
 import com.github.lwhite1.tablesaw.api.Table;
 import com.github.lwhite1.tablesaw.api.ml.classification.ConfusionMatrix;
 import com.github.lwhite1.tablesaw.api.ml.classification.LogisticRegression;
@@ -26,11 +24,11 @@ public class SfCrimeTest {
 
         crime.removeColumns("DayOfWeek");
 
-        IntColumn precinct = crime.categoryColumn("PdDistrict").toIntColumn();
+        DoubleColumn precinct = crime.categoryColumn("PdDistrict").toDoubleColumn();
         precinct.setName("Precinct");
         crime.addColumn(precinct);
 
-        ShortColumn year = crime.dateTimeColumn("Dates").year();
+        DoubleColumn year = crime.dateTimeColumn("Dates").year();
         year.setName("Year");
         crime.addColumn(year);
 
@@ -38,15 +36,15 @@ public class SfCrimeTest {
         Table categorySummary = category.summary().sortDescendingOn("Count");
         out(categorySummary.print());
 
-        ShortColumn minuteOfDay = crime.dateTimeColumn("Dates").minuteOfDay();
+        DoubleColumn minuteOfDay = crime.dateTimeColumn("Dates").minuteOfDay();
         minuteOfDay.setName("MinuteOfDay");
         crime.addColumn(minuteOfDay);
 
-        ShortColumn dayOfYear = crime.dateTimeColumn("Dates").dayOfYear();
+        DoubleColumn dayOfYear = crime.dateTimeColumn("Dates").dayOfYear();
         dayOfYear.setName("DayOfYear");
         crime.addColumn(dayOfYear);
 
-        ShortColumn dayOfWeekValue = crime.dateTimeColumn("Dates").dayOfWeekValue();
+        DoubleColumn dayOfWeekValue = crime.dateTimeColumn("Dates").dayOfWeekValue();
         dayOfWeekValue.setName("DayOfWeek");
         crime.addColumn(dayOfWeekValue);
 
@@ -90,53 +88,53 @@ public class SfCrimeTest {
         // true, ','));
 
         ColumnType[] columnTypes = {
-                INTEGER, // 0     Id
-                FLOAT,  // 1     ARSON
-                FLOAT,  // 2     ASSAULT
-                FLOAT,  // 3     BAD CHECKS
-                FLOAT,  // 4     BRIBERY
-                FLOAT,  // 5     BURGLARY
-                FLOAT,  // 6     DISORDERLY CONDUCT
-                FLOAT,  // 7     DRIVING UNDER THE INFLUENCE
-                FLOAT,  // 8     DRUG/NARCOTIC
-                FLOAT,  // 9     DRUNKENNESS
-                FLOAT,  // 10    EMBEZZLEMENT
-                FLOAT,  // 11    EXTORTION
-                FLOAT,  // 12    FAMILY OFFENSES
-                FLOAT,  // 13    FORGERY/COUNTERFEITING
-                FLOAT,  // 14    FRAUD
-                FLOAT,  // 15    GAMBLING
-                FLOAT,  // 16    KIDNAPPING
-                FLOAT,  // 17    LARCENY/THEFT
-                FLOAT,  // 18    LIQUOR LAWS
-                FLOAT,  // 19    LOITERING
-                FLOAT,  // 20    MISSING PERSON
-                FLOAT,  // 21    NON-CRIMINAL
-                FLOAT,  // 22    OTHER OFFENSES
-                FLOAT,  // 23    PORNOGRAPHY/OBSCENE MAT
-                FLOAT,  // 24    PROSTITUTION
-                FLOAT,  // 25    RECOVERED VEHICLE
-                FLOAT,  // 26    ROBBERY
-                FLOAT,  // 27    RUNAWAY
-                FLOAT,  // 28    SECONDARY CODES
-                FLOAT,  // 29    SEX OFFENSES FORCIBLE
-                FLOAT,  // 30    SEX OFFENSES NON FORCIBLE
-                FLOAT,  // 31    STOLEN PROPERTY
-                FLOAT,  // 32    SUICIDE
-                FLOAT,  // 33    SUSPICIOUS OCC
-                FLOAT,  // 34    TREA
-                FLOAT,  // 35    TRESPASS
-                FLOAT,  // 36    VANDALISM
-                FLOAT,  // 37    VEHICLE THEFT
-                FLOAT,  // 38    WARRANTS
-                FLOAT,  // 39    WEAPON LAWS
+                DOUBLE, // 0     Id
+                DOUBLE,  // 1     ARSON
+                DOUBLE,  // 2     ASSAULT
+                DOUBLE,  // 3     BAD CHECKS
+                DOUBLE,  // 4     BRIBERY
+                DOUBLE,  // 5     BURGLARY
+                DOUBLE,  // 6     DISORDERLY CONDUCT
+                DOUBLE,  // 7     DRIVING UNDER THE INFLUENCE
+                DOUBLE,  // 8     DRUG/NARCOTIC
+                DOUBLE,  // 9     DRUNKENNESS
+                DOUBLE,  // 10    EMBEZZLEMENT
+                DOUBLE,  // 11    EXTORTION
+                DOUBLE,  // 12    FAMILY OFFENSES
+                DOUBLE,  // 13    FORGERY/COUNTERFEITING
+                DOUBLE,  // 14    FRAUD
+                DOUBLE,  // 15    GAMBLING
+                DOUBLE,  // 16    KIDNAPPING
+                DOUBLE,  // 17    LARCENY/THEFT
+                DOUBLE,  // 18    LIQUOR LAWS
+                DOUBLE,  // 19    LOITERING
+                DOUBLE,  // 20    MISSING PERSON
+                DOUBLE,  // 21    NON-CRIMINAL
+                DOUBLE,  // 22    OTHER OFFENSES
+                DOUBLE,  // 23    PORNOGRAPHY/OBSCENE MAT
+                DOUBLE,  // 24    PROSTITUTION
+                DOUBLE,  // 25    RECOVERED VEHICLE
+                DOUBLE,  // 26    ROBBERY
+                DOUBLE,  // 27    RUNAWAY
+                DOUBLE,  // 28    SECONDARY CODES
+                DOUBLE,  // 29    SEX OFFENSES FORCIBLE
+                DOUBLE,  // 30    SEX OFFENSES NON FORCIBLE
+                DOUBLE,  // 31    STOLEN PROPERTY
+                DOUBLE,  // 32    SUICIDE
+                DOUBLE,  // 33    SUSPICIOUS OCC
+                DOUBLE,  // 34    TREA
+                DOUBLE,  // 35    TRESPASS
+                DOUBLE,  // 36    VANDALISM
+                DOUBLE,  // 37    VEHICLE THEFT
+                DOUBLE,  // 38    WARRANTS
+                DOUBLE,  // 39    WEAPON LAWS
         };
 
         Table results = Table.createFromCsv(columnTypes,
                 "/Users/larrywhite/IdeaProjects/testdata/bigdata/sampleSubmission.csv");
 
-        FloatColumn larceny = results.floatColumn("LARCENY/THEFT");
-        FloatColumn warrants = results.floatColumn("WARRANTS");
+        DoubleColumn larceny = results.floatColumn("LARCENY/THEFT");
+        DoubleColumn warrants = results.floatColumn("WARRANTS");
 
         Table trueCrime = testData();
         for (int row : trueCrime) {
@@ -163,23 +161,23 @@ public class SfCrimeTest {
 
         trueCrime.removeColumns("DayOfWeek");
 
-        IntColumn precinctT = trueCrime.categoryColumn("PdDistrict").toIntColumn();
+        DoubleColumn precinctT = trueCrime.categoryColumn("PdDistrict").toDoubleColumn;
         precinctT.setName("Precinct");
         trueCrime.addColumn(precinctT);
 
-        ShortColumn yearT = trueCrime.dateTimeColumn("Dates").year();
+        DoubleColumn yearT = trueCrime.dateTimeColumn("Dates").year();
         yearT.setName("Year");
         trueCrime.addColumn(yearT);
 
-        ShortColumn minuteOfDayT = trueCrime.dateTimeColumn("Dates").minuteOfDay();
+        DoubleColumn minuteOfDayT = trueCrime.dateTimeColumn("Dates").minuteOfDay();
         minuteOfDayT.setName("MinuteOfDay");
         trueCrime.addColumn(minuteOfDayT);
 
-        ShortColumn dayOfYearT = trueCrime.dateTimeColumn("Dates").dayOfYear();
+        DoubleColumn dayOfYearT = trueCrime.dateTimeColumn("Dates").dayOfYear();
         dayOfYearT.setName("DayOfYear");
         trueCrime.addColumn(dayOfYearT);
 
-        ShortColumn dayOfWeekValueT = trueCrime.dateTimeColumn("Dates").dayOfWeekValue();
+        DoubleColumn dayOfWeekValueT = trueCrime.dateTimeColumn("Dates").dayOfWeekValue();
         dayOfWeekValueT.setName("DayOfWeek");
         trueCrime.addColumn(dayOfWeekValueT);
         return trueCrime;

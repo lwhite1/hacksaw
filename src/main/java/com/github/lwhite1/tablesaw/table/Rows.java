@@ -5,10 +5,7 @@ import com.github.lwhite1.tablesaw.api.CategoryColumn;
 import com.github.lwhite1.tablesaw.api.ColumnType;
 import com.github.lwhite1.tablesaw.api.DateColumn;
 import com.github.lwhite1.tablesaw.api.DateTimeColumn;
-import com.github.lwhite1.tablesaw.api.FloatColumn;
-import com.github.lwhite1.tablesaw.api.IntColumn;
-import com.github.lwhite1.tablesaw.api.LongColumn;
-import com.github.lwhite1.tablesaw.api.ShortColumn;
+import com.github.lwhite1.tablesaw.api.DoubleColumn;
 import com.github.lwhite1.tablesaw.api.Table;
 import com.github.lwhite1.tablesaw.api.TimeColumn;
 import com.github.lwhite1.tablesaw.util.Selection;
@@ -31,17 +28,8 @@ public class Rows {
         for (int columnIndex = 0; columnIndex < oldTable.columnCount(); columnIndex++) {
             ColumnType columnType = oldTable.column(columnIndex).type();
             switch (columnType) {
-                case FLOAT:
-                    copy(rows, (FloatColumn) oldTable.column(columnIndex), (FloatColumn) newTable.column(columnIndex));
-                    break;
-                case INTEGER:
-                    copy(rows, (IntColumn) oldTable.column(columnIndex), (IntColumn) newTable.column(columnIndex));
-                    break;
-                case SHORT_INT:
-                    copy(rows, (ShortColumn) oldTable.column(columnIndex), (ShortColumn) newTable.column(columnIndex));
-                    break;
-                case LONG_INT:
-                    copy(rows, (LongColumn) oldTable.column(columnIndex), (LongColumn) newTable.column(columnIndex));
+                case DOUBLE:
+                    copy(rows, (DoubleColumn) oldTable.column(columnIndex), (DoubleColumn) newTable.column(columnIndex));
                     break;
                 case CATEGORY:
                     copy(rows, (CategoryColumn) oldTable.column(columnIndex), (CategoryColumn) newTable.column
@@ -74,17 +62,8 @@ public class Rows {
         for (int columnIndex = 0; columnIndex < oldTable.columnCount(); columnIndex++) {
             ColumnType columnType = oldTable.column(columnIndex).type();
             switch (columnType) {
-                case FLOAT:
-                    copy(rows, (FloatColumn) oldTable.column(columnIndex), (FloatColumn) newTable.column(columnIndex));
-                    break;
-                case INTEGER:
-                    copy(rows, (IntColumn) oldTable.column(columnIndex), (IntColumn) newTable.column(columnIndex));
-                    break;
-                case SHORT_INT:
-                    copy(rows, (ShortColumn) oldTable.column(columnIndex), (ShortColumn) newTable.column(columnIndex));
-                    break;
-                case LONG_INT:
-                    copy(rows, (LongColumn) oldTable.column(columnIndex), (LongColumn) newTable.column(columnIndex));
+                case DOUBLE:
+                    copy(rows, (DoubleColumn) oldTable.column(columnIndex), (DoubleColumn) newTable.column(columnIndex));
                     break;
                 case CATEGORY:
                     copyRow(row, (CategoryColumn) oldTable.column(columnIndex), (CategoryColumn) newTable.column
@@ -116,24 +95,9 @@ public class Rows {
         for (int columnIndex = 0; columnIndex < original.columnCount(); columnIndex++) {
             ColumnType columnType = original.column(columnIndex).type();
             switch (columnType) {
-                case FLOAT:
-                    result = compare(rowInOriginal, (FloatColumn) tempTable.column(columnIndex), (FloatColumn)
+                case DOUBLE:
+                    result = compare(rowInOriginal, (DoubleColumn) tempTable.column(columnIndex), (DoubleColumn)
                             original.column(columnIndex));
-                    if (!result) return false;
-                    break;
-                case INTEGER:
-                    result = compare(rowInOriginal, (IntColumn) tempTable.column(columnIndex), (IntColumn) original
-                            .column(columnIndex));
-                    if (!result) return false;
-                    break;
-                case SHORT_INT:
-                    result = compare(rowInOriginal, (ShortColumn) tempTable.column(columnIndex), (ShortColumn)
-                            original.column(columnIndex));
-                    if (!result) return false;
-                    break;
-                case LONG_INT:
-                    result = compare(rowInOriginal, (LongColumn) tempTable.column(columnIndex), (LongColumn) original
-                            .column(columnIndex));
                     if (!result) return false;
                     break;
                 case CATEGORY:
@@ -192,13 +156,13 @@ public class Rows {
         copyRowsToTable(rows, oldTable, newTable);
     }
 
-    private static void copy(IntArrayList rows, FloatColumn oldColumn, FloatColumn newColumn) {
+    private static void copy(IntArrayList rows, DoubleColumn oldColumn, DoubleColumn newColumn) {
         for (int index : rows) {
             newColumn.append(oldColumn.get(index));
         }
     }
 
-    private static boolean compare(int row, FloatColumn tempTable, FloatColumn original) {
+    private static boolean compare(int row, DoubleColumn tempTable, DoubleColumn original) {
         return original.get(row) == tempTable.get(tempTable.size() - 1);
     }
 
@@ -223,38 +187,6 @@ public class Rows {
     }
 
     private static boolean compare(int row, BooleanColumn tempTable, BooleanColumn original) {
-        return original.get(row) == tempTable.get(tempTable.size() - 1);
-    }
-
-    private static void copy(IntArrayList rows, IntColumn oldColumn, IntColumn newColumn) {
-        for (int index : rows) {
-            newColumn.append(oldColumn.get(index));
-        }
-    }
-
-    private static boolean compare(int row, IntColumn tempTable, IntColumn original) {
-        return original.get(row) == tempTable.get(tempTable.size() - 1);
-    }
-
-    private static void copy(IntArrayList rows, ShortColumn oldColumn, ShortColumn newColumn) {
-        for (int index : rows) {
-            newColumn.append(oldColumn.get(index));
-        }
-    }
-
-    private static boolean compare(int row, ShortColumn tempTable, ShortColumn original) {
-        short t = tempTable.get(tempTable.size() - 1);
-        short o = original.get(row);
-        return o == t;
-    }
-
-    private static void copy(IntArrayList rows, LongColumn oldColumn, LongColumn newColumn) {
-        for (int index : rows) {
-            newColumn.append(oldColumn.get(index));
-        }
-    }
-
-    private static boolean compare(int row, LongColumn tempTable, LongColumn original) {
         return original.get(row) == tempTable.get(tempTable.size() - 1);
     }
 

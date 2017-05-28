@@ -1,6 +1,6 @@
 package com.github.lwhite1.tablesaw.plotting.xchart;
 
-import com.github.lwhite1.tablesaw.api.NumericColumn;
+import com.github.lwhite1.tablesaw.api.DoubleColumn;
 import com.github.lwhite1.tablesaw.table.TemporaryView;
 import com.github.lwhite1.tablesaw.table.ViewGroup;
 import com.github.lwhite1.tablesaw.util.DoubleArrays;
@@ -18,21 +18,21 @@ public class XchartLine {
 
     private static final String WINDOW_TITLE = "Tablesaw";
 
-    public static void show(String chartTitle, NumericColumn yColumn) {
+    public static void show(String chartTitle, DoubleColumn yColumn) {
         double[] x = DoubleArrays.toN(yColumn.size());
         show(chartTitle, x, yColumn, 600, 400);
     }
 
-    public static void show(String chartTitle, NumericColumn xColumn, NumericColumn yColumn, int markerSize) {
+    public static void show(String chartTitle, DoubleColumn xColumn, DoubleColumn yColumn, int markerSize) {
         show(chartTitle, xColumn, yColumn, 600, 400, markerSize);
     }
 
-    public static void show(String chartTitle, NumericColumn xColumn, NumericColumn yColumn) {
+    public static void show(String chartTitle, DoubleColumn xColumn, DoubleColumn yColumn) {
         int markerSize = 2;
         show(chartTitle, xColumn, yColumn, 600, 400, markerSize);
     }
 
-    public static void show(String chartTitle, NumericColumn xColumn, NumericColumn yColumn, ViewGroup group) {
+    public static void show(String chartTitle, DoubleColumn xColumn, DoubleColumn yColumn, ViewGroup group) {
         XYChart chart = new XYChart(600, 400);
         chart.setTitle(chartTitle);
         chart.setXAxisTitle(xColumn.name());
@@ -52,8 +52,8 @@ public class XchartLine {
     }
 
     public static void show(String chartTitle,
-                            NumericColumn xColumn,
-                            NumericColumn yColumn,
+                            DoubleColumn xColumn,
+                            DoubleColumn yColumn,
                             ViewGroup group,
                             int markerSize) {
         XYChart chart = new XYChart(600, 400);
@@ -75,8 +75,8 @@ public class XchartLine {
     }
 
     public static void show(String chartTitle,
-                            NumericColumn xColumn,
-                            NumericColumn yColumn,
+                            DoubleColumn xColumn,
+                            DoubleColumn yColumn,
                             int width,
                             int height,
                             int markerSize) {
@@ -97,7 +97,7 @@ public class XchartLine {
         new SwingWrapper<>(chart).displayChart(WINDOW_TITLE);
     }
 
-    public static void show(String chartTitle, double[] xData, NumericColumn yColumn, int width, int height) {
+    public static void show(String chartTitle, double[] xData, DoubleColumn yColumn, int width, int height) {
         double[] yData = yColumn.toDoubleArray();
 
         // Create Chart

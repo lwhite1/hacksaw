@@ -4,11 +4,7 @@ import com.github.lwhite1.tablesaw.api.BooleanColumn;
 import com.github.lwhite1.tablesaw.api.CategoryColumn;
 import com.github.lwhite1.tablesaw.api.DateColumn;
 import com.github.lwhite1.tablesaw.api.DateTimeColumn;
-import com.github.lwhite1.tablesaw.api.FloatColumn;
-import com.github.lwhite1.tablesaw.api.IntColumn;
-import com.github.lwhite1.tablesaw.api.LongColumn;
-import com.github.lwhite1.tablesaw.api.NumericColumn;
-import com.github.lwhite1.tablesaw.api.ShortColumn;
+import com.github.lwhite1.tablesaw.api.DoubleColumn;
 import com.github.lwhite1.tablesaw.api.Table;
 import com.github.lwhite1.tablesaw.api.TimeColumn;
 import com.github.lwhite1.tablesaw.columns.Column;
@@ -217,36 +213,12 @@ public class TemporaryView implements Relation, IntIterable {
         return (BooleanColumn) column(columnName).subset(rowMap);
     }
 
-    public FloatColumn floatColumn(int columnIndex) {
-        return (FloatColumn) column(columnIndex).subset(rowMap);
+    public DoubleColumn doubleColumn(int columnIndex) {
+        return (DoubleColumn) column(columnIndex).subset(rowMap);
     }
 
-    public FloatColumn floatColumn(String columnName) {
-        return (FloatColumn) column(columnName).subset(rowMap);
-    }
-
-    public IntColumn intColumn(String columnName) {
-        return (IntColumn) column(columnName).subset(rowMap);
-    }
-
-    public IntColumn intColumn(int columnIndex) {
-        return (IntColumn) column(columnIndex).subset(rowMap);
-    }
-
-    public ShortColumn shortColumn(String columnName) {
-        return (ShortColumn) column(columnName).subset(rowMap);
-    }
-
-    public ShortColumn shortColumn(int columnIndex) {
-        return (ShortColumn) column(columnIndex).subset(rowMap);
-    }
-
-    public LongColumn longColumn(String columnName) {
-        return (LongColumn) column(columnName).subset(rowMap);
-    }
-
-    public LongColumn longColumn(int columnIndex) {
-        return (LongColumn) column(columnIndex).subset(rowMap);
+    public DoubleColumn doubleColumn(String columnName) {
+        return (DoubleColumn) column(columnName).subset(rowMap);
     }
 
     public DateColumn dateColumn(int columnIndex) {
@@ -281,12 +253,12 @@ public class TemporaryView implements Relation, IntIterable {
         return (CategoryColumn) column(columnIndex).subset(rowMap);
     }
 
-    public NumericColumn numericColumn(int columnIndex) {
-        return (NumericColumn) column(columnIndex).subset(rowMap);
+    public DoubleColumn numericColumn(int columnIndex) {
+        return (DoubleColumn) column(columnIndex).subset(rowMap);
     }
 
-    public NumericColumn numericColumn(String columnName) {
-        return (NumericColumn) column(columnName).subset(rowMap);
+    public DoubleColumn numericColumn(String columnName) {
+        return (DoubleColumn) column(columnName).subset(rowMap);
     }
 
     @Override

@@ -11,11 +11,11 @@ import it.unimi.dsi.fastutil.ints.IntArrayList;
 /**
  * An index for four-byte floating point columns
  */
-public class FloatIndex {
+public class DoubleIndex {
 
     private final Double2ObjectAVLTreeMap<IntArrayList> index;
 
-    public FloatIndex(DoubleColumn column) {
+    public DoubleIndex(DoubleColumn column) {
         int sizeEstimate = Integer.min(1_000_000, column.size() / 100);
         Double2ObjectOpenHashMap<IntArrayList> tempMap = new Double2ObjectOpenHashMap<>(sizeEstimate);
         for (int i = 0; i < column.size(); i++) {

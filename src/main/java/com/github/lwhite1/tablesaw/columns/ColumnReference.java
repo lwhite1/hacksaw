@@ -1,30 +1,23 @@
 package com.github.lwhite1.tablesaw.columns;
 
-import com.github.lwhite1.tablesaw.api.IntColumn;
+import com.github.lwhite1.tablesaw.api.DoubleColumn;
 import com.github.lwhite1.tablesaw.columns.packeddata.PackedLocalDate;
 import com.github.lwhite1.tablesaw.filtering.BooleanIsFalse;
 import com.github.lwhite1.tablesaw.filtering.BooleanIsTrue;
 import com.github.lwhite1.tablesaw.filtering.DateEqualTo;
 import com.github.lwhite1.tablesaw.filtering.Filter;
-import com.github.lwhite1.tablesaw.filtering.FloatEqualTo;
-import com.github.lwhite1.tablesaw.filtering.FloatGreaterThan;
-import com.github.lwhite1.tablesaw.filtering.FloatGreaterThanOrEqualTo;
-import com.github.lwhite1.tablesaw.filtering.FloatLessThan;
-import com.github.lwhite1.tablesaw.filtering.FloatLessThanOrEqualTo;
-import com.github.lwhite1.tablesaw.filtering.IntBetween;
-import com.github.lwhite1.tablesaw.filtering.IntEqualTo;
-import com.github.lwhite1.tablesaw.filtering.IntGreaterThan;
-import com.github.lwhite1.tablesaw.filtering.IntGreaterThanOrEqualTo;
-import com.github.lwhite1.tablesaw.filtering.IntIsIn;
-import com.github.lwhite1.tablesaw.filtering.IntLessThan;
-import com.github.lwhite1.tablesaw.filtering.IntLessThanOrEqualTo;
+import com.github.lwhite1.tablesaw.filtering.DoubleGreaterThan;
+import com.github.lwhite1.tablesaw.filtering.DoubleGreaterThanOrEqualTo;
+import com.github.lwhite1.tablesaw.filtering.DoubleLessThan;
+import com.github.lwhite1.tablesaw.filtering.DoubleLessThanOrEqualTo;
+import com.github.lwhite1.tablesaw.filtering.DoubleBetween;
+import com.github.lwhite1.tablesaw.filtering.DoubleIsIn;
 import com.github.lwhite1.tablesaw.filtering.IsMissing;
 import com.github.lwhite1.tablesaw.filtering.IsNotMissing;
 import com.github.lwhite1.tablesaw.filtering.LocalDateBetween;
 import com.github.lwhite1.tablesaw.filtering.StringEqualTo;
 import com.github.lwhite1.tablesaw.filtering.StringNotEqualTo;
 import com.github.lwhite1.tablesaw.filtering.TimeEqualTo;
-import com.github.lwhite1.tablesaw.filtering.columnbased.ColumnEqualTo;
 import com.github.lwhite1.tablesaw.filtering.dates.LocalDateIsAfter;
 import com.github.lwhite1.tablesaw.filtering.dates.LocalDateIsBefore;
 import com.github.lwhite1.tablesaw.filtering.datetimes.DateTimeIsBefore;
@@ -112,24 +105,12 @@ public class ColumnReference {
         return new IsMissing(this);
     }
 
-    public Filter isEqualTo(int value) {
-        return new IntEqualTo(this, value);
-    }
-
-    public Filter isEqualTo(ColumnReference reference) {
-        return new ColumnEqualTo(this, reference);
-    }
-
     public Filter isBetween(int low, int high) {
-        return new IntBetween(this, low, high);
+        return new DoubleBetween(this, low, high);
     }
 
     public Filter isBetween(LocalDate low, LocalDate high) {
         return new LocalDateBetween(this, low, high);
-    }
-
-    public Filter isEqualTo(float value) {
-        return new FloatEqualTo(this, value);
     }
 
     public Filter isEqualTo(LocalTime value) {
@@ -148,48 +129,32 @@ public class ColumnReference {
         return new StringNotEqualTo(this, value);
     }
 
-    public Filter isGreaterThan(int value) {
-        return new IntGreaterThan(this, value);
-    }
-
-    public Filter isIn(IntColumn intColumn) {
-        return new IntIsIn(this, intColumn);
+    public Filter isIn(DoubleColumn intColumn) {
+        return new DoubleIsIn(this, intColumn);
     }
 
     public Filter isIn(String... strings) {
         return new TextIsIn(this, strings);
     }
 
-    public Filter isIn(int... ints) {
-        return new IntIsIn(this, ints);
-    }
-
-    public Filter isLessThan(int value) {
-        return new IntLessThan(this, value);
-    }
-
-    public Filter isLessThanOrEqualTo(int value) {
-        return new IntLessThanOrEqualTo(this, value);
-    }
-
-    public Filter isGreaterThanOrEqualTo(int value) {
-        return new IntGreaterThanOrEqualTo(this, value);
+    public Filter isIn(double... doubles) {
+        return new DoubleIsIn(this, doubles);
     }
 
     public Filter isGreaterThan(float value) {
-        return new FloatGreaterThan(this, value);
+        return new DoubleGreaterThan(this, value);
     }
 
     public Filter isLessThan(float value) {
-        return new FloatLessThan(this, value);
+        return new DoubleLessThan(this, value);
     }
 
     public Filter isLessThanOrEqualTo(float value) {
-        return new FloatLessThanOrEqualTo(this, value);
+        return new DoubleLessThanOrEqualTo(this, value);
     }
 
     public Filter isGreaterThanOrEqualTo(float value) {
-        return new FloatGreaterThanOrEqualTo(this, value);
+        return new DoubleGreaterThanOrEqualTo(this, value);
     }
 
     public String getColumnName() {

@@ -5,10 +5,7 @@ import com.github.lwhite1.tablesaw.api.CategoryColumn;
 import com.github.lwhite1.tablesaw.api.ColumnType;
 import com.github.lwhite1.tablesaw.api.DateColumn;
 import com.github.lwhite1.tablesaw.api.DateTimeColumn;
-import com.github.lwhite1.tablesaw.api.FloatColumn;
-import com.github.lwhite1.tablesaw.api.IntColumn;
-import com.github.lwhite1.tablesaw.api.LongColumn;
-import com.github.lwhite1.tablesaw.api.ShortColumn;
+import com.github.lwhite1.tablesaw.api.DoubleColumn;
 import com.github.lwhite1.tablesaw.api.Table;
 import com.github.lwhite1.tablesaw.api.TimeColumn;
 import com.github.lwhite1.tablesaw.columns.Column;
@@ -51,21 +48,9 @@ public class SubTable extends Table {
             Column column = column(i);
             ColumnType type = column.type();
             switch (type) {
-                case FLOAT:
-                    FloatColumn floatColumn = (FloatColumn) column;
-                    floatColumn.append(sourceTable.floatColumn(i).get(rowIndex));
-                    break;
-                case INTEGER:
-                    IntColumn intColumn = (IntColumn) column;
-                    intColumn.append(sourceTable.intColumn(i).get(rowIndex));
-                    break;
-                case SHORT_INT:
-                    ShortColumn shortColumn = (ShortColumn) column;
-                    shortColumn.append(sourceTable.shortColumn(i).get(rowIndex));
-                    break;
-                case LONG_INT:
-                    LongColumn longColumn = (LongColumn) column;
-                    longColumn.append(sourceTable.longColumn(i).get(rowIndex));
+                case DOUBLE:
+                    DoubleColumn floatColumn = (DoubleColumn) column;
+                    floatColumn.append(sourceTable.doubleColumn(i).get(rowIndex));
                     break;
                 case BOOLEAN:
                     BooleanColumn booleanColumn = (BooleanColumn) column;

@@ -1,6 +1,6 @@
 package com.github.lwhite1.tablesaw;
 
-import com.github.lwhite1.tablesaw.api.FloatColumn;
+import com.github.lwhite1.tablesaw.api.DoubleColumn;
 import com.github.lwhite1.tablesaw.api.Table;
 import com.github.lwhite1.tablesaw.columns.Column;
 import org.junit.Before;
@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 public class TableTest {
 
     private Table table;
-    private FloatColumn column = new FloatColumn("f1");
+    private DoubleColumn column = new DoubleColumn("f1");
 
     @Before
     public void setUp() throws Exception {
@@ -44,7 +44,7 @@ public class TableTest {
     @Test
     public void testRowCount() throws Exception {
         assertEquals(0, table.rowCount());
-        FloatColumn floatColumn = column;
+        DoubleColumn floatColumn = column;
         floatColumn.append(2f);
         assertEquals(1, table.rowCount());
 

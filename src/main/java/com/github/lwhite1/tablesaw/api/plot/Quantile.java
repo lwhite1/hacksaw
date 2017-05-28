@@ -1,6 +1,6 @@
 package com.github.lwhite1.tablesaw.api.plot;
 
-import com.github.lwhite1.tablesaw.api.NumericColumn;
+import com.github.lwhite1.tablesaw.api.DoubleColumn;
 import com.github.lwhite1.tablesaw.plotting.xchart.XchartQuantile;
 
 /**
@@ -8,19 +8,19 @@ import com.github.lwhite1.tablesaw.plotting.xchart.XchartQuantile;
  */
 public class Quantile {
 
-    public static void show(String chartTitle, NumericColumn yColumn) {
+    public static void show(String chartTitle, DoubleColumn yColumn) {
         double[] x = new double[yColumn.size()];
 
         for (int i = 0; i < x.length; i++) {
             x[i] = i / (float) x.length;
         }
 
-        NumericColumn copy = (NumericColumn) yColumn.copy();
+        DoubleColumn copy = (DoubleColumn) yColumn.copy();
         copy.sortAscending();
         show(chartTitle, x, copy);
     }
 
-    public static void show(String chartTitle, double[] xData, NumericColumn yColumn) {
+    public static void show(String chartTitle, double[] xData, DoubleColumn yColumn) {
 
         // Create Chart
         XchartQuantile.show(chartTitle, xData, yColumn, 600, 400);

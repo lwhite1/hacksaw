@@ -2,10 +2,6 @@ package com.github.lwhite1.tablesaw.util;
 
 import com.github.lwhite1.tablesaw.api.CategoryColumn;
 import com.github.lwhite1.tablesaw.api.DoubleColumn;
-import com.github.lwhite1.tablesaw.api.FloatColumn;
-import com.github.lwhite1.tablesaw.api.IntColumn;
-import com.github.lwhite1.tablesaw.api.LongColumn;
-import com.github.lwhite1.tablesaw.api.ShortColumn;
 import com.github.lwhite1.tablesaw.api.Table;
 import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 
@@ -14,31 +10,23 @@ import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
  */
 public class Stats {
 
-    long n;
-    double sum;
-    double mean;
-    double min;
-    double max;
-    double variance;
-    double standardDeviation;
-    double geometricMean;
-    double quadraticMean;
-    double secondMoment;
-    double populationVariance;
-    double sumOfLogs;
-    double sumOfSquares;
+    private long n;
+    private double sum;
+    private double mean;
+    private double min;
+    private double max;
+    private double variance;
+    private double standardDeviation;
+    private double geometricMean;
+    private double quadraticMean;
+    private double secondMoment;
+    private double populationVariance;
+    private double sumOfLogs;
+    private double sumOfSquares;
     private String name;
 
     public Stats(String name) {
         this.name = name;
-    }
-
-    public static Stats create(final FloatColumn values) {
-        SummaryStatistics summaryStatistics = new SummaryStatistics();
-        for (float f : values) {
-            summaryStatistics.addValue(f);
-        }
-        return getStats(values, summaryStatistics);
     }
 
     public static Stats create(final DoubleColumn values) {
@@ -47,39 +35,6 @@ public class Stats {
             summaryStatistics.addValue(f);
         }
         return getStats(values, summaryStatistics);
-    }
-
-    public static Stats create(final IntColumn ints) {
-        FloatColumn values = FloatColumn.create(ints.name(), ints.toFloatArray());
-        return create(values);
-    }
-
-    public static Stats create(final ShortColumn ints) {
-        FloatColumn values = FloatColumn.create(ints.name(), ints.toFloatArray());
-        return create(values);
-    }
-
-    public static Stats create(final LongColumn ints) {
-        FloatColumn values = FloatColumn.create(ints.name(), ints.toFloatArray());
-        return create(values);
-    }
-
-    private static Stats getStats(FloatColumn values, SummaryStatistics summaryStatistics) {
-        Stats stats = new Stats("Column: " + values.name());
-        stats.min = (float) summaryStatistics.getMin();
-        stats.max = (float) summaryStatistics.getMax();
-        stats.n = summaryStatistics.getN();
-        stats.sum = summaryStatistics.getSum();
-        stats.variance = summaryStatistics.getVariance();
-        stats.populationVariance = summaryStatistics.getPopulationVariance();
-        stats.quadraticMean = summaryStatistics.getQuadraticMean();
-        stats.geometricMean = summaryStatistics.getGeometricMean();
-        stats.mean = summaryStatistics.getMean();
-        stats.standardDeviation = summaryStatistics.getStandardDeviation();
-        stats.sumOfLogs = summaryStatistics.getSumOfLogs();
-        stats.sumOfSquares = summaryStatistics.getSumsq();
-        stats.secondMoment = summaryStatistics.getSecondMoment();
-        return stats;
     }
 
     private static Stats getStats(DoubleColumn values, SummaryStatistics summaryStatistics) {
@@ -159,7 +114,7 @@ public class Stats {
     public Table asTable() {
         Table t = Table.create(name);
         CategoryColumn measure = CategoryColumn.create("Measure");
-        FloatColumn value = FloatColumn.create("Value");
+        DoubleColumn value = DoubleColumn.create("Value");
         t.addColumn(measure);
         t.addColumn(value);
 
@@ -194,7 +149,7 @@ public class Stats {
         Table t = asTable();
 
         CategoryColumn measure = t.categoryColumn("Measure");
-        FloatColumn value = t.floatColumn("Value");
+        DoubleColumn value = t.doubleColumn("Value");
 
         measure.add("Sum of Squares");
         value.append(sumOfSquares());

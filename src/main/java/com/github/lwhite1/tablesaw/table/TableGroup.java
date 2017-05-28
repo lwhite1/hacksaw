@@ -1,7 +1,7 @@
 package com.github.lwhite1.tablesaw.table;
 
 import com.github.lwhite1.tablesaw.api.CategoryColumn;
-import com.github.lwhite1.tablesaw.api.FloatColumn;
+import com.github.lwhite1.tablesaw.api.DoubleColumn;
 import com.github.lwhite1.tablesaw.api.Table;
 import com.github.lwhite1.tablesaw.columns.Column;
 import com.github.lwhite1.tablesaw.reducing.NumericReduceFunction;
@@ -133,7 +133,7 @@ public class TableGroup implements Iterable<SubTable> {
         Preconditions.checkArgument(!subTables.isEmpty());
         Table t = Table.create(original.name() + " summary");
         CategoryColumn groupColumn = new CategoryColumn("Group", subTables.size());
-        FloatColumn resultColumn = new FloatColumn(function.functionName(), subTables.size());
+        DoubleColumn resultColumn = new DoubleColumn(function.functionName(), subTables.size());
         t.addColumn(groupColumn);
         t.addColumn(resultColumn);
 

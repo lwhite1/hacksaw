@@ -23,24 +23,6 @@ public class IntIndex {
     };
     private final Int2ObjectAVLTreeMap<IntArrayList> index;
 
-    public IntIndex(IntColumn column) {
-        int sizeEstimate = Integer.min(1_000_000, column.size() / 100);
-        Int2ObjectOpenHashMap<IntArrayList> tempMap = new Int2ObjectOpenHashMap<>(sizeEstimate);
-        for (int i = 0; i < column.size(); i++) {
-            int value = column.get(i);
-            IntArrayList recordIds = tempMap.get(value);
-            if (recordIds == null) {
-                recordIds = new IntArrayList();
-                recordIds.add(i);
-                tempMap.trim();
-                tempMap.put(value, recordIds);
-            } else {
-                recordIds.add(i);
-            }
-        }
-        index = new Int2ObjectAVLTreeMap<>(tempMap);
-    }
-
     public IntIndex(DateColumn column) {
         int sizeEstimate = Integer.min(1_000_000, column.size() / 100);
         Int2ObjectOpenHashMap<IntArrayList> tempMap = new Int2ObjectOpenHashMap<>(sizeEstimate);

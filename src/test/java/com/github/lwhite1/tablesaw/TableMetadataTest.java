@@ -1,6 +1,6 @@
 package com.github.lwhite1.tablesaw;
 
-import com.github.lwhite1.tablesaw.api.FloatColumn;
+import com.github.lwhite1.tablesaw.api.DoubleColumn;
 import com.github.lwhite1.tablesaw.api.Table;
 import com.github.lwhite1.tablesaw.columns.Column;
 import com.github.lwhite1.tablesaw.store.TableMetadata;
@@ -14,8 +14,8 @@ import static org.junit.Assert.assertEquals;
 public class TableMetadataTest {
 
     private Table table;
-    private Column column1 = new FloatColumn("f1");
-    private Column column2 = new FloatColumn("i1");
+    private Column column1 = new DoubleColumn("f1");
+    private Column column2 = new DoubleColumn("i1");
 
     @Before
     public void setUp() throws Exception {

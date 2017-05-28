@@ -3,8 +3,7 @@ package com.github.lwhite1.tablesaw.store;
 import com.github.lwhite1.tablesaw.api.CategoryColumn;
 import com.github.lwhite1.tablesaw.api.ColumnType;
 import com.github.lwhite1.tablesaw.api.DateColumn;
-import com.github.lwhite1.tablesaw.api.FloatColumn;
-import com.github.lwhite1.tablesaw.api.LongColumn;
+import com.github.lwhite1.tablesaw.api.DoubleColumn;
 import com.github.lwhite1.tablesaw.api.Table;
 import com.github.lwhite1.tablesaw.io.csv.CsvReader;
 import com.github.lwhite1.tablesaw.table.Relation;
@@ -27,39 +26,38 @@ public class StorageManagerTest {
     private static final int COUNT = 5;
     // column types for the tornado table
     private static final ColumnType[] COLUMN_TYPES = {
-            FLOAT,   // number by year
-            FLOAT,   // year
-            FLOAT,   // month
-            FLOAT,   // day
+            DOUBLE,   // number by year
+            DOUBLE,   // year
+            DOUBLE,   // month
+            DOUBLE,   // day
             LOCAL_DATE,  // date
             LOCAL_TIME,  // time
             CATEGORY, // tz
             CATEGORY, // st
             CATEGORY, // state fips
-            FLOAT,    // state torn number
-            FLOAT,    // scale
-            FLOAT,    // injuries
-            FLOAT,    // fatalities
+            DOUBLE,    // state torn number
+            DOUBLE,    // scale
+            DOUBLE,    // injuries
+            DOUBLE,    // fatalities
             CATEGORY, // loss
-            FLOAT,   // crop loss
-            FLOAT,   // St. Lat
-            FLOAT,   // St. Lon
-            FLOAT,   // End Lat
-            FLOAT,   // End Lon
-            FLOAT,   // length
-            FLOAT,   // width
-            FLOAT,   // NS
-            FLOAT,   // SN
-            FLOAT,   // SG
+            DOUBLE,   // crop loss
+            DOUBLE,   // St. Lat
+            DOUBLE,   // St. Lon
+            DOUBLE,   // End Lat
+            DOUBLE,   // End Lon
+            DOUBLE,   // length
+            DOUBLE,   // width
+            DOUBLE,   // NS
+            DOUBLE,   // SN
+            DOUBLE,   // SG
             CATEGORY,  // Count FIPS 1-4
             CATEGORY,
             CATEGORY,
             CATEGORY};
     private Relation table = Table.create("t");
-    private FloatColumn floatColumn = FloatColumn.create("float");
+    private DoubleColumn floatColumn = DoubleColumn.create("float");
     private CategoryColumn categoryColumn = CategoryColumn.create("cat");
     private DateColumn localDateColumn = DateColumn.create("date");
-    private LongColumn longColumn = LongColumn.create("long");
 
     public static void main(String[] args) throws Exception {
 
@@ -87,12 +85,10 @@ public class StorageManagerTest {
             floatColumn.append((float) i);
             localDateColumn.append(LocalDate.now());
             categoryColumn.add("Category " + i);
-            longColumn.append(i);
         }
         table.addColumn(floatColumn);
         table.addColumn(localDateColumn);
         table.addColumn(categoryColumn);
-        table.addColumn(longColumn);
     }
 
     @Test
@@ -121,7 +117,7 @@ public class StorageManagerTest {
 
         StorageManager.saveTable("/tmp/mytables2", table);
         com.github.lwhite1.tablesaw.api.Table t = StorageManager.readTable("/tmp/mytables2/t.saw");
-        t.floatColumn("float").setName("a float column");
+        t.doubleColumn("float").setName("a float column");
 
         StorageManager.saveTable("/tmp/mytables2", table);
         t = StorageManager.readTable("/tmp/mytables2/t.saw");

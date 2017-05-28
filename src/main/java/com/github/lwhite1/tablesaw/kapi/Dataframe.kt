@@ -5,11 +5,7 @@ import com.github.lwhite1.tablesaw.api.CategoryColumn
 import com.github.lwhite1.tablesaw.api.DateColumn
 import com.github.lwhite1.tablesaw.api.DateTimeColumn
 import com.github.lwhite1.tablesaw.api.DoubleColumn
-import com.github.lwhite1.tablesaw.api.FloatColumn
-import com.github.lwhite1.tablesaw.api.IntColumn
-import com.github.lwhite1.tablesaw.api.LongColumn
 import com.github.lwhite1.tablesaw.api.QueryHelper.column
-import com.github.lwhite1.tablesaw.api.ShortColumn
 import com.github.lwhite1.tablesaw.api.Table
 import com.github.lwhite1.tablesaw.api.TimeColumn
 import com.github.lwhite1.tablesaw.columns.Column
@@ -94,13 +90,9 @@ class Dataframe (val target : Table) {
 
     fun dateCol(columnName: String): DateCol = DateCol(target.dateColumn(columnName))
 
-    fun nCol(columnName: String): NumericCol {
+    fun nCol(columnName: String): DoubleCol {
         val col = target.column(columnName)
         return when (col) {
-            is IntColumn -> IntCol(col)
-            is FloatColumn -> FloatCol(col)
-            is LongColumn -> LongCol(col)
-            is ShortColumn -> ShortCol(col)
             is DoubleColumn -> DoubleCol(col)
             else -> {
                 throw ClassCastException("Non-numeric column type")
@@ -115,19 +107,14 @@ class Dataframe (val target : Table) {
 
     fun col(col: Column<*>): Col {
         return when (col) {
-            is IntColumn -> IntCol(col)
-            is FloatColumn -> FloatCol(col)
-            is LongColumn -> LongCol(col)
-            is ShortColumn -> ShortCol(col)
             is DoubleColumn -> DoubleCol(col)
-
             is DateColumn -> DateCol(col)
             is TimeColumn -> TimeCol(col)
             is DateTimeColumn -> DateTimeCol(col)
             is BooleanColumn -> BooleanCol(col)
             is CategoryColumn -> CategoryCol(col)
             else -> {
-                throw ClassCastException("Non-numeric column type")
+                throw ClassCastException("Unhandled column type")
             }
         }
     }

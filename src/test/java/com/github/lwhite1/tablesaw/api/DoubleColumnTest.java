@@ -34,7 +34,7 @@ public class DoubleColumnTest {
         table.addColumn(doubleColumn);
         table.addColumn(booleanColumn);
         for (int i = 0; i < 1_000_000_000; i++) {
-            doubleColumn.add((double) Math.random());
+            doubleColumn.append((double) Math.random());
             booleanColumn.append(fairy.baseProducer().trueOrFalse());
         }
         Stopwatch stopwatch = Stopwatch.createStarted();
@@ -53,7 +53,7 @@ public class DoubleColumnTest {
 
         DoubleColumn doubleColumn = new DoubleColumn("test", 1_000_000_000);
         for (int i = 0; i < 1_000_000_000; i++) {
-            doubleColumn.add((double) Math.random());
+            doubleColumn.append((double) Math.random());
         }
         Stopwatch stopwatch = Stopwatch.createStarted();
         System.out.println(doubleColumn.sum());
@@ -73,7 +73,7 @@ public class DoubleColumnTest {
         DoubleColumn doubleColumn = new DoubleColumn("test", 1_000_000_000);
         System.out.println("Adding doubles to column");
         for (int i = 0; i < 1_000_000_000; i++) {
-            doubleColumn.add((double) Math.random());
+            doubleColumn.append((double) Math.random());
         }
         System.out.println("Sorting");
         Stopwatch stopwatch = Stopwatch.createStarted();
@@ -89,7 +89,7 @@ public class DoubleColumnTest {
         DoubleColumn doubleColumn = new DoubleColumn("test", size);
         table.addColumn(doubleColumn);
         for (int i = 0; i < size; i++) {
-            doubleColumn.add((double) Math.random());
+            doubleColumn.append((double) Math.random());
         }
         Selection results = doubleColumn.isLessThan(.5f);
         int count = 0;
@@ -110,7 +110,7 @@ public class DoubleColumnTest {
         DoubleColumn doubleColumn = new DoubleColumn("test", size);
         table.addColumn(doubleColumn);
         for (int i = 0; i < size; i++) {
-            doubleColumn.add((double) Math.random());
+            doubleColumn.append((double) Math.random());
         }
         Selection results = doubleColumn.isGreaterThan(.5f);
 
@@ -130,7 +130,7 @@ public class DoubleColumnTest {
         int records = 1_000_000;
         DoubleColumn doubleColumn = new DoubleColumn("test", records);
         for (int i = 0; i < records; i++) {
-            doubleColumn.add((double) Math.random());
+            doubleColumn.append((double) Math.random());
         }
         doubleColumn.sortAscending();
         double last = Double.NEGATIVE_INFINITY;
@@ -147,7 +147,7 @@ public class DoubleColumnTest {
         records = 10;
         doubleColumn = new DoubleColumn("test", records);
         for (int i = 0; i < records; i++) {
-            doubleColumn.add((double) Math.random());
+            doubleColumn.append((double) Math.random());
         }
         doubleColumn.sortDescending();
         last = Double.POSITIVE_INFINITY;
@@ -166,7 +166,7 @@ public class DoubleColumnTest {
         table.addColumn(doubleColumn);
         for (int i = 0; i < 1_000_000; i++) {
             double d = Math.random();
-            doubleColumn.add(d);
+            doubleColumn.append(d);
             doubles[i] = d;
         }
         Selection results;
@@ -182,7 +182,7 @@ public class DoubleColumnTest {
     public void testMaxAndMin() {
         DoubleColumn doubles = new DoubleColumn("doubles", 100);
         for (int i = 0; i < 100; i++) {
-            doubles.add(RandomUtils.nextDouble(0, 10_000));
+            doubles.append(RandomUtils.nextDouble(0, 10_000));
         }
         DoubleArrayList doubles1 = doubles.top(50);
         DoubleArrayList doubles2 = doubles.bottom(50);
@@ -202,7 +202,7 @@ public class DoubleColumnTest {
     public void testRound() {
         DoubleColumn doubles = new DoubleColumn("doubles", 100);
         for (int i = 0; i < 100; i++) {
-            doubles.add(RandomUtils.nextDouble(0, 10_000));
+            doubles.append(RandomUtils.nextDouble(0, 10_000));
         }
         Column newDoubles = doubles.round();
         assertFalse(newDoubles.isEmpty());
@@ -212,7 +212,7 @@ public class DoubleColumnTest {
     public void testLogN() {
         DoubleColumn doubles = new DoubleColumn("doubles", 100);
         for (int i = 0; i < 100; i++) {
-            doubles.add(RandomUtils.nextDouble(0, 10_000));
+            doubles.append(RandomUtils.nextDouble(0, 10_000));
         }
         Column newDoubles = doubles.logN();
         assertFalse(newDoubles.isEmpty());
@@ -222,7 +222,7 @@ public class DoubleColumnTest {
     public void testLog10() {
         DoubleColumn doubles = new DoubleColumn("doubles", 100);
         for (int i = 0; i < 100; i++) {
-            doubles.add(RandomUtils.nextDouble(0, 10_000));
+            doubles.append(RandomUtils.nextDouble(0, 10_000));
         }
         Column newDoubles = doubles.log10();
         assertFalse(newDoubles.isEmpty());
@@ -232,7 +232,7 @@ public class DoubleColumnTest {
     public void testLog1p() {
         DoubleColumn doubles = new DoubleColumn("doubles", 100);
         for (int i = 0; i < 100; i++) {
-            doubles.add(RandomUtils.nextDouble(0, 10_000));
+            doubles.append(RandomUtils.nextDouble(0, 10_000));
         }
         Column newDoubles = doubles.log1p();
         assertFalse(newDoubles.isEmpty());
@@ -242,7 +242,7 @@ public class DoubleColumnTest {
     public void testAbs() {
         DoubleColumn doubles = new DoubleColumn("doubles", 100);
         for (int i = 0; i < 100; i++) {
-            doubles.add(RandomUtils.nextDouble(0, 10_000));
+            doubles.append(RandomUtils.nextDouble(0, 10_000));
         }
         Column newDoubles = doubles.abs();
         assertFalse(newDoubles.isEmpty());
@@ -252,7 +252,7 @@ public class DoubleColumnTest {
     public void testClear() {
         DoubleColumn doubles = new DoubleColumn("doubles", 100);
         for (int i = 0; i < 100; i++) {
-            doubles.add(RandomUtils.nextDouble(0, 10_000));
+            doubles.append(RandomUtils.nextDouble(0, 10_000));
         }
         assertFalse(doubles.isEmpty());
         doubles.clear();
@@ -263,12 +263,12 @@ public class DoubleColumnTest {
     public void testCountMissing() {
         DoubleColumn doubles = new DoubleColumn("doubles", 10);
         for (int i = 0; i < 10; i++) {
-            doubles.add(RandomUtils.nextDouble(0, 1_000));
+            doubles.append(RandomUtils.nextDouble(0, 1_000));
         }
         assertEquals(0, doubles.countMissing());
         doubles.clear();
         for (int i = 0; i < 10; i++) {
-            doubles.add(DoubleColumn.MISSING_VALUE);
+            doubles.append(DoubleColumn.MISSING_VALUE);
         }
         assertEquals(10, doubles.countMissing());
     }
@@ -279,7 +279,7 @@ public class DoubleColumnTest {
         DoubleColumn doubles = new DoubleColumn("doubles", 10);
         double[] uniques = {0.0f, 0.00000001f, -0.000001f, 92923.29340f, 24252, 23442f, 2252, 2342f};
         for (double unique : uniques) {
-            doubles.add(unique);
+            doubles.append(unique);
         }
         assertEquals(uniques.length, doubles.countUnique());
 
@@ -287,7 +287,7 @@ public class DoubleColumnTest {
         double[] notUniques = {0.0f, 0.00000001f, -0.000001f, 92923.29340f, 24252, 23442f, 2252, 2342f, 0f};
 
         for (double notUnique : notUniques) {
-            doubles.add(notUnique);
+            doubles.append(notUnique);
         }
         assertEquals(notUniques.length - 1, doubles.countUnique());
     }
@@ -297,7 +297,7 @@ public class DoubleColumnTest {
         DoubleColumn doubles = new DoubleColumn("doubles", 10);
         double[] uniques = {0.0f, 0.00000001f, -0.000001f, 92923.29340f, 24252, 23442f, 2252, 2342f};
         for (double unique : uniques) {
-            doubles.add(unique);
+            doubles.append(unique);
         }
         assertEquals(uniques.length, doubles.unique().size());
 
@@ -305,7 +305,7 @@ public class DoubleColumnTest {
         double[] notUniques = {0.0f, 0.00000001f, -0.000001f, 92923.29340f, 24252, 23442f, 2252, 2342f, 0f};
 
         for (double notUnique : notUniques) {
-            doubles.add(notUnique);
+            doubles.append(notUnique);
         }
         assertEquals(notUniques.length - 1, doubles.unique().size());
     }
@@ -314,13 +314,13 @@ public class DoubleColumnTest {
     public void testIsMissingAndIsNotMissing() {
         DoubleColumn doubles = new DoubleColumn("doubles", 10);
         for (int i = 0; i < 10; i++) {
-            doubles.add(RandomUtils.nextDouble(0, 1_000));
+            doubles.append(RandomUtils.nextDouble(0, 1_000));
         }
         assertEquals(0, doubles.isMissing().size());
         assertEquals(10, doubles.isNotMissing().size());
         doubles.clear();
         for (int i = 0; i < 10; i++) {
-            doubles.add(DoubleColumn.MISSING_VALUE);
+            doubles.append(DoubleColumn.MISSING_VALUE);
         }
         assertEquals(10, doubles.isMissing().size());
         assertEquals(0, doubles.isNotMissing().size());
@@ -332,7 +332,7 @@ public class DoubleColumnTest {
         String comment = "This is a comment";
         doubles.setComment(comment);
         for (int i = 0; i < 100; i++) {
-            doubles.add(RandomUtils.nextDouble(0, 10_000));
+            doubles.append(RandomUtils.nextDouble(0, 10_000));
         }
         DoubleColumn empty = doubles.emptyCopy();
         assertTrue(empty.isEmpty());
@@ -348,7 +348,7 @@ public class DoubleColumnTest {
         DoubleColumn doubles = new DoubleColumn("doubles", size);
         assertEquals(0, doubles.size());
         for (int i = 0; i < size; i++) {
-            doubles.add(RandomUtils.nextDouble(0, 10_000));
+            doubles.append(RandomUtils.nextDouble(0, 10_000));
         }
         assertEquals(size, doubles.size());
         doubles.clear();
@@ -359,7 +359,7 @@ public class DoubleColumnTest {
     public void testNeg() {
         DoubleColumn doubles = new DoubleColumn("doubles", 100);
         for (int i = 0; i < 100; i++) {
-            doubles.add(RandomUtils.nextDouble(0, 10_000));
+            doubles.append(RandomUtils.nextDouble(0, 10_000));
         }
         Column newDoubles = doubles.neg();
         assertFalse(newDoubles.isEmpty());
@@ -370,8 +370,8 @@ public class DoubleColumnTest {
         DoubleColumn doubles = new DoubleColumn("doubles", 100);
         DoubleColumn otherDoubles = new DoubleColumn("otherDoubles", 100);
         for (int i = 0; i < 100; i++) {
-            doubles.add(RandomUtils.nextDouble(0, 10_000));
-            otherDoubles.add(doubles.get(i) - 1.0f);
+            doubles.append(RandomUtils.nextDouble(0, 10_000));
+            otherDoubles.append(doubles.get(i) - 1.0f);
         }
         Column newDoubles = doubles.remainder(otherDoubles);
         assertFalse(newDoubles.isEmpty());
@@ -381,7 +381,7 @@ public class DoubleColumnTest {
     public void testSquareAndSqrt() {
         DoubleColumn doubles = new DoubleColumn("doubles", 100);
         for (int i = 0; i < 100; i++) {
-            doubles.add(RandomUtils.nextDouble(0, 10_000));
+            doubles.append(RandomUtils.nextDouble(0, 10_000));
         }
 
         DoubleColumn newDoubles = doubles.square();
@@ -401,7 +401,7 @@ public class DoubleColumnTest {
     public void testCubeAndCbrt() {
         DoubleColumn doubles = new DoubleColumn("doubles", 100);
         for (int i = 0; i < 100; i++) {
-            doubles.add(RandomUtils.nextDouble(0, 10_000));
+            doubles.append(RandomUtils.nextDouble(0, 10_000));
         }
         DoubleColumn newDoubles = doubles.cube();
         DoubleColumn revert = newDoubles.cubeRoot();
@@ -416,8 +416,8 @@ public class DoubleColumnTest {
         DoubleColumn doubles = new DoubleColumn("doubles", 100);
         DoubleColumn otherDoubles = new DoubleColumn("otherDoubles", 100);
         for (int i = 0; i < 100; i++) {
-            doubles.add(RandomUtils.nextDouble(0, 10_000));
-            otherDoubles.add(doubles.get(i) - 1.0f);
+            doubles.append(RandomUtils.nextDouble(0, 10_000));
+            otherDoubles.append(doubles.get(i) - 1.0f);
         }
         DoubleColumn diff = doubles.subtract(otherDoubles);
         for (int i = 0; i < doubles.size(); i++) {
@@ -432,7 +432,7 @@ public class DoubleColumnTest {
 
         DoubleColumn initial = new DoubleColumn("Test", originalValues.length);
         for (double value : originalValues) {
-            initial.add(value);
+            initial.append(value);
         }
         DoubleColumn difference = initial.difference();
         assertEquals("Both sets of data should be the same size.", expectedValues.length, difference.size());
@@ -453,7 +453,7 @@ public class DoubleColumnTest {
 
         DoubleColumn initial = new DoubleColumn("Test", originalValues.length);
         for (double value : originalValues) {
-            initial.add(value);
+            initial.append(value);
         }
         DoubleColumn difference = initial.difference();
         assertEquals("Both sets of data should be the same size.", expectedValues.length, difference.size());

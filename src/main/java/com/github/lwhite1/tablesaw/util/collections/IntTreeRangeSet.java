@@ -128,7 +128,7 @@ public class IntTreeRangeSet extends AbstractIntRangeSet {
                     ubToAdd = rangeBelowLB.upperBound;
           /*
            * TODO(cpovirk): can we just "return;" here? Or, can we remove this if() entirely? If
-           * not, add tests to demonstrate the problem with each approach
+           * not, append tests to demonstrate the problem with each approach
            */
                 }
                 lbToAdd = rangeBelowLB.lowerBound;
@@ -797,7 +797,7 @@ public class IntTreeRangeSet extends AbstractIntRangeSet {
 
         @Override
         public void add(IntRange rangeToAdd) {
-            checkArgument(restriction.encloses(rangeToAdd), "Cannot add range %s to subRangeSet(%s)",
+            checkArgument(restriction.encloses(rangeToAdd), "Cannot append range %s to subRangeSet(%s)",
                     rangeToAdd, restriction);
             super.add(rangeToAdd);
         }

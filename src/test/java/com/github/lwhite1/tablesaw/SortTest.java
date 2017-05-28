@@ -27,7 +27,7 @@ public class SortTest {
     public void sortAscending() {
         // sort ascending by date and then an integer
         Table sortedTable = unsortedTable.sortAscendingOn("IQ", "DOB");
-        Table expectedResults = TestData.SIMPLE_SORTED_DATA_BY_INTEGER_AND_DATE_ASCENDING.getTable();
+        Table expectedResults = TestData.SIMPLE_SORTED_DATA_BY_DOUBLE_AND_DATE_ASCENDING.getTable();
         compareTables(sortedTable, expectedResults);
     }
 
@@ -38,7 +38,7 @@ public class SortTest {
     public void sortDescending() {
         unsortedTable = TestData.SIMPLE_UNSORTED_DATA.getTable();
         Table sortedTable = unsortedTable.sortDescendingOn("IQ", "DOB");
-        Table expectedResults = TestData.SIMPLE_SORTED_DATA_BY_INTEGER_AND_DATE_DESCENDING.getTable();
+        Table expectedResults = TestData.SIMPLE_SORTED_DATA_BY_DOUBLE_AND_DATE_DESCENDING.getTable();
         compareTables(sortedTable, expectedResults);
     }
 
@@ -49,14 +49,14 @@ public class SortTest {
     @Test(expected = ComparisonFailure.class)
     public void sortDescendingNegative() {
         Table sortedTable = unsortedTable.sortDescendingOn("IQ", "DOB");
-        Table expectedResults = TestData.SIMPLE_SORTED_DATA_BY_INTEGER_AND_DATE_ASCENDING.getTable();
+        Table expectedResults = TestData.SIMPLE_SORTED_DATA_BY_DOUBLE_AND_DATE_ASCENDING.getTable();
         compareTables(sortedTable, expectedResults);
     }
 
     @Test
     public void testMultipleSortOrdersVerifyMinus() {
         Table sortedTable = unsortedTable.sortOn("-" + columnNames[IQ_INDEX], "-" + columnNames[DOB_INDEX]);
-        Table expectedResults = TestData.SIMPLE_SORTED_DATA_BY_INTEGER_AND_DATE_DESCENDING.getTable();
+        Table expectedResults = TestData.SIMPLE_SORTED_DATA_BY_DOUBLE_AND_DATE_DESCENDING.getTable();
         compareTables(expectedResults, sortedTable);
     }
 
@@ -70,18 +70,18 @@ public class SortTest {
     @Test
     public void testMultipleSortOrdersVerifyPlus() {
         Table sortedTable = unsortedTable.sortOn("+" + columnNames[IQ_INDEX], "+" + columnNames[DOB_INDEX]);
-        Table expectedResults = TestData.SIMPLE_SORTED_DATA_BY_INTEGER_AND_DATE_ASCENDING.getTable();
+        Table expectedResults = TestData.SIMPLE_SORTED_DATA_BY_DOUBLE_AND_DATE_ASCENDING.getTable();
         compareTables(expectedResults, sortedTable);
 
         sortedTable = unsortedTable.sortOn(columnNames[IQ_INDEX], columnNames[DOB_INDEX]);
-        expectedResults = TestData.SIMPLE_SORTED_DATA_BY_INTEGER_AND_DATE_ASCENDING.getTable();
+        expectedResults = TestData.SIMPLE_SORTED_DATA_BY_DOUBLE_AND_DATE_ASCENDING.getTable();
         compareTables(expectedResults, sortedTable);
     }
 
     @Test
     public void testAscendingWithPlusSign() {
         Table sortedTable = unsortedTable.sortOn("+" + columnNames[IQ_INDEX]);
-        Table expectedResults = TestData.SIMPLE_SORTED_DATA_BY_INTEGER_ASCENDING.getTable();
+        Table expectedResults = TestData.SIMPLE_SORTED_DATA_BY_DOUBLE_ASCENDING.getTable();
         compareTables(expectedResults, sortedTable);
     }
 

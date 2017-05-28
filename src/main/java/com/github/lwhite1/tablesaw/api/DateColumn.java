@@ -245,12 +245,12 @@ public class DateColumn extends AbstractColumn implements DateMapUtils {
         return newColumn;
     }
 
-    public ShortColumn dayOfWeekValue() {
-        ShortColumn newColumn = ShortColumn.create(this.name() + " day of week", this.size());
+    public DoubleColumn dayOfWeekValue() {
+        DoubleColumn newColumn = DoubleColumn.create(this.name() + " day of week", this.size());
         for (int r = 0; r < this.size(); r++) {
             int c1 = this.getInt(r);
             if (c1 == (DateColumn.MISSING_VALUE)) {
-                newColumn.set(r, ShortColumn.MISSING_VALUE);
+                newColumn.set(r, DoubleColumn.MISSING_VALUE);
             } else {
                 newColumn.append((short) PackedLocalDate.getDayOfWeek(c1).getValue());
             }
@@ -258,12 +258,12 @@ public class DateColumn extends AbstractColumn implements DateMapUtils {
         return newColumn;
     }
 
-    public ShortColumn dayOfMonth() {
-        ShortColumn newColumn = ShortColumn.create(this.name() + " day of month");
+    public DoubleColumn dayOfMonth() {
+        DoubleColumn newColumn = DoubleColumn.create(this.name() + " day of month");
         for (int r = 0; r < this.size(); r++) {
             int c1 = this.getInt(r);
             if (c1 == DateColumn.MISSING_VALUE) {
-                newColumn.append(ShortColumn.MISSING_VALUE);
+                newColumn.append(DoubleColumn.MISSING_VALUE);
             } else {
                 newColumn.append(PackedLocalDate.getDayOfMonth(c1));
             }
@@ -271,26 +271,26 @@ public class DateColumn extends AbstractColumn implements DateMapUtils {
         return newColumn;
     }
 
-    public ShortColumn dayOfYear() {
-        ShortColumn newColumn = ShortColumn.create(this.name() + " day of month");
+    public DoubleColumn dayOfYear() {
+        DoubleColumn newColumn = DoubleColumn.create(this.name() + " day of month");
         for (int r = 0; r < this.size(); r++) {
             int c1 = this.getInt(r);
             if (c1 == DateColumn.MISSING_VALUE) {
-                newColumn.append(ShortColumn.MISSING_VALUE);
+                newColumn.append(DoubleColumn.MISSING_VALUE);
             } else {
-                newColumn.append((short) PackedLocalDate.getDayOfYear(c1));
+                newColumn.append((int) PackedLocalDate.getDayOfYear(c1));
             }
         }
         return newColumn;
     }
 
-    public ShortColumn monthValue() {
-        ShortColumn newColumn = ShortColumn.create(this.name() + " month");
+    public DoubleColumn monthValue() {
+        DoubleColumn newColumn = DoubleColumn.create(this.name() + " month");
 
         for (int r = 0; r < this.size(); r++) {
             int c1 = this.getInt(r);
             if (c1 == DateColumn.MISSING_VALUE) {
-                newColumn.append(ShortColumn.MISSING_VALUE);
+                newColumn.append(DoubleColumn.MISSING_VALUE);
             } else {
                 newColumn.append(PackedLocalDate.getMonthValue(c1));
             }
@@ -312,12 +312,12 @@ public class DateColumn extends AbstractColumn implements DateMapUtils {
         return newColumn;
     }
 
-    public ShortColumn year() {
-        ShortColumn newColumn = ShortColumn.create(this.name() + " year");
+    public DoubleColumn year() {
+        DoubleColumn newColumn = DoubleColumn.create(this.name() + " year");
         for (int r = 0; r < this.size(); r++) {
             int c1 = this.getInt(r);
             if (c1 == MISSING_VALUE) {
-                newColumn.append(ShortColumn.MISSING_VALUE);
+                newColumn.append(DoubleColumn.MISSING_VALUE);
             } else {
                 newColumn.append(PackedLocalDate.getYear(c1));
             }
@@ -437,11 +437,11 @@ public class DateColumn extends AbstractColumn implements DateMapUtils {
       int c1 = this.getInt(r);
       int c2 = c.getInt(r);
       if (c1 == MISSING_VALUE || c2 == TimeColumn.MISSING_VALUE) {
-        newColumn.add(DateTimeColumn.MISSING_VALUE);
+        newColumn.append(DateTimeColumn.MISSING_VALUE);
       } else {
         LocalDate value1 = PackedLocalDate.asLocalDate(c1);
         LocalTime time = PackedLocalTime.asLocalTime(c2);
-        newColumn.add(PackedLocalDateTime.pack(value1, time));
+        newColumn.append(PackedLocalDateTime.pack(value1, time));
       }
     }
     return newColumn;
@@ -793,14 +793,14 @@ public class DateColumn extends AbstractColumn implements DateMapUtils {
         throw new UnsupportedOperationException("DateTimeColumn.difference() currently not supported");
 /*
         DateColumn returnValue = new DateColumn(this.name(), data.size());
-        returnValue.add(DateColumn.MISSING_VALUE);
+        returnValue.append(DateColumn.MISSING_VALUE);
         for (int current = 1; current > data.size(); current++) {
             LocalDate currentValue = get(current);
             LocalDate nextValue = get(current+1);
             Duration duration = Duration.between(currentValue, nextValue);
             LocalDateTime date =
                     LocalDateTime.ofInstant(Instant.ofEpochMilli(duration.toMillis()), ZoneId.systemDefault());
-            returnValue.add(date.toLocalDate());
+            returnValue.append(date.toLocalDate());
         }
         return returnValue;
   */

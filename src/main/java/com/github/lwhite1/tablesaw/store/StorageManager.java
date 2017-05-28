@@ -5,15 +5,10 @@ import com.github.lwhite1.tablesaw.api.CategoryColumn;
 import com.github.lwhite1.tablesaw.api.DateColumn;
 import com.github.lwhite1.tablesaw.api.DateTimeColumn;
 import com.github.lwhite1.tablesaw.api.DoubleColumn;
-import com.github.lwhite1.tablesaw.api.FloatColumn;
-import com.github.lwhite1.tablesaw.api.IntColumn;
-import com.github.lwhite1.tablesaw.api.LongColumn;
-import com.github.lwhite1.tablesaw.api.ShortColumn;
 import com.github.lwhite1.tablesaw.api.Table;
 import com.github.lwhite1.tablesaw.api.TimeColumn;
 import com.github.lwhite1.tablesaw.columns.Column;
 import com.github.lwhite1.tablesaw.table.Relation;
-import com.google.common.annotations.VisibleForTesting;
 import org.iq80.snappy.SnappyFramedInputStream;
 import org.iq80.snappy.SnappyFramedOutputStream;
 
@@ -116,10 +111,8 @@ public class StorageManager {
             throws IOException {
 
         switch (columnMetadata.getType()) {
-            case FLOAT:
-                return readFloatColumn(fileName, columnMetadata);
-            case INTEGER:
-                return readIntColumn(fileName, columnMetadata);
+            case DOUBLE:
+                return readDoubleColumn(fileName, columnMetadata);
             case BOOLEAN:
                 return readBooleanColumn(fileName, columnMetadata);
             case LOCAL_DATE:
@@ -130,17 +123,13 @@ public class StorageManager {
                 return readLocalDateTimeColumn(fileName, columnMetadata);
             case CATEGORY:
                 return readCategoryColumn(fileName, columnMetadata);
-            case SHORT_INT:
-                return readShortColumn(fileName, columnMetadata);
-            case LONG_INT:
-                return readLongColumn(fileName, columnMetadata);
             default:
                 throw new RuntimeException("Unhandled column type writing columns");
         }
     }
 
-    private static FloatColumn readFloatColumn(String fileName, ColumnMetadata metadata) throws IOException {
-        FloatColumn floats = new FloatColumn(metadata);
+    private static DoubleColumn readDoubleColumn(String fileName, ColumnMetadata metadata) throws IOException {
+        DoubleColumn floats = new DoubleColumn(metadata);
         try (FileInputStream fis = new FileInputStream(fileName);
              SnappyFramedInputStream sis = new SnappyFramedInputStream(fis, true);
              DataInputStream dis = new DataInputStream(sis)) {
@@ -155,57 +144,6 @@ public class StorageManager {
             }
         }
         return floats;
-    }
-
-    private static IntColumn readIntColumn(String fileName, ColumnMetadata metadata) throws IOException {
-        IntColumn ints = IntColumn.create(metadata);
-        try (FileInputStream fis = new FileInputStream(fileName);
-             SnappyFramedInputStream sis = new SnappyFramedInputStream(fis, true);
-             DataInputStream dis = new DataInputStream(sis)) {
-            boolean EOF = false;
-            while (!EOF) {
-                try {
-                    ints.append(dis.readInt());
-                } catch (EOFException e) {
-                    EOF = true;
-                }
-            }
-        }
-        return ints;
-    }
-
-    private static ShortColumn readShortColumn(String fileName, ColumnMetadata metadata) throws IOException {
-        ShortColumn ints = new ShortColumn(metadata);
-        try (FileInputStream fis = new FileInputStream(fileName);
-             SnappyFramedInputStream sis = new SnappyFramedInputStream(fis, true);
-             DataInputStream dis = new DataInputStream(sis)) {
-            boolean EOF = false;
-            while (!EOF) {
-                try {
-                    ints.append(dis.readShort());
-                } catch (EOFException e) {
-                    EOF = true;
-                }
-            }
-        }
-        return ints;
-    }
-
-    private static LongColumn readLongColumn(String fileName, ColumnMetadata metadata) throws IOException {
-        LongColumn ints = new LongColumn(metadata);
-        try (FileInputStream fis = new FileInputStream(fileName);
-             SnappyFramedInputStream sis = new SnappyFramedInputStream(fis, true);
-             DataInputStream dis = new DataInputStream(sis)) {
-            boolean EOF = false;
-            while (!EOF) {
-                try {
-                    ints.append(dis.readLong());
-                } catch (EOFException e) {
-                    EOF = true;
-                }
-            }
-        }
-        return ints;
     }
 
     private static DateColumn readLocalDateColumn(String fileName, ColumnMetadata metadata) throws IOException {
@@ -363,14 +301,8 @@ public class StorageManager {
     private static void writeColumn(String fileName, Column column) {
         try {
             switch (column.type()) {
-                case FLOAT:
-                    writeColumn(fileName, (FloatColumn) column);
-                    break;
                 case DOUBLE:
                     writeColumn(fileName, (DoubleColumn) column);
-                    break;
-                case INTEGER:
-                    writeColumn(fileName, (IntColumn) column);
                     break;
                 case BOOLEAN:
                     writeColumn(fileName, (BooleanColumn) column);
@@ -387,34 +319,11 @@ public class StorageManager {
                 case CATEGORY:
                     writeColumn(fileName, (CategoryColumn) column);
                     break;
-                case SHORT_INT:
-                    writeColumn(fileName, (ShortColumn) column);
-                    break;
-                case LONG_INT:
-                    writeColumn(fileName, (LongColumn) column);
-                    break;
                 default:
                     throw new RuntimeException("Unhandled column type writing columns");
             }
         } catch (IOException ex) {
             throw new RuntimeException("IOException writing to file");
-        }
-    }
-
-    @VisibleForTesting
-    public static void writeColumn(String fileName, FloatColumn column) throws IOException {
-        try (FileOutputStream fos = new FileOutputStream(fileName);
-             SnappyFramedOutputStream sos = new SnappyFramedOutputStream(fos);
-             DataOutputStream dos = new DataOutputStream(sos)) {
-            int i = 0;
-            for (float d : column) {
-                dos.writeFloat(d);
-                if (i % FLUSH_AFTER_ITERATIONS == 0) {
-                    dos.flush();
-                }
-                i++;
-            }
-            dos.flush();
         }
     }
 
@@ -465,55 +374,6 @@ public class StorageManager {
                 }
                 i++;
             }
-        }
-    }
-
-    //TODO(lwhite): saveTable the column using integer compression
-    public static void writeColumn(String fileName, IntColumn column) throws IOException {
-        try (FileOutputStream fos = new FileOutputStream(fileName);
-             SnappyFramedOutputStream sos = new SnappyFramedOutputStream(fos);
-             DataOutputStream dos = new DataOutputStream(sos)) {
-            int i = 0;
-            for (int d : column.data()) {
-                dos.writeInt(d);
-                if (i % FLUSH_AFTER_ITERATIONS == 0) {
-                    dos.flush();
-                }
-                i++;
-            }
-            dos.flush();
-        }
-    }
-
-    public static void writeColumn(String fileName, ShortColumn column) throws IOException {
-        try (FileOutputStream fos = new FileOutputStream(fileName);
-             SnappyFramedOutputStream sos = new SnappyFramedOutputStream(fos);
-             DataOutputStream dos = new DataOutputStream(sos)) {
-            int i = 0;
-            for (short d : column) {
-                dos.writeShort(d);
-                if (i % FLUSH_AFTER_ITERATIONS == 0) {
-                    dos.flush();
-                }
-                i++;
-            }
-            dos.flush();
-        }
-    }
-
-    public static void writeColumn(String fileName, LongColumn column) throws IOException {
-        try (FileOutputStream fos = new FileOutputStream(fileName);
-             SnappyFramedOutputStream sos = new SnappyFramedOutputStream(fos);
-             DataOutputStream dos = new DataOutputStream(sos)) {
-            int i = 0;
-            for (long d : column) {
-                dos.writeLong(d);
-                if (i % FLUSH_AFTER_ITERATIONS == 0) {
-                    dos.flush();
-                }
-                i++;
-            }
-            dos.flush();
         }
     }
 

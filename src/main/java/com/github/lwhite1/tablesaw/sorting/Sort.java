@@ -1,6 +1,7 @@
 package com.github.lwhite1.tablesaw.sorting;
 
 import com.google.common.base.MoreObjects;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -14,7 +15,7 @@ import java.util.Map;
  * table.sortOn(first("Year", DESCEND).next("State", ASCEND));
  * <p>
  * This sorts table on the column named year in descending order, such that the most recent years
- * appear first, then on State, in ascending order so "AL" will appear before "CA". You can add
+ * appear first, then on State, in ascending order so "AL" will appear before "CA". You can append
  * additional instructions for multi-column sorts by chaining additional calls to next() with the
  * appropriate column names and Order.
  */
@@ -48,6 +49,7 @@ public class Sort implements Iterable<Map.Entry<String, Sort.Order>> {
      *
      * @return an Iterator.
      */
+    @NotNull
     @Override
     public Iterator<Map.Entry<String, Order>> iterator() {
         return sortOrder.entrySet().iterator();

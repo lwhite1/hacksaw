@@ -1,6 +1,6 @@
 package com.github.lwhite1.tablesaw.util;
 
-import com.github.lwhite1.tablesaw.api.FloatColumn;
+import com.github.lwhite1.tablesaw.api.DoubleColumn;
 import org.junit.Test;
 
 import java.util.Random;
@@ -16,7 +16,7 @@ public class StatUtilTest {
     public void testSum() {
         Random random = new Random();
         float sum = 0.0f;
-        FloatColumn column = FloatColumn.create("c1");
+        DoubleColumn column = DoubleColumn.create("c1");
         for (int i = 0; i < 100; i++) {
             float f = random.nextFloat();
             column.append(f);
@@ -29,7 +29,7 @@ public class StatUtilTest {
     public void testMin() {
         Random random = new Random();
         float min = Float.MAX_VALUE;
-        FloatColumn column = FloatColumn.create("c1");
+        DoubleColumn column = DoubleColumn.create("c1");
         for (int i = 0; i < 100; i++) {
             float f = random.nextFloat();
             column.append(f);
@@ -44,7 +44,7 @@ public class StatUtilTest {
     public void testMax() {
         Random random = new Random();
         float max = Float.MIN_VALUE;
-        FloatColumn column = FloatColumn.create("c1");
+        DoubleColumn column = DoubleColumn.create("c1");
         for (int i = 0; i < 100; i++) {
             float f = random.nextFloat();
             column.append(f);

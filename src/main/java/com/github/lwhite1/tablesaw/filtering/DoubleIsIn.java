@@ -1,31 +1,33 @@
 package com.github.lwhite1.tablesaw.filtering;
 
+import com.github.lwhite1.tablesaw.api.DoubleColumn;
 import com.github.lwhite1.tablesaw.api.Table;
 import com.github.lwhite1.tablesaw.columns.ColumnReference;
 import com.github.lwhite1.tablesaw.util.Selection;
-import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.doubles.DoubleSet;
 import it.unimi.dsi.fastutil.ints.IntSet;
 
 /**
  */
-public class IntIsIn extends ColumnFilter {
+public class DoubleIsIn extends ColumnFilter {
 
-    private IntColumn filterColumn;
+    private DoubleColumn filterColumn;
 
-    public IntIsIn(ColumnReference reference, IntColumn filterColumn) {
+    public DoubleIsIn(ColumnReference reference, DoubleColumn filterColumn) {
         super(reference);
         this.filterColumn = filterColumn;
     }
 
-    public IntIsIn(ColumnReference reference, int... ints) {
+    public DoubleIsIn(ColumnReference reference, double... doubles) {
         super(reference);
-        this.filterColumn = IntColumn.create("temp", new IntArrayList(ints));
+        this.filterColumn = DoubleColumn.create("temp", new DoubleArrayList(doubles));
     }
 
     public Selection apply(Table relation) {
-        IntColumn intColumn = (IntColumn) relation.column(columnReference.getColumnName());
-        IntSet firstSet = intColumn.asSet();
+        DoubleColumn doubleColumn = (DoubleColumn) relation.column(columnReference.getColumnName());
+        DoubleSet firstSet = doubleColumn.asSet();
         firstSet.retainAll(filterColumn.data());
-        return intColumn.select(firstSet::contains);
+        return doubleColumn.select(firstSet::contains);
     }
 }

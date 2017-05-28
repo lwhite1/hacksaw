@@ -6,11 +6,6 @@ import com.github.lwhite1.tablesaw.api.ColumnType;
 import com.github.lwhite1.tablesaw.api.DateColumn;
 import com.github.lwhite1.tablesaw.api.DateTimeColumn;
 import com.github.lwhite1.tablesaw.api.DoubleColumn;
-import com.github.lwhite1.tablesaw.api.FloatColumn;
-import com.github.lwhite1.tablesaw.api.IntColumn;
-import com.github.lwhite1.tablesaw.api.LongColumn;
-import com.github.lwhite1.tablesaw.api.NumericColumn;
-import com.github.lwhite1.tablesaw.api.ShortColumn;
 import com.github.lwhite1.tablesaw.api.Table;
 import com.github.lwhite1.tablesaw.api.TimeColumn;
 import com.github.lwhite1.tablesaw.columns.Column;
@@ -199,18 +194,18 @@ public interface Relation {
                 .append(" variables (cols)");
 
         Table structure = Table.create(nameBuilder.toString());
-        structure.addColumn(IntColumn.create("Index"));
+        structure.addColumn(DoubleColumn.create("Index"));
         structure.addColumn(CategoryColumn.create("Column Name"));
         structure.addColumn(CategoryColumn.create("Type"));
-        structure.addColumn(IntColumn.create("Unique Values"));
+        structure.addColumn(DoubleColumn.create("Unique Values"));
         structure.addColumn(CategoryColumn.create("First"));
         structure.addColumn(CategoryColumn.create("Last"));
 
         for (Column column : columns()) {
-            structure.intColumn("Index").append(columnIndex(column));
+            structure.doubleColumn("Index").append(columnIndex(column));
             structure.categoryColumn("Column Name").add(column.name());
             structure.categoryColumn("Type").add(column.type().name());
-            structure.intColumn("Unique Values").append(column.countUnique());
+            structure.doubleColumn("Unique Values").append(column.countUnique());
             structure.categoryColumn("First").add(column.first());
             structure.categoryColumn("Last").add(column.getString(column.size() - 1));
         }
@@ -239,54 +234,21 @@ public interface Relation {
         return (BooleanColumn) column(columnName);
     }
 
-    default NumericColumn numericColumn(int columnIndex) {
-        Column c = column(columnIndex);
-        if (c.type() == ColumnType.CATEGORY) {
-            CategoryColumn categoryColumn = (CategoryColumn) c;
-            return categoryColumn.toIntColumn();
-        } else if (c.type() == ColumnType.BOOLEAN) {
-            BooleanColumn booleanColumn = (BooleanColumn) c;
-            return booleanColumn.toIntColumn();
-        }
-        return (NumericColumn) column(columnIndex);
+    default DoubleColumn numericColumn(int columnIndex) {
+        return (DoubleColumn) column(columnIndex);
     }
 
-    default NumericColumn numericColumn(String columnName) {
-        Column c = column(columnName);
-        if (c.type() == ColumnType.CATEGORY) {
-            CategoryColumn categoryColumn = (CategoryColumn) c;
-            return categoryColumn.toIntColumn();
-        } else if (c.type() == ColumnType.BOOLEAN) {
-            BooleanColumn booleanColumn = (BooleanColumn) c;
-            return booleanColumn.toIntColumn();
-        }
-        return (NumericColumn) column(columnName);
+    default DoubleColumn numericColumn(String columnName) {
+        return (DoubleColumn) column(columnName);
     }
 
     /**
-     * Returns the column with the given name cast to a NumericColumn
+     * Returns the column with the given name cast to a DoubleColumn
      * <p>
      * Shorthand for numericColumn()
      */
-    default NumericColumn nCol(String columnName) {
-        return numericColumn(columnName);
-    }
-
-    /**
-     * Returns the column with the given name cast to a NumericColumn
-     * <p>
-     * Shorthand for numericColumn()
-     */
-    default NumericColumn nCol(int columnIndex) {
-        return numericColumn(columnIndex);
-    }
-
-    default FloatColumn floatColumn(int columnIndex) {
-        return (FloatColumn) column(columnIndex);
-    }
-
-    default FloatColumn floatColumn(String columnName) {
-        return (FloatColumn) column(columnName);
+    default DoubleColumn nCol(String columnName) {
+        return doubleColumn(columnName);
     }
 
     default DoubleColumn doubleColumn(int columnIndex) {
@@ -295,30 +257,6 @@ public interface Relation {
 
     default DoubleColumn doubleColumn(String columnName) {
         return (DoubleColumn) column(columnName);
-    }
-
-    default IntColumn intColumn(String columnName) {
-        return (IntColumn) column(columnName);
-    }
-
-    default IntColumn intColumn(int columnIndex) {
-        return (IntColumn) column(columnIndex);
-    }
-
-    default ShortColumn shortColumn(String columnName) {
-        return (ShortColumn) column(columnName);
-    }
-
-    default ShortColumn shortColumn(int columnIndex) {
-        return (ShortColumn) column(columnIndex);
-    }
-
-    default LongColumn longColumn(String columnName) {
-        return (LongColumn) column(columnName);
-    }
-
-    default LongColumn longColumn(int columnIndex) {
-        return (LongColumn) column(columnIndex);
     }
 
     default DateColumn dateColumn(int columnIndex) {

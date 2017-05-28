@@ -15,38 +15,38 @@ import static com.github.lwhite1.tablesaw.api.ColumnType.*;
  */
 public enum TestData {
     SIMPLE_DATA_WITH_CANONICAL_DATE_FORMAT(new String[]{"Name", "IQ", "City", "DOB"},
-            new ColumnType[]{CATEGORY, INTEGER, CATEGORY, LOCAL_DATE},
+            new ColumnType[]{CATEGORY, DOUBLE, CATEGORY, LOCAL_DATE},
             "data/simple-data-with-canonical-date-format.csv"),
 
     SIMPLE_UNSORTED_DATA(new String[]{"Name", "IQ", "City", "DOB"},
-            new ColumnType[]{CATEGORY, INTEGER, CATEGORY, LOCAL_DATE}, "data/unsorted-simple-data.csv"),
+            new ColumnType[]{CATEGORY, DOUBLE, CATEGORY, LOCAL_DATE}, "data/unsorted-simple-data.csv"),
 
-    SIMPLE_SORTED_DATA_BY_INTEGER_ASCENDING(new String[]{"Name", "IQ", "City", "DOB"},
-            new ColumnType[]{CATEGORY, INTEGER, CATEGORY, LOCAL_DATE}, "data/simple-data-sort_by_int_ascending.csv"),
+    SIMPLE_SORTED_DATA_BY_DOUBLE_ASCENDING(new String[]{"Name", "IQ", "City", "DOB"},
+            new ColumnType[]{CATEGORY, DOUBLE, CATEGORY, LOCAL_DATE}, "data/simple-data-sort_by_int_ascending.csv"),
 
-    SIMPLE_SORTED_DATA_BY_INTEGER_DESCENDING(new String[]{"Name", "IQ", "City", "DOB"},
-            new ColumnType[]{CATEGORY, INTEGER, CATEGORY, LOCAL_DATE}, "data/simple-data-sort_by_int_descending.csv"),
+    SIMPLE_SORTED_DATA_BY_DOUBLE_DESCENDING(new String[]{"Name", "IQ", "City", "DOB"},
+            new ColumnType[]{CATEGORY, DOUBLE, CATEGORY, LOCAL_DATE}, "data/simple-data-sort_by_int_descending.csv"),
 
     SIMPLE_SORTED_DATA_BY_INT_ASCENDING_AND_THEN_DATE_DESCENDING(new String[]{"Name", "IQ", "City", "DOB"},
-            new ColumnType[]{CATEGORY, INTEGER, CATEGORY, LOCAL_DATE}, "data/simple-data-sort_by_int_ascending.csv"),
+            new ColumnType[]{CATEGORY, DOUBLE, CATEGORY, LOCAL_DATE}, "data/simple-data-sort_by_int_ascending.csv"),
 
-    SIMPLE_SORTED_DATA_BY_INTEGER_AND_DATE_ASCENDING(new String[]{"Name", "IQ", "City", "DOB"},
-            new ColumnType[]{CATEGORY, INTEGER, CATEGORY, LOCAL_DATE},
+    SIMPLE_SORTED_DATA_BY_DOUBLE_AND_DATE_ASCENDING(new String[]{"Name", "IQ", "City", "DOB"},
+            new ColumnType[]{CATEGORY, DOUBLE, CATEGORY, LOCAL_DATE},
             "data/simple-data-sort_by_int_and_date_ascending.csv"),
 
-    SIMPLE_SORTED_DATA_BY_INTEGER_AND_DATE_DESCENDING(
-            new String[]{"Name", "IQ", "City", "DOB"}, new ColumnType[]{CATEGORY, INTEGER, CATEGORY, LOCAL_DATE},
+    SIMPLE_SORTED_DATA_BY_DOUBLE_AND_DATE_DESCENDING(
+            new String[]{"Name", "IQ", "City", "DOB"}, new ColumnType[]{CATEGORY, DOUBLE, CATEGORY, LOCAL_DATE},
             "data/simple-data-sort_by_int_and_date_descending.csv"),
 
-    BUSH_APPROVAL(new String[]{"date", "approval", "who"}, new ColumnType[]{LOCAL_DATE, INTEGER, CATEGORY},
+    BUSH_APPROVAL(new String[]{"date", "approval", "who"}, new ColumnType[]{LOCAL_DATE, DOUBLE, CATEGORY},
             "data/BushApproval.csv"),
 
     TORNADOES(new String[]{"Number", "Year", "Month", "Day", "Date", "Time", "Zone", "State", "State FIPS", "State No",
             "Scale", "Injuries", "Fatalities", "Loss", "Crop Loss", "Start Lat", "Start Lon", "End Lat", "End Lon",
             "Length", "Width", "NS", "SN", "SG", "FIPS 1", "FIPS 2", "FIPS 3", "FIPS 4"},
-            new ColumnType[]{INTEGER, INTEGER, INTEGER, INTEGER, LOCAL_DATE, LOCAL_TIME, CATEGORY, CATEGORY, CATEGORY,
-                    INTEGER, INTEGER, INTEGER, INTEGER, FLOAT, FLOAT, FLOAT, FLOAT, FLOAT, FLOAT, FLOAT, FLOAT, FLOAT,
-                    FLOAT, FLOAT, CATEGORY, CATEGORY, CATEGORY, CATEGORY}, "data/1950-2014_torn.csv");
+            new ColumnType[]{DOUBLE, DOUBLE, DOUBLE, DOUBLE, LOCAL_DATE, LOCAL_TIME, CATEGORY, CATEGORY, CATEGORY,
+                    DOUBLE, DOUBLE, DOUBLE, DOUBLE, DOUBLE, DOUBLE, DOUBLE, DOUBLE, DOUBLE, DOUBLE, DOUBLE, DOUBLE, DOUBLE,
+                    DOUBLE, DOUBLE, CATEGORY, CATEGORY, CATEGORY, CATEGORY}, "data/1950-2014_torn.csv");
 
 
     private Table table;

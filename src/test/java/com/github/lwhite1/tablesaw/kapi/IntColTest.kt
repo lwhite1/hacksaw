@@ -1,6 +1,6 @@
 package com.github.lwhite1.tablesaw.kapi
 
-import com.github.lwhite1.tablesaw.api.IntColumn
+import com.github.lwhite1.tablesaw.api.DoubleColumn
 import com.github.lwhite1.tablesaw.api.Table
 import org.junit.Test
 
@@ -10,13 +10,13 @@ class IntColTest {
 
     @Test
     fun plus() {
-        val column = IntColumn.create("test", 4)
-        column.append(1)
+        val column = DoubleColumn.create("test", 4)
+        column.append(1.0)
         column.append(2)
         column.append(3)
         column.append(4)
 
-        val col = IntCol(column)
+        val col = DoubleCol(column)
         val result = col + 3
         val result2 = col + col
         val result3 = col / 2
@@ -71,16 +71,12 @@ class IntColTest {
         println(col.standardDeviation())
         println(col.skewness())
         println(col.kurtosis())
-
-
-        val subset = col.isEven()
-        println(subset.print())
     }
 
     @Test
     fun plus1() {
 
-        val column = IntColumn.create("test", 4)
+        val column = DoubleColumn.create("test", 4)
         column.append(1)
         column.append(2)
         column.append(3)

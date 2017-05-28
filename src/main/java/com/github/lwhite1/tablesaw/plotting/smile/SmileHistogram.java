@@ -1,6 +1,6 @@
 package com.github.lwhite1.tablesaw.plotting.smile;
 
-import com.github.lwhite1.tablesaw.api.NumericColumn;
+import com.github.lwhite1.tablesaw.api.DoubleColumn;
 import smile.plot.PlotCanvas;
 
 import javax.swing.*;
@@ -14,7 +14,7 @@ import static com.github.lwhite1.tablesaw.plotting.smile.SmilePlotUtils.getjFram
 public class SmileHistogram {
 
 
-    public static PlotCanvas create(String plotTitle, String xTitle, String yTitle, NumericColumn column) {
+    public static PlotCanvas create(String plotTitle, String xTitle, String yTitle, DoubleColumn column) {
         PlotCanvas canvas = smile.plot.Histogram.plot(column.toDoubleArray());
         canvas.setForeground(Color.DARK_GRAY);
         canvas.setTitle(plotTitle);
@@ -37,14 +37,14 @@ public class SmileHistogram {
         frame.setVisible(true);
     }
 
-    public static void show(String plotTitle, NumericColumn column) {
+    public static void show(String plotTitle, DoubleColumn column) {
         JFrame frame = getjFrame(600, 400);
         PlotCanvas canvas = create(plotTitle, column.name(), "proportion", column);
         frame.add(canvas);
         frame.setVisible(true);
     }
 
-    public static void show(NumericColumn column) {
+    public static void show(DoubleColumn column) {
         JFrame frame = getjFrame(600, 400);
         PlotCanvas canvas = create("", column.name(), "proportion", column);
         frame.add(canvas);

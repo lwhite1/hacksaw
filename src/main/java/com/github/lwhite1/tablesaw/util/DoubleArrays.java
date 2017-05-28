@@ -1,6 +1,6 @@
 package com.github.lwhite1.tablesaw.util;
 
-import com.github.lwhite1.tablesaw.api.NumericColumn;
+import com.github.lwhite1.tablesaw.api.DoubleColumn;
 import com.github.lwhite1.tablesaw.table.TemporaryView;
 import com.github.lwhite1.tablesaw.table.ViewGroup;
 import com.google.common.base.Preconditions;
@@ -18,15 +18,15 @@ public class DoubleArrays {
         return result;
     }
 
-    public static double[][] to2dArray(NumericColumn... columns) {
+    public static double[][] to2dArray(DoubleColumn... columns) {
         Preconditions.checkArgument(columns.length >= 1);
         int obs = columns[0].size();
         double[][] allVals = new double[obs][columns.length];
 
         for (int r = 0; r < obs; r++) {
             for (int c = 0; c < columns.length; c++) {
-                allVals[r][c] = columns[c].getFloat(r);
-                allVals[r][c] = columns[c].getFloat(r);
+                allVals[r][c] = columns[c].getDouble(r);
+                allVals[r][c] = columns[c].getDouble(r);
             }
         }
         return allVals;
@@ -40,7 +40,7 @@ public class DoubleArrays {
         for (int viewNumber = 0; viewNumber < viewCount; viewNumber++) {
             TemporaryView view = views.get(viewNumber);
             allVals[viewNumber] = new double[view.rowCount()];
-            NumericColumn numericColumn = view.numericColumn(columnNumber);
+            DoubleColumn numericColumn = view.numericColumn(columnNumber);
             for (int r = 0; r < view.rowCount(); r++) {
                 allVals[viewNumber][r] = numericColumn.getFloat(r);
             }
@@ -57,11 +57,11 @@ public class DoubleArrays {
         return allVals;
     }
 
-    public static double[][] to2dArray(NumericColumn x, NumericColumn y) {
+    public static double[][] to2dArray(DoubleColumn x, DoubleColumn y) {
         double[][] allVals = new double[x.size()][2];
         for (int i = 0; i < x.size(); i++) {
-            allVals[i][0] = x.getFloat(i);
-            allVals[i][1] = y.getFloat(i);
+            allVals[i][0] = x.getDouble(i);
+            allVals[i][1] = y.getDouble(i);
         }
         return allVals;
     }

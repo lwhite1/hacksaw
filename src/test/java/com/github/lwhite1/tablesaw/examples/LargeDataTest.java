@@ -5,7 +5,7 @@ import com.github.lwhite1.tablesaw.api.BooleanColumn;
 import com.github.lwhite1.tablesaw.api.CategoryColumn;
 import com.github.lwhite1.tablesaw.api.ColumnType;
 import com.github.lwhite1.tablesaw.api.DateColumn;
-import com.github.lwhite1.tablesaw.api.ShortColumn;
+import com.github.lwhite1.tablesaw.api.DoubleColumn;
 import com.github.lwhite1.tablesaw.api.Table;
 import com.github.lwhite1.tablesaw.columns.packeddata.PackedLocalDate;
 import com.github.lwhite1.tablesaw.io.csv.CsvReader;
@@ -18,6 +18,8 @@ import io.codearte.jfairy.producer.person.Person;
 import java.time.LocalDate;
 import java.util.concurrent.TimeUnit;
 
+import static com.github.lwhite1.tablesaw.api.ColumnType.*;
+
 /**
  * Tests manipulation of large (but not big) data sets
  */
@@ -29,9 +31,8 @@ public class LargeDataTest {
 
         Stopwatch stopwatch = Stopwatch.createStarted();
 
-        ColumnType[] columnTypes = {ColumnType.CATEGORY, ColumnType.CATEGORY, ColumnType.CATEGORY, ColumnType
-                .CATEGORY, ColumnType.CATEGORY, ColumnType.CATEGORY, ColumnType.LOCAL_DATE, ColumnType.SHORT_INT,
-                ColumnType.SHORT_INT, ColumnType.BOOLEAN};
+        ColumnType[] columnTypes = {CATEGORY, CATEGORY, CATEGORY, CATEGORY, CATEGORY, CATEGORY, LOCAL_DATE, DOUBLE,
+                DOUBLE, BOOLEAN};
         Table t = CsvReader.read(columnTypes, CSV_FILE);
         System.out.println("Time to read from CSV File " + stopwatch.elapsed(TimeUnit.SECONDS));
 
@@ -46,12 +47,12 @@ public class LargeDataTest {
         System.out.println();
 
         stopwatch.reset().start();
-        System.out.println(t.shortColumn("weight").summary().print());
+        System.out.println(t.doubleColumn("weight").summary().print());
         System.out.println("Time to summarize weight column " + stopwatch.elapsed(TimeUnit.SECONDS) + " seconds");
         System.out.println();
 
         stopwatch.reset().start();
-        System.out.println(t.shortColumn("height").summary().print());
+        System.out.println(t.doubleColumn("height").summary().print());
         System.out.println("Time to summarize height column " + stopwatch.elapsed(TimeUnit.SECONDS) + " seconds");
         System.out.println();
 
@@ -111,8 +112,8 @@ public class LargeDataTest {
         CategoryColumn postalCode = CategoryColumn.create("postal code");
         CategoryColumn state = CategoryColumn.create("state");
         DateColumn birthDate = DateColumn.create("birth date");
-        ShortColumn height = ShortColumn.create("height");
-        ShortColumn weight = ShortColumn.create("weight");
+        DoubleColumn height = DoubleColumn.create("height");
+        DoubleColumn weight = DoubleColumn.create("weight");
         BooleanColumn female = BooleanColumn.create("female");
 
         t.addColumn(fName);
@@ -149,8 +150,8 @@ public class LargeDataTest {
     }
 
     private static void storeInDb() throws Exception {
-        ColumnType[] columnTypes = {ColumnType.CATEGORY, ColumnType.CATEGORY, ColumnType.CATEGORY, ColumnType
-                .LOCAL_DATE, ColumnType.CATEGORY, ColumnType.CATEGORY, ColumnType.CATEGORY, ColumnType.SHORT_INT, ColumnType.SHORT_INT, ColumnType.BOOLEAN, ColumnType.BOOLEAN};
+        ColumnType[] columnTypes = {CATEGORY, CATEGORY, CATEGORY,
+                LOCAL_DATE, CATEGORY, CATEGORY, CATEGORY, DOUBLE, DOUBLE, BOOLEAN, BOOLEAN};
         Table t = CsvReader.read(columnTypes, CSV_FILE);
         StorageManager.saveTable("bigdata/people", t);
     }

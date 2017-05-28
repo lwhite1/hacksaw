@@ -335,13 +335,13 @@ public class Table implements Relation, IntIterable {
      * Throws a runtime exception if a column with the given name is already in the table
      */
     private void validateColumn(Column newColumn) {
-        Preconditions.checkNotNull(newColumn, "Attempted to add a null to the columns in table " + name);
+        Preconditions.checkNotNull(newColumn, "Attempted to append a null to the columns in table " + name);
         List<String> stringList = new ArrayList<>();
         for (String name : columnNames()) {
             stringList.add(name.toLowerCase());
         }
         if (stringList.contains(newColumn.name().toLowerCase())) {
-            String message = String.format("Cannot add column with duplicate name %s to table %s", newColumn, name);
+            String message = String.format("Cannot append column with duplicate name %s to table %s", newColumn, name);
             throw new RuntimeException(message);
         }
     }
@@ -769,7 +769,7 @@ public class Table implements Relation, IntIterable {
 
     public Table structure() {
         Table t = new Table("Structure of " + name());
-        IntColumn index = IntColumn.create("Index", columnCount());
+        DoubleColumn index = DoubleColumn.create("Index", columnCount());
         CategoryColumn columnName = new CategoryColumn("Column Name", columnCount());
         CategoryColumn columnType = new CategoryColumn("Column Type", columnCount());
         t.addColumn(index);

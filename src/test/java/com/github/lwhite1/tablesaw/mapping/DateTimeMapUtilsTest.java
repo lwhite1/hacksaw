@@ -1,8 +1,7 @@
 package com.github.lwhite1.tablesaw.mapping;
 
 import com.github.lwhite1.tablesaw.api.DateTimeColumn;
-import com.github.lwhite1.tablesaw.api.LongColumn;
-import com.github.lwhite1.tablesaw.api.ShortColumn;
+import com.github.lwhite1.tablesaw.api.DoubleColumn;
 import com.github.lwhite1.tablesaw.columns.packeddata.PackedLocalDateTime;
 import org.junit.Test;
 
@@ -16,9 +15,9 @@ import static org.junit.Assert.assertEquals;
  */
 public class DateTimeMapUtilsTest {
 
-    DateTimeColumn startCol = DateTimeColumn.create("start");
-    DateTimeColumn stopCol = DateTimeColumn.create("stop");
-    LocalDateTime start = LocalDateTime.now();
+    private DateTimeColumn startCol = DateTimeColumn.create("start");
+    private DateTimeColumn stopCol = DateTimeColumn.create("stop");
+    private LocalDateTime start = LocalDateTime.now();
 
 
     @Test
@@ -31,7 +30,7 @@ public class DateTimeMapUtilsTest {
         stopCol.add(stop);
 
         assertEquals(100_000L, startCol.difference(pStart, pStop, ChronoUnit.MILLIS));
-        LongColumn result = startCol.differenceInMilliseconds(stopCol);
+        DoubleColumn result = startCol.differenceInMilliseconds(stopCol);
         assertEquals(100_000L, result.firstElement());
     }
 
@@ -42,7 +41,7 @@ public class DateTimeMapUtilsTest {
         startCol.add(start);
         stopCol.add(stop);
 
-        LongColumn result = startCol.differenceInSeconds(stopCol);
+        DoubleColumn result = startCol.differenceInSeconds(stopCol);
         assertEquals(100_000L, result.firstElement());
     }
 
@@ -53,7 +52,7 @@ public class DateTimeMapUtilsTest {
         startCol.add(start);
         stopCol.add(stop);
 
-        LongColumn result = startCol.differenceInMinutes(stopCol);
+        DoubleColumn result = startCol.differenceInMinutes(stopCol);
         assertEquals(100_000L, result.firstElement());
     }
 
@@ -64,7 +63,7 @@ public class DateTimeMapUtilsTest {
         startCol.add(start);
         stopCol.add(stop);
 
-        LongColumn result = startCol.differenceInHours(stopCol);
+        DoubleColumn result = startCol.differenceInHours(stopCol);
         assertEquals(100_000L, result.firstElement());
 
     }
@@ -76,7 +75,7 @@ public class DateTimeMapUtilsTest {
         startCol.add(start);
         stopCol.add(stop);
 
-        LongColumn result = startCol.differenceInDays(stopCol);
+        DoubleColumn result = startCol.differenceInDays(stopCol);
         assertEquals(100_000L, result.firstElement());
     }
 
@@ -87,14 +86,14 @@ public class DateTimeMapUtilsTest {
         startCol.add(start);
         stopCol.add(stop);
 
-        LongColumn result = startCol.differenceInYears(stopCol);
+        DoubleColumn result = startCol.differenceInYears(stopCol);
         assertEquals(10_000L, result.firstElement());
     }
 
     @Test
     public void testHour() throws Exception {
         startCol.add(LocalDateTime.of(1984, 12, 12, 7, 30));
-        ShortColumn hour = startCol.hour();
+        DoubleColumn hour = startCol.hour();
         assertEquals(7, hour.firstElement());
     }
 }

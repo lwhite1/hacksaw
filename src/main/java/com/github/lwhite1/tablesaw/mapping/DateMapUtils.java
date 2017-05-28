@@ -2,7 +2,7 @@ package com.github.lwhite1.tablesaw.mapping;
 
 import com.github.lwhite1.tablesaw.api.DateColumn;
 import com.github.lwhite1.tablesaw.api.DateTimeColumn;
-import com.github.lwhite1.tablesaw.api.FloatColumn;
+import com.github.lwhite1.tablesaw.api.DoubleColumn;
 import com.github.lwhite1.tablesaw.api.TimeColumn;
 import com.github.lwhite1.tablesaw.columns.Column;
 import com.github.lwhite1.tablesaw.columns.DateColumnUtils;
@@ -27,22 +27,22 @@ public interface DateMapUtils extends DateColumnUtils {
         return column1.name() + ": " + value + " " + unit.toString() + "(s)";
     }
 
-    default FloatColumn differenceInDays(DateColumn column2) {
+    default DoubleColumn differenceInDays(DateColumn column2) {
         DateColumn column1 = (DateColumn) this;
         return difference(column1, column2, ChronoUnit.DAYS);
     }
 
-    default FloatColumn differenceInWeeks(DateColumn column2) {
+    default DoubleColumn differenceInWeeks(DateColumn column2) {
         DateColumn column1 = (DateColumn) this;
         return difference(column1, column2, ChronoUnit.WEEKS);
     }
 
-    default FloatColumn differenceInMonths(DateColumn column2) {
+    default DoubleColumn differenceInMonths(DateColumn column2) {
         DateColumn column1 = (DateColumn) this;
         return difference(column1, column2, ChronoUnit.MONTHS);
     }
 
-    default FloatColumn differenceInYears(DateColumn column2) {
+    default DoubleColumn differenceInYears(DateColumn column2) {
         DateColumn column1 = (DateColumn) this;
         return difference(column1, column2, ChronoUnit.YEARS);
     }
@@ -53,14 +53,14 @@ public interface DateMapUtils extends DateColumnUtils {
      * <p>
      * Missing values in either result in a Missing Value for the new column
      */
-    default FloatColumn difference(DateColumn column1, DateColumn column2, ChronoUnit unit) {
+    default DoubleColumn difference(DateColumn column1, DateColumn column2, ChronoUnit unit) {
 
-        FloatColumn newColumn = FloatColumn.create(column1.name() + " - " + column2.name());
+        DoubleColumn newColumn = DoubleColumn.create(column1.name() + " - " + column2.name());
         for (int r = 0; r < column1.size(); r++) {
             int c1 = column1.getInt(r);
             int c2 = column2.getInt(r);
-            if (c1 == FloatColumn.MISSING_VALUE || c2 == FloatColumn.MISSING_VALUE) {
-                newColumn.append(FloatColumn.MISSING_VALUE);
+            if (c1 == DoubleColumn.MISSING_VALUE || c2 == DoubleColumn.MISSING_VALUE) {
+                newColumn.append(DoubleColumn.MISSING_VALUE);
             } else {
                 LocalDate value1 = PackedLocalDate.asLocalDate(c1);
                 LocalDate value2 = PackedLocalDate.asLocalDate(c2);

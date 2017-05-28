@@ -1,11 +1,9 @@
 package com.github.lwhite1.tablesaw;
 
-import com.github.lwhite1.tablesaw.api.ColumnType;
 import com.github.lwhite1.tablesaw.api.DateColumn;
-import com.github.lwhite1.tablesaw.api.IntColumn;
+import com.github.lwhite1.tablesaw.api.DoubleColumn;
 import com.github.lwhite1.tablesaw.api.Table;
 import com.github.lwhite1.tablesaw.columns.packeddata.PackedLocalDate;
-import com.github.lwhite1.tablesaw.io.csv.CsvReader;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,24 +17,18 @@ import static org.junit.Assert.*;
  */
 public class TableFilteringTest {
 
-    private final ColumnType[] types = {
-            ColumnType.LOCAL_DATE,     // date of poll
-            ColumnType.INTEGER,        // approval rating (pct)
-            ColumnType.CATEGORY             // polling org
-    };
-
     private Table table;
 
     @Before
     public void setUp() throws Exception {
-        table = CsvReader.read(types, "data/BushApproval.csv");
+        table = Table.createFromCsv("data/BushApproval.csv");
     }
 
     @Test
     public void testFilter1() {
         Table result = table.selectWhere(column("approval").isLessThan(70));
-        IntColumn a = result.intColumn("approval");
-        for (int v : a) {
+        DoubleColumn a = result.doubleColumn("approval");
+        for (double v : a) {
             assertTrue(v < 70);
         }
     }
@@ -57,7 +49,7 @@ public class TableFilteringTest {
                         column("approval").isGreaterThan(70)));
 
         DateColumn dates = result.dateColumn("date");
-        IntColumn approval = result.intColumn("approval");
+        DoubleColumn approval = result.doubleColumn("approval");
         for (int row : result) {
             assertTrue(PackedLocalDate.isInApril(dates.getInt(row)));
             assertTrue(approval.get(row) > 70);

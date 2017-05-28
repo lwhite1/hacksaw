@@ -3,8 +3,7 @@ package com.github.lwhite1.tablesaw.examples;
 import com.github.lwhite1.tablesaw.api.CategoryColumn;
 import com.github.lwhite1.tablesaw.api.ColumnType;
 import com.github.lwhite1.tablesaw.api.DateColumn;
-import com.github.lwhite1.tablesaw.api.FloatColumn;
-import com.github.lwhite1.tablesaw.api.IntColumn;
+import com.github.lwhite1.tablesaw.api.DoubleColumn;
 import com.github.lwhite1.tablesaw.api.Table;
 import com.github.lwhite1.tablesaw.columns.packeddata.PackedLocalDate;
 import com.github.lwhite1.tablesaw.index.IntIndex;
@@ -25,6 +24,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import static com.github.lwhite1.tablesaw.api.ColumnType.*;
 import static com.github.lwhite1.tablesaw.api.QueryHelper.column;
 import static java.lang.System.out;
 
@@ -63,8 +63,8 @@ public class ObservationDataTest {
 
         String randomConcept1 = t.categoryColumn("concept").get(RandomUtils.nextInt(0, t.rowCount()));
         String randomConcept2 = t.categoryColumn("concept").get(RandomUtils.nextInt(0, t.rowCount()));
-        int randomPatient1 = t.intColumn("patient").get(RandomUtils.nextInt(0, t.rowCount()));
-        int randomPatient2 = t.intColumn("patient").get(RandomUtils.nextInt(0, t.rowCount()));
+        double randomPatient1 = t.doubleColumn("patient").get(RandomUtils.nextInt(0, t.rowCount()));
+        double randomPatient2 = t.doubleColumn("patient").get(RandomUtils.nextInt(0, t.rowCount()));
 
         stopwatch.reset().start();
         Table result = t.selectWhere(column("concept").isEqualTo(randomConcept1));
@@ -80,8 +80,8 @@ public class ObservationDataTest {
         out.println();
 
         stopwatch.reset().start();
-        IntColumn patients = t.intColumn("patient");
-        IntIndex patientIndex = new IntIndex(patients);
+        DoubleColumn patients = t.doubleColumn("patient");
+        DoubleIndex patientIndex = new DoubleIndex(patients);
         out.println("patient index built in " + stopwatch.elapsed(TimeUnit.SECONDS) + " seconds");
         out.println();
 
@@ -104,7 +104,7 @@ public class ObservationDataTest {
         out.println();
 
         stopwatch.reset().start();
-        t.floatColumn("value").sum();
+        t.doubleColumn("value").sum();
         out.println("Time to sum floats: " + stopwatch.elapsed(TimeUnit.MILLISECONDS) + "ms");
 
         System.exit(0);
@@ -122,8 +122,8 @@ public class ObservationDataTest {
         t = Table.create("Observations");
         CategoryColumn conceptId = CategoryColumn.create("concept");
         DateColumn date = DateColumn.create("date");
-        FloatColumn value = FloatColumn.create("value");
-        IntColumn patientId = IntColumn.create("patient");
+        DoubleColumn value = DoubleColumn.create("value");
+        DoubleColumn patientId = DoubleColumn.create("patient");
 
         t.addColumn(conceptId);
         t.addColumn(date);
@@ -150,7 +150,7 @@ public class ObservationDataTest {
     private static Table loadFromCsv(Stopwatch stopwatch) throws IOException {
         stopwatch.reset().start();
         Table t;// ConceptId, Date, Value, PatientNo
-        ColumnType[] columnTypes = {ColumnType.CATEGORY, ColumnType.LOCAL_DATE, ColumnType.FLOAT, ColumnType.INTEGER};
+        ColumnType[] columnTypes = {CATEGORY, LOCAL_DATE, DOUBLE, DOUBLE};
         t = CsvReader.read(columnTypes, CSV_FILE);
         out.println("Time to read to CSV File " + stopwatch.elapsed(TimeUnit.SECONDS) + " seconds");
         return t;
@@ -173,8 +173,8 @@ public class ObservationDataTest {
 
         DateColumn dateColumn = table.dateColumn("date");
         CategoryColumn conceptColumn = table.categoryColumn("concept");
-        FloatColumn valueColumn = table.floatColumn("value");
-        IntColumn patientColumn = table.intColumn("patient");
+        DoubleColumn valueColumn = table.doubleColumn("value");
+        DoubleColumn patientColumn = table.doubleColumn("patient");
 
         CSVWriter writer = new CSVWriter(new FileWriter(CSV_FILE));
         String[] line = new String[4];
@@ -189,10 +189,10 @@ public class ObservationDataTest {
             line[3] = Integer.toString(patientIds.getInt(RandomUtils.nextInt(0, patientIds.size())));
             writer.writeNext(line);
 /*
-      dateColumn.add(dates.getInt(RandomUtils.nextInt(0, dates.size())));
-      conceptColumn.add(concepts.get(RandomUtils.nextInt(0, concepts.size())));
-      valueColumn.add(RandomUtils.nextFloat(0f, 100_000f));
-      patientColumn.add(patientIds.getInt(RandomUtils.nextInt(0, patientIds.size())));
+      dateColumn.append(dates.getInt(RandomUtils.nextInt(0, dates.size())));
+      conceptColumn.append(concepts.get(RandomUtils.nextInt(0, concepts.size())));
+      valueColumn.append(RandomUtils.nextFloat(0f, 100_000f));
+      patientColumn.append(patientIds.getInt(RandomUtils.nextInt(0, patientIds.size())));
 */
         }
         writer.flush();

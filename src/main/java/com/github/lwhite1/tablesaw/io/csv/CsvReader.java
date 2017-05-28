@@ -366,7 +366,7 @@ public class CsvReader {
         Column indxCol = structure.column("Index");
         Column nameCol = structure.column("Column Name");
 
-        // add the column headers
+        // append the column headers
         int typeColIndex = structure.columnIndex(typeCol);
         int indxColIndex = structure.columnIndex(indxCol);
         int nameColIndex = structure.columnIndex(nameCol);
@@ -518,7 +518,7 @@ public class CsvReader {
 
         // Types to choose from. When more than one would work, we pick the first of the options
         ColumnType[] typeArray =  // we leave out category, as that is the default type
-                {LOCAL_DATE_TIME, LOCAL_TIME, LOCAL_DATE, BOOLEAN, SHORT_INT, INTEGER, LONG_INT, FLOAT, DOUBLE};
+                {LOCAL_DATE_TIME, LOCAL_TIME, LOCAL_DATE, BOOLEAN, DOUBLE};
 
         CopyOnWriteArrayList<ColumnType> typeCandidates = new CopyOnWriteArrayList<>(typeArray);
 
@@ -545,26 +545,6 @@ public class CsvReader {
             if (typeCandidates.contains(BOOLEAN)) {
                 if (!isBoolean.test(s)) {
                     typeCandidates.remove(BOOLEAN);
-                }
-            }
-            if (typeCandidates.contains(SHORT_INT)) {
-                if (!isShort.test(s)) {
-                    typeCandidates.remove(SHORT_INT);
-                }
-            }
-            if (typeCandidates.contains(INTEGER)) {
-                if (!isInteger.test(s)) {
-                    typeCandidates.remove(INTEGER);
-                }
-            }
-            if (typeCandidates.contains(LONG_INT)) {
-                if (!isLong.test(s)) {
-                    typeCandidates.remove(LONG_INT);
-                }
-            }
-            if (typeCandidates.contains(FLOAT)) {
-                if (!isFloat.test(s)) {
-                    typeCandidates.remove(FLOAT);
                 }
             }
             if (typeCandidates.contains(DOUBLE)) {

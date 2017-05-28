@@ -69,17 +69,9 @@ fun main(args: Array<String>) {
     println(fatal.first(5).print())
 
     println()
-    println("Total fatalities: " + fatal.shortColumn("Fatalities").sum())
-
-    println()
     println("Sorting on Fatalities in descending order")
     fatal = fatal.sortDescendingOn("Fatalities")
     println(fatal.first(5).print())
-
-    println("")
-    println("Calculating basic descriptive statistics on Fatalities")
-    println(fatal.shortColumn("Fatalities").summary().print())
-
 
     //TODO(lwhite): Provide a param for title of the new table (or auto-generate a better one).
     val injuriesByScale = tornadoes.median("Injuries").by("Scale")

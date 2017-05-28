@@ -12,10 +12,10 @@ import java.util.Set;
  * ignore empty ranges and coalesce connected ranges.  For example:  <pre>   {@code
  * <p>
  *   IntRangeSet rangeSet = IntTreeRangeSet.createFromCsv();
- *   rangeSet.add(IntRange.closed(1, 10)); // {[1, 10]}
- *   rangeSet.add(IntRange.closedOpen(11, 15)); // disconnected range; {[1, 10], [11, 15)}
- *   rangeSet.add(IntRange.closedOpen(15, 20)); // connected range; {[1, 10], [11, 20)}
- *   rangeSet.add(IntRange.openClosed(0, 0)); // empty range; {[1, 10], [11, 20)}
+ *   rangeSet.append(IntRange.closed(1, 10)); // {[1, 10]}
+ *   rangeSet.append(IntRange.closedOpen(11, 15)); // disconnected range; {[1, 10], [11, 15)}
+ *   rangeSet.append(IntRange.closedOpen(15, 20)); // connected range; {[1, 10], [11, 20)}
+ *   rangeSet.append(IntRange.openClosed(0, 0)); // empty range; {[1, 10], [11, 20)}
  *   rangeSet.remove(IntRange.open(5, 10)); // splits [1, 10]; {[1, 5], [10, 10], [11, 20)}}</pre>
  * <p>
  * <p>Note that the behavior of {@link IntRange#isEmpty()} and {@link IntRange#isConnected(IntRange)} may
@@ -100,7 +100,7 @@ public interface IntRangeSet {
      * <p>
      * <p>The returned view supports all optional operations supported by this {@code IntRangeSet}, with
      * the caveat that an {@link IllegalArgumentException} is thrown on an attempt to
-     * {@linkplain #add(IntRange) add} any range not {@linkplain IntRange#encloses(IntRange) enclosed} by
+     * {@linkplain #add(IntRange) append} any range not {@linkplain IntRange#encloses(IntRange) enclosed} by
      * {@code view}.
      */
     IntRangeSet subRangeSet(IntRange view);
@@ -109,14 +109,14 @@ public interface IntRangeSet {
 
     /**
      * Adds the specified range to this {@code IntRangeSet} (optional operation). That is, for equal
-     * range sets a and b, the result of {@code a.add(range)} is that {@code a} will be the minimal
+     * range sets a and b, the result of {@code a.append(range)} is that {@code a} will be the minimal
      * range set for which both {@code a.enclosesAll(b)} and {@code a.encloses(range)}.
      * <p>
      * <p>Note that {@code range} will be {@linkplain IntRange#span(IntRange) coalesced} with any ranges in
      * the range set that are {@linkplain IntRange#isConnected(IntRange) connected} with it.  Moreover,
      * if {@code range} is empty, this is a no-op.
      *
-     * @throws UnsupportedOperationException if this range set does not support the {@code add}
+     * @throws UnsupportedOperationException if this range set does not support the {@code append}
      *                                       operation
      */
     void add(IntRange range);

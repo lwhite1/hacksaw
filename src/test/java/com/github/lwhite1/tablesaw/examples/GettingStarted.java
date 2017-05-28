@@ -16,7 +16,7 @@ public class GettingStarted {
 
     private ColumnType[] types = {
             LOCAL_DATE,     // date of poll
-            INTEGER,        // approval rating (pct)
+            DOUBLE,         // approval rating (pct)
             CATEGORY        // polling org
     };
 

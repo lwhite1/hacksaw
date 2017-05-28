@@ -2,20 +2,19 @@ package com.github.lwhite1.tablesaw.kapi
 
 import com.github.lwhite1.tablesaw.api.ColumnType
 import com.github.lwhite1.tablesaw.api.DoubleColumn
-import com.github.lwhite1.tablesaw.api.NumericColumn
 import com.github.lwhite1.tablesaw.store.ColumnMetadata
 import com.github.lwhite1.tablesaw.util.Selection
 
 /**
  *
  */
-class DoubleCol(val target: DoubleColumn) : NumericCol {
+class DoubleCol(val target: DoubleColumn) : Col {
 
-    override fun target(): NumericColumn = target
+    fun target(): DoubleColumn = target
 
     override fun toDoubleArray(): DoubleArray = target.toDoubleArray()
 
-    override fun getFloat(index: Int): Float = target.getFloat(index)
+    fun getFloat(index: Int): Float = target.getFloat(index)
 
     override fun size(): Int = target.size()
 
@@ -57,7 +56,7 @@ class DoubleCol(val target: DoubleColumn) : NumericCol {
 
 
 /*
-    operator fun plus(c : DoubleCol): DoubleColumn = target.add(c.target);
+    operator fun plus(c : DoubleCol): DoubleColumn = target.append(c.target);
 
     operator fun plus(value : Double): DoubleColumn = target.addToEach(value);
 */
@@ -70,16 +69,7 @@ class DoubleCol(val target: DoubleColumn) : NumericCol {
     operator fun minus(value : Int): IntColumn = target.addToEach(-value);
 */
 
-
-//    operator fun div(value : Float): DoubleColumn = target.divide(value); //todo
-
-    operator fun div(c: IntCol): DoubleColumn = target.divide(c.target);
-
     operator fun div(c: DoubleCol): DoubleColumn = target.divide(c.target);
-
-
-    operator fun times(c: IntCol): DoubleColumn = target.multiply(c.target);
-
     operator fun times(c: DoubleCol): DoubleColumn = target.multiply(c.target);
 
     // math functions
@@ -98,28 +88,28 @@ class DoubleCol(val target: DoubleColumn) : NumericCol {
 
     // summary statistics
     fun sum(): Double = target.sum()
-    override fun product(): Double = target.product()
-    override fun sumOfLogs(): Double = target.sumOfLogs()
-    override fun sumOfSquares(): Double = target.sumOfSquares()
+    fun product(): Double = target.product()
+    fun sumOfLogs(): Double = target.sumOfLogs()
+    fun sumOfSquares(): Double = target.sumOfSquares()
 
-    override fun mean(): Double = target.mean()
-    override fun geometricMean(): Double = target.geometricMean()
-    override fun quadraticMean(): Double = target.quadraticMean()
-    override fun median(): Double = target.median()
-    override fun quartile1(): Double = target.quartile1()
-    override fun quartile3(): Double = target.quartile3()
-    override fun percentile(percentile : Double): Double = target.percentile(percentile)
+    fun mean(): Double = target.mean()
+    fun geometricMean(): Double = target.geometricMean()
+    fun quadraticMean(): Double = target.quadraticMean()
+    fun median(): Double = target.median()
+    fun quartile1(): Double = target.quartile1()
+    fun quartile3(): Double = target.quartile3()
+    fun percentile(percentile : Double): Double = target.percentile(percentile)
 
-    override fun max(): Double = target.max()
-    override fun min(): Double = target.min()
+    fun max(): Double = target.max()
+    fun min(): Double = target.min()
 
-    override fun range(): Double = target.range()
-    override fun variance(): Double = target.variance()
-    override fun populationVariance(): Double = target.populationVariance()
-    override fun standardDeviation(): Double = target.standardDeviation()
+    fun range(): Double = target.range()
+    fun variance(): Double = target.variance()
+    fun populationVariance(): Double = target.populationVariance()
+    fun standardDeviation(): Double = target.standardDeviation()
 
-    override fun skewness(): Double = target.skewness()
-    override fun kurtosis(): Double = target.kurtosis()
+    fun skewness(): Double = target.skewness()
+    fun kurtosis(): Double = target.kurtosis()
 
     // comparisons
 

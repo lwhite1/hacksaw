@@ -1,6 +1,6 @@
 package com.github.lwhite1.tablesaw.plotting.fx;
 
-import com.github.lwhite1.tablesaw.api.NumericColumn;
+import com.github.lwhite1.tablesaw.api.DoubleColumn;
 import com.github.lwhite1.tablesaw.columns.Column;
 import javafx.collections.FXCollections;
 import javafx.scene.chart.BarChart;
@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class FxBuilder {
 
-    static NumberAxis getNumberAxis(NumericColumn numericColumn) {
+    static NumberAxis getNumberAxis(DoubleColumn numericColumn) {
         final NumberAxis numberAxis = new NumberAxis();
         numberAxis.setLabel(numericColumn.name());
         return numberAxis;
@@ -28,7 +28,7 @@ public class FxBuilder {
         return categoryAxis;
     }
 
-    static XYChart.Series<String, Number> getSeries(NumericColumn numericColumn, List<XYChart.Data<String, Number>>
+    static XYChart.Series<String, Number> getSeries(DoubleColumn numericColumn, List<XYChart.Data<String, Number>>
             data) {
         XYChart.Series<String, Number> series1
                 = new XYChart.Series<>(FXCollections.observableList(data));

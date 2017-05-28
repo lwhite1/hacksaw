@@ -195,7 +195,7 @@ public class CategoryColumn extends AbstractColumn
     public Table countByCategory() {
         Table t = new Table("Column: " + name());
         CategoryColumn categories = CategoryColumn.create("Category");
-        IntColumn counts = IntColumn.create("Count");
+        DoubleColumn counts = DoubleColumn.create("Count");
 
         Int2IntMap valueToCount = new Int2IntOpenHashMap();
         for (int next : values) {
@@ -388,7 +388,7 @@ public class CategoryColumn extends AbstractColumn
             String category = lookupTable.get(next);
             for (BooleanColumn column : results) {
                 if (category.equals(column.name())) {
-                    //TODO(lwhite): update the correct row more efficiently, by using set rather than add & only
+                    //TODO(lwhite): update the correct row more efficiently, by using set rather than append & only
                     // updating true
                     column.append(true);
                 } else {
@@ -419,8 +419,8 @@ public class CategoryColumn extends AbstractColumn
     }
 
 
-    public IntColumn toIntColumn() {
-        IntColumn intColumn = IntColumn.create(this.name() + ": codes", size());
+    public DoubleColumn toIntColumn() {
+        DoubleColumn intColumn = DoubleColumn.create(this.name() + ": codes", size());
         IntArrayList data = data();
         for (int i = 0; i < size(); i++) {
             intColumn.append(data.getInt(i));

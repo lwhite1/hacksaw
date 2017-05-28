@@ -15,30 +15,30 @@ public class TornadoExample {
 
     // column types for the tornado table
     private static final ColumnType[] COLUMN_TYPES_OLD = {
-            INTEGER,     // number by year
-            INTEGER,     // year
-            INTEGER,     // month
-            INTEGER,     // day
+            DOUBLE,     // number by year
+            DOUBLE,     // year
+            DOUBLE,     // month
+            DOUBLE,     // day
             LOCAL_DATE,  // date
             LOCAL_TIME,  // time
             CATEGORY,    // tz
             CATEGORY,    // st
             CATEGORY,    // state fips
-            INTEGER,     // state torn number
-            INTEGER,     // scale
-            INTEGER,     // injuries
-            INTEGER,     // fatalities
-            FLOAT,       // loss
-            FLOAT,   // crop loss
-            FLOAT,   // St. Lat
-            FLOAT,   // St. Lon
-            FLOAT,   // End Lat
-            FLOAT,   // End Lon
-            FLOAT,   // length
-            FLOAT,   // width
-            FLOAT,   // NS
-            FLOAT,   // SN
-            FLOAT,   // SG
+            DOUBLE,     // state torn number
+            DOUBLE,     // scale
+            DOUBLE,     // injuries
+            DOUBLE,     // fatalities
+            DOUBLE,       // loss
+            DOUBLE,   // crop loss
+            DOUBLE,   // St. Lat
+            DOUBLE,   // St. Lon
+            DOUBLE,   // End Lat
+            DOUBLE,   // End Lon
+            DOUBLE,   // length
+            DOUBLE,   // width
+            DOUBLE,   // NS
+            DOUBLE,   // SN
+            DOUBLE,   // SG
             CATEGORY,  // Count FIPS 1-4
             CATEGORY,
             CATEGORY,
@@ -62,7 +62,7 @@ public class TornadoExample {
         assert (tornadoes != null);
 
         out(tornadoes.structure().print());
-        out(tornadoes.structure().selectWhere(column("Column Type").isEqualTo("INTEGER")).print());
+        out(tornadoes.structure().selectWhere(column("Column Type").isEqualTo("DOUBLE")).print());
 
         tornadoes.setName("tornadoes");
 
@@ -104,7 +104,7 @@ public class TornadoExample {
         out(fatal.first(5).print());
 
         out();
-        out("Total fatalities: " + fatal.shortColumn("Fatalities").sum());
+        out("Total fatalities: " + fatal.doubleColumn("Fatalities").sum());
 
         out();
         out("Sorting on Fatalities in descending order");
@@ -113,7 +113,7 @@ public class TornadoExample {
 
         out("");
         out("Calculating basic descriptive statistics on Fatalities");
-        out(fatal.shortColumn("Fatalities").summary().print());
+        out(fatal.doubleColumn("Fatalities").summary().print());
 
 
         //TODO(lwhite): Provide a param for title of the new table (or auto-generate a better one).

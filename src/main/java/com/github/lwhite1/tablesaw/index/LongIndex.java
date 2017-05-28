@@ -1,7 +1,6 @@
 package com.github.lwhite1.tablesaw.index;
 
 import com.github.lwhite1.tablesaw.api.DateTimeColumn;
-import com.github.lwhite1.tablesaw.api.LongColumn;
 import com.github.lwhite1.tablesaw.util.BitmapBackedSelection;
 import com.github.lwhite1.tablesaw.util.Selection;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
@@ -15,24 +14,6 @@ import it.unimi.dsi.fastutil.longs.Long2ObjectSortedMap;
 public class LongIndex {
 
     private final Long2ObjectAVLTreeMap<IntArrayList> index;
-
-    public LongIndex(LongColumn column) {
-        int sizeEstimate = Integer.min(1_000_000, column.size() / 100);
-        Long2ObjectOpenHashMap<IntArrayList> tempMap = new Long2ObjectOpenHashMap<>(sizeEstimate);
-        for (int i = 0; i < column.size(); i++) {
-            long value = column.get(i);
-            IntArrayList recordIds = tempMap.get(value);
-            if (recordIds == null) {
-                recordIds = new IntArrayList();
-                recordIds.add(i);
-                tempMap.trim();
-                tempMap.put(value, recordIds);
-            } else {
-                recordIds.add(i);
-            }
-        }
-        index = new Long2ObjectAVLTreeMap<>(tempMap);
-    }
 
     public LongIndex(DateTimeColumn column) {
         int sizeEstimate = Integer.min(1_000_000, column.size() / 100);
@@ -90,7 +71,7 @@ public class LongIndex {
 
     public Selection atMost(long value) {
         Selection selection = new BitmapBackedSelection();
-        Long2ObjectSortedMap<IntArrayList> head = index.headMap(value + 1);  // we add 1 to get values equal to the arg
+        Long2ObjectSortedMap<IntArrayList> head = index.headMap(value + 1);  // we append 1 to get values equal to the arg
         for (IntArrayList keys : head.values()) {
             addAllToSelection(keys, selection);
         }
@@ -99,7 +80,7 @@ public class LongIndex {
 
     public Selection lessThan(long value) {
         Selection selection = new BitmapBackedSelection();
-        Long2ObjectSortedMap<IntArrayList> head = index.headMap(value);  // we add 1 to get values equal to the arg
+        Long2ObjectSortedMap<IntArrayList> head = index.headMap(value);  // we append 1 to get values equal to the arg
         for (IntArrayList keys : head.values()) {
             addAllToSelection(keys, selection);
         }

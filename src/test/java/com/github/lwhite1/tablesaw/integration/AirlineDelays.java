@@ -15,9 +15,9 @@ public class AirlineDelays {
 
     // The full set of all available columns in tbe dataset
     static ColumnType[] heading = {
-            ColumnType.INTEGER, // year
-            ColumnType.INTEGER, // month
-            ColumnType.INTEGER, // day
+            ColumnType.DOUBLE, // year
+            ColumnType.DOUBLE, // month
+            ColumnType.DOUBLE, // day
             ColumnType.CATEGORY,  // dow
             ColumnType.LOCAL_TIME, // DepTime
             ColumnType.LOCAL_TIME, // CRSDepTime
@@ -26,31 +26,31 @@ public class AirlineDelays {
             ColumnType.CATEGORY, // Carrier
             ColumnType.CATEGORY, // FlightNum
             ColumnType.CATEGORY, // TailNum
-            ColumnType.INTEGER, // ActualElapsedTime
-            ColumnType.INTEGER, // CRSElapsedTime
-            ColumnType.INTEGER, // AirTime
-            ColumnType.INTEGER, // ArrDelay
-            ColumnType.INTEGER, // DepDelay
+            ColumnType.DOUBLE, // ActualElapsedTime
+            ColumnType.DOUBLE, // CRSElapsedTime
+            ColumnType.DOUBLE, // AirTime
+            ColumnType.DOUBLE, // ArrDelay
+            ColumnType.DOUBLE, // DepDelay
             ColumnType.CATEGORY, // Origin
             ColumnType.CATEGORY, // Dest
-            ColumnType.INTEGER, // Distance
-            ColumnType.INTEGER, // TaxiIn
-            ColumnType.INTEGER, // TaxiOut
+            ColumnType.DOUBLE, // Distance
+            ColumnType.DOUBLE, // TaxiIn
+            ColumnType.DOUBLE, // TaxiOut
             ColumnType.BOOLEAN, // Cancelled
             ColumnType.CATEGORY, // CancellationCode
             ColumnType.BOOLEAN, // Diverted
-            ColumnType.FLOAT, // CarrierDelay
-            ColumnType.FLOAT, // WeatherDelay
-            ColumnType.FLOAT, // NASDelay
-            ColumnType.FLOAT, // SecurityDelay
-            ColumnType.FLOAT  // LateAircraftDelay
+            ColumnType.DOUBLE, // CarrierDelay
+            ColumnType.DOUBLE, // WeatherDelay
+            ColumnType.DOUBLE, // NASDelay
+            ColumnType.DOUBLE, // SecurityDelay
+            ColumnType.DOUBLE  // LateAircraftDelay
     };
     private static Table flights2008;
     // A filtered set of columns
     private static ColumnType[] reduced_set = {
             ColumnType.SKIP, // year
-            ColumnType.INTEGER, // month
-            ColumnType.INTEGER, // day
+            ColumnType.DOUBLE, // month
+            ColumnType.DOUBLE, // day
             ColumnType.CATEGORY,  // dow
             ColumnType.SKIP, // DepTime
             ColumnType.LOCAL_TIME, // CRSDepTime
@@ -63,10 +63,10 @@ public class AirlineDelays {
             ColumnType.SKIP, // CRSElapsedTime
             ColumnType.SKIP, // AirTime
             ColumnType.SKIP, // ArrDelay
-            ColumnType.INTEGER, // DepDelay
+            ColumnType.DOUBLE, // DepDelay
             ColumnType.CATEGORY, // Origin
             ColumnType.CATEGORY, // Dest
-            ColumnType.INTEGER, // Distance
+            ColumnType.DOUBLE, // Distance
             ColumnType.SKIP, // TaxiIn
             ColumnType.SKIP, // TaxiOut
             ColumnType.BOOLEAN, // Cancelled

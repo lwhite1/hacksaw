@@ -1,7 +1,7 @@
 package com.github.lwhite1.tablesaw.table;
 
 import com.github.lwhite1.tablesaw.api.CategoryColumn;
-import com.github.lwhite1.tablesaw.api.FloatColumn;
+import com.github.lwhite1.tablesaw.api.DoubleColumn;
 import com.github.lwhite1.tablesaw.api.Table;
 import com.github.lwhite1.tablesaw.columns.Column;
 import com.github.lwhite1.tablesaw.reducing.NumericReduceFunction;
@@ -167,7 +167,7 @@ public class ViewGroup implements Iterable<TemporaryView> {
         Preconditions.checkArgument(!subTables.isEmpty());
         NumericSummaryTable groupTable = NumericSummaryTable.create(sortedOriginal.name() + " summary");
         CategoryColumn groupColumn = new CategoryColumn("Group", subTables.size());
-        FloatColumn resultColumn = new FloatColumn(reduceColumnName(numericColumnName, function.functionName()),
+        DoubleColumn resultColumn = new DoubleColumn(reduceColumnName(numericColumnName, function.functionName()),
                 subTables.size());
         groupTable.addColumn(groupColumn);
         groupTable.addColumn(resultColumn);

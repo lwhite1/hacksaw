@@ -1,8 +1,9 @@
 package com.github.lwhite1.tablesaw.examples;
 
 import com.github.lwhite1.tablesaw.api.DateTimeColumn;
-import com.github.lwhite1.tablesaw.api.LongColumn;
+import com.github.lwhite1.tablesaw.api.DoubleColumn;
 import com.github.lwhite1.tablesaw.api.Table;
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 import it.unimi.dsi.fastutil.floats.FloatArrayList;
 
 import static com.github.lwhite1.tablesaw.api.QueryHelper.*;
@@ -30,7 +31,7 @@ public class ServiceExample {
         }
 
         // Calc duration
-        LongColumn duration = start.differenceInSeconds(end);
+        DoubleColumn duration = start.differenceInSeconds(end);
         ops.addColumn(duration);
         duration.setName("Duration");
 
@@ -44,7 +45,7 @@ public class ServiceExample {
 
         Table durationByFacilityAndShift = q2_429_assembly.median("Duration").by("Facility", "Shift");
         // TODO(lwhite): We need a top() method that can be used to return the top table rows
-        FloatArrayList tops = durationByFacilityAndShift.floatColumn("Median").top(5);
+        DoubleArrayList tops = durationByFacilityAndShift.doubleColumn("Median").top(5);
 
         out(durationByFacilityAndShift.print());
 

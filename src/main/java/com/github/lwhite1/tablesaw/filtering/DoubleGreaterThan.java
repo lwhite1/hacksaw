@@ -1,24 +1,25 @@
 package com.github.lwhite1.tablesaw.filtering;
 
+import com.github.lwhite1.tablesaw.api.DoubleColumn;
 import com.github.lwhite1.tablesaw.api.Table;
 import com.github.lwhite1.tablesaw.columns.ColumnReference;
 import com.github.lwhite1.tablesaw.util.Selection;
 
-import static com.github.lwhite1.tablesaw.columns.FloatColumnUtils.isGreaterThan;
+import static com.github.lwhite1.tablesaw.columns.DoubleColumnUtils.isGreaterThan;
 
 /**
  */
-public class FloatGreaterThan extends ColumnFilter {
+public class DoubleGreaterThan extends ColumnFilter {
 
     private float value;
 
-    public FloatGreaterThan(ColumnReference reference, float value) {
+    public DoubleGreaterThan(ColumnReference reference, float value) {
         super(reference);
         this.value = value;
     }
 
     public Selection apply(Table relation) {
-        FloatColumn floatColumn = (FloatColumn) relation.column(columnReference.getColumnName());
+        DoubleColumn floatColumn = (DoubleColumn) relation.column(columnReference.getColumnName());
         return floatColumn.select(isGreaterThan, value);
     }
 }

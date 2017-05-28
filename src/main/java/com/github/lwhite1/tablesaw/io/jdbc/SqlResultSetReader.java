@@ -28,16 +28,16 @@ public class SqlResultSetReader {
                     .put(Types.TIME, ColumnType.LOCAL_TIME)
                     .put(Types.TIMESTAMP, ColumnType.LOCAL_DATE_TIME)
 
-                    .put(Types.DECIMAL, ColumnType.FLOAT)
-                    .put(Types.DOUBLE, ColumnType.FLOAT)
-                    .put(Types.FLOAT, ColumnType.FLOAT)
-                    .put(Types.NUMERIC, ColumnType.FLOAT)
-                    .put(Types.REAL, ColumnType.FLOAT)
+                    .put(Types.DECIMAL, ColumnType.DOUBLE)
+                    .put(Types.DOUBLE, ColumnType.DOUBLE)
+                    .put(Types.FLOAT, ColumnType.DOUBLE)
+                    .put(Types.NUMERIC, ColumnType.DOUBLE)
+                    .put(Types.REAL, ColumnType.DOUBLE)
 
-                    .put(Types.INTEGER, ColumnType.INTEGER)
-                    .put(Types.SMALLINT, ColumnType.SHORT_INT)
-                    .put(Types.TINYINT, ColumnType.SHORT_INT)
-                    .put(Types.BIGINT, ColumnType.LONG_INT)
+                    .put(Types.INTEGER, ColumnType.DOUBLE)
+                    .put(Types.SMALLINT, ColumnType.DOUBLE)
+                    .put(Types.TINYINT, ColumnType.DOUBLE)
+                    .put(Types.BIGINT, ColumnType.DOUBLE)
 
                     .put(Types.CHAR, ColumnType.CATEGORY)
                     .put(Types.LONGVARCHAR, ColumnType.CATEGORY)
@@ -57,7 +57,7 @@ public class SqlResultSetReader {
         ResultSetMetaData metaData = resultSet.getMetaData();
         Table table = Table.create(tableName);
 
-        // Setup the columns and add to the table
+        // Setup the columns and append to the table
         for (int i = 1; i <= metaData.getColumnCount(); i++) {
             String name = metaData.getColumnName(i);
 
