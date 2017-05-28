@@ -1,5 +1,7 @@
 package com.github.lwhite1.tablesaw.filtering;
 
+import com.github.lwhite1.tablesaw.columns.packeddata.PackedLocalDate;
+
 import java.time.LocalDate;
 
 /**
@@ -7,6 +9,6 @@ import java.time.LocalDate;
  */
 public interface LocalDatePredicate {
 
-    boolean test(LocalDate i);
+    boolean test(LocalDate d);
 
 }

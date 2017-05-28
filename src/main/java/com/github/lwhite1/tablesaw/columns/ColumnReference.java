@@ -2,51 +2,27 @@ package com.github.lwhite1.tablesaw.columns;
 
 import com.github.lwhite1.tablesaw.api.DoubleColumn;
 import com.github.lwhite1.tablesaw.columns.packeddata.PackedLocalDate;
+import com.github.lwhite1.tablesaw.columns.packeddata.PackedLocalDateTime;
 import com.github.lwhite1.tablesaw.filtering.BooleanIsFalse;
 import com.github.lwhite1.tablesaw.filtering.BooleanIsTrue;
+import com.github.lwhite1.tablesaw.filtering.DateBiFilter;
 import com.github.lwhite1.tablesaw.filtering.DateEqualTo;
+import com.github.lwhite1.tablesaw.filtering.DateFilter;
+import com.github.lwhite1.tablesaw.filtering.DoubleBiFilter;
 import com.github.lwhite1.tablesaw.filtering.Filter;
-import com.github.lwhite1.tablesaw.filtering.DoubleGreaterThan;
-import com.github.lwhite1.tablesaw.filtering.DoubleGreaterThanOrEqualTo;
-import com.github.lwhite1.tablesaw.filtering.DoubleLessThan;
-import com.github.lwhite1.tablesaw.filtering.DoubleLessThanOrEqualTo;
 import com.github.lwhite1.tablesaw.filtering.DoubleBetween;
 import com.github.lwhite1.tablesaw.filtering.DoubleIsIn;
+import com.github.lwhite1.tablesaw.filtering.IntBiPredicate;
 import com.github.lwhite1.tablesaw.filtering.IsMissing;
 import com.github.lwhite1.tablesaw.filtering.IsNotMissing;
 import com.github.lwhite1.tablesaw.filtering.LocalDateBetween;
+import com.github.lwhite1.tablesaw.filtering.LongBiPredicate;
 import com.github.lwhite1.tablesaw.filtering.StringEqualTo;
 import com.github.lwhite1.tablesaw.filtering.StringNotEqualTo;
 import com.github.lwhite1.tablesaw.filtering.TimeEqualTo;
 import com.github.lwhite1.tablesaw.filtering.dates.LocalDateIsAfter;
 import com.github.lwhite1.tablesaw.filtering.dates.LocalDateIsBefore;
 import com.github.lwhite1.tablesaw.filtering.datetimes.DateTimeIsBefore;
-import com.github.lwhite1.tablesaw.filtering.datetimes.IsFirstDayOfTheMonth;
-import com.github.lwhite1.tablesaw.filtering.datetimes.IsFriday;
-import com.github.lwhite1.tablesaw.filtering.datetimes.IsInApril;
-import com.github.lwhite1.tablesaw.filtering.datetimes.IsInAugust;
-import com.github.lwhite1.tablesaw.filtering.datetimes.IsInDecember;
-import com.github.lwhite1.tablesaw.filtering.datetimes.IsInFebruary;
-import com.github.lwhite1.tablesaw.filtering.datetimes.IsInJanuary;
-import com.github.lwhite1.tablesaw.filtering.datetimes.IsInJuly;
-import com.github.lwhite1.tablesaw.filtering.datetimes.IsInJune;
-import com.github.lwhite1.tablesaw.filtering.datetimes.IsInMarch;
-import com.github.lwhite1.tablesaw.filtering.datetimes.IsInMay;
-import com.github.lwhite1.tablesaw.filtering.datetimes.IsInNovember;
-import com.github.lwhite1.tablesaw.filtering.datetimes.IsInOctober;
-import com.github.lwhite1.tablesaw.filtering.datetimes.IsInQ1;
-import com.github.lwhite1.tablesaw.filtering.datetimes.IsInQ2;
-import com.github.lwhite1.tablesaw.filtering.datetimes.IsInQ3;
-import com.github.lwhite1.tablesaw.filtering.datetimes.IsInQ4;
-import com.github.lwhite1.tablesaw.filtering.datetimes.IsInSeptember;
-import com.github.lwhite1.tablesaw.filtering.datetimes.IsInYear;
-import com.github.lwhite1.tablesaw.filtering.datetimes.IsLastDayOfTheMonth;
-import com.github.lwhite1.tablesaw.filtering.datetimes.IsMonday;
-import com.github.lwhite1.tablesaw.filtering.datetimes.IsSaturday;
-import com.github.lwhite1.tablesaw.filtering.datetimes.IsSunday;
-import com.github.lwhite1.tablesaw.filtering.datetimes.IsThursday;
-import com.github.lwhite1.tablesaw.filtering.datetimes.IsTuesday;
-import com.github.lwhite1.tablesaw.filtering.datetimes.IsWednesday;
 import com.github.lwhite1.tablesaw.filtering.text.TextContains;
 import com.github.lwhite1.tablesaw.filtering.text.TextEndsWith;
 import com.github.lwhite1.tablesaw.filtering.text.TextEqualToIgnoringCase;
@@ -142,19 +118,19 @@ public class ColumnReference {
     }
 
     public Filter isGreaterThan(float value) {
-        return new DoubleGreaterThan(this, value);
+        return new DoubleBiFilter(this, DoubleColumnUtils.isGreaterThan, value);
     }
 
     public Filter isLessThan(float value) {
-        return new DoubleLessThan(this, value);
+        return new DoubleBiFilter(this, DoubleColumnUtils.isLessThan, value);
     }
 
     public Filter isLessThanOrEqualTo(float value) {
-        return new DoubleLessThanOrEqualTo(this, value);
+        return new DoubleBiFilter(this, DoubleColumnUtils.isLessThanOrEqualTo, value);
     }
 
     public Filter isGreaterThanOrEqualTo(float value) {
-        return new DoubleGreaterThanOrEqualTo(this, value);
+        return new DoubleBiFilter(this, DoubleColumnUtils.isGreaterThanOrEqualTo, value);
     }
 
     public String getColumnName() {
@@ -190,107 +166,107 @@ public class ColumnReference {
     }
 
     public Filter isSunday() {
-        return new IsSunday(this);
+        return new DateFilter(this, PackedLocalDate::isSunday, PackedLocalDateTime::isSunday);
     }
 
     public Filter isMonday() {
-        return new IsMonday(this);
+        return new DateFilter(this, PackedLocalDate::isMonday, PackedLocalDateTime::isMonday);
     }
 
     public Filter isTuesday() {
-        return new IsTuesday(this);
+        return new DateFilter(this, PackedLocalDate::isTuesday, PackedLocalDateTime::isTuesday);
     }
 
     public Filter isWednesday() {
-        return new IsWednesday(this);
+        return new DateFilter(this, PackedLocalDate::isWednesday, PackedLocalDateTime::isWednesday);
     }
 
     public Filter isThursday() {
-        return new IsThursday(this);
+        return new DateFilter(this, PackedLocalDate::isThursday, PackedLocalDateTime::isThursday);
     }
 
     public Filter isFriday() {
-        return new IsFriday(this);
+        return new DateFilter(this, PackedLocalDate::isFriday, PackedLocalDateTime::isFriday);
     }
 
     public Filter isSaturday() {
-        return new IsSaturday(this);
+        return new DateFilter(this, PackedLocalDate::isSaturday, PackedLocalDateTime::isSaturday);
     }
 
     public Filter isInJanuary() {
-        return new IsInJanuary(this);
+        return new DateFilter(this, PackedLocalDate::isInJanuary, PackedLocalDateTime::isInJanuary);
     }
 
     public Filter isInFebruary() {
-        return new IsInFebruary(this);
+        return new DateFilter(this, PackedLocalDate::isInFebruary, PackedLocalDateTime::isInFebruary);
     }
 
     public Filter isInMarch() {
-        return new IsInMarch(this);
+        return new DateFilter(this, PackedLocalDate::isInMarch, PackedLocalDateTime::isInMarch);
     }
 
     public Filter isInApril() {
-        return new IsInApril(this);
+        return new DateFilter(this, PackedLocalDate::isInApril, PackedLocalDateTime::isInApril);
     }
 
     public Filter isInMay() {
-        return new IsInMay(this);
+        return new DateFilter(this, PackedLocalDate::isInMay, PackedLocalDateTime::isInMay);
     }
 
     public Filter isInJune() {
-        return new IsInJune(this);
+        return new DateFilter(this, PackedLocalDate::isInJune, PackedLocalDateTime::isInJune);
     }
 
     public Filter isInJuly() {
-        return new IsInJuly(this);
+        return new DateFilter(this, PackedLocalDate::isInJuly, PackedLocalDateTime::isInJuly);
     }
 
     public Filter isInAugust() {
-        return new IsInAugust(this);
+        return new DateFilter(this, PackedLocalDate::isInAugust, PackedLocalDateTime::isInAugust);
     }
 
     public Filter isInSeptember() {
-        return new IsInSeptember(this);
+        return new DateFilter(this, PackedLocalDate::isInSeptember, PackedLocalDateTime::isInSeptember);
     }
 
     public Filter isInOctober() {
-        return new IsInOctober(this);
+        return new DateFilter(this, PackedLocalDate::isInOctober, PackedLocalDateTime::isInOctober);
     }
 
     public Filter isInNovember() {
-        return new IsInNovember(this);
+        return new DateFilter(this, PackedLocalDate::isInNovember, PackedLocalDateTime::isInNovember);
     }
 
     public Filter isInDecember() {
-        return new IsInDecember(this);
+        return new DateFilter(this, PackedLocalDate::isInDecember, PackedLocalDateTime::isInDecember);
     }
 
     public Filter isInQ1() {
-        return new IsInQ1(this);
+        return new DateFilter(this, PackedLocalDate::isInQ1, PackedLocalDateTime::isInQ1);
     }
 
     public Filter isInQ2() {
-        return new IsInQ2(this);
+        return new DateFilter(this, PackedLocalDate::isInQ2, PackedLocalDateTime::isInQ2);
     }
 
     public Filter isInQ3() {
-        return new IsInQ3(this);
+        return new DateFilter(this, PackedLocalDate::isInQ3, PackedLocalDateTime::isInQ3);
     }
 
     public Filter isInQ4() {
-        return new IsInQ4(this);
+        return new DateFilter(this, PackedLocalDate::isInQ4, PackedLocalDateTime::isInQ4);
     }
 
     public Filter isFirstDayOfMonth() {
-        return new IsFirstDayOfTheMonth(this);
+        return new DateFilter(this, PackedLocalDate::isFirstDayOfMonth, PackedLocalDateTime::isFirstDayOfMonth);
     }
 
     public Filter isLastDayOfMonth() {
-        return new IsLastDayOfTheMonth(this);
+        return new DateFilter(this, PackedLocalDate::isLastDayOfMonth, PackedLocalDateTime::isLastDayOfMonth);
     }
 
     public Filter isInYear(int year) {
-        return new IsInYear(this, year);
+        return new DateBiFilter(this, IntBiPredicate.isInYear, LongBiPredicate.isInYear, year);
     }
 
     public Filter isBefore(LocalDate date) {

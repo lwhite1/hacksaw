@@ -1,9 +1,13 @@
 package com.github.lwhite1.tablesaw.filtering;
 
+import com.github.lwhite1.tablesaw.columns.packeddata.PackedLocalDateTime;
+
 /**
  *
  */
 public interface LongBiPredicate {
+
+    LongBiPredicate isInYear = (packedDateTime, year) -> PackedLocalDateTime.isInYear(packedDateTime, (int) year);
 
     /**
      * Returns true if valueToTest meets the criteria of this predicate when valueToCompareAgainst is considered

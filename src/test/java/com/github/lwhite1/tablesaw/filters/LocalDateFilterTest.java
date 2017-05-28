@@ -3,14 +3,13 @@ package com.github.lwhite1.tablesaw.filters;
 import com.github.lwhite1.tablesaw.api.DateColumn;
 import com.github.lwhite1.tablesaw.api.Table;
 import com.github.lwhite1.tablesaw.columns.ColumnReference;
+import com.github.lwhite1.tablesaw.columns.packeddata.PackedLocalDate;
+import com.github.lwhite1.tablesaw.columns.packeddata.PackedLocalDateTime;
+import com.github.lwhite1.tablesaw.filtering.DateBiFilter;
+import com.github.lwhite1.tablesaw.filtering.DateFilter;
+import com.github.lwhite1.tablesaw.filtering.IntBiPredicate;
 import com.github.lwhite1.tablesaw.filtering.LocalDatePredicate;
-import com.github.lwhite1.tablesaw.filtering.datetimes.IsFirstDayOfTheMonth;
-import com.github.lwhite1.tablesaw.filtering.datetimes.IsInFebruary;
-import com.github.lwhite1.tablesaw.filtering.datetimes.IsInMarch;
-import com.github.lwhite1.tablesaw.filtering.datetimes.IsInYear;
-import com.github.lwhite1.tablesaw.filtering.datetimes.IsLastDayOfTheMonth;
-import com.github.lwhite1.tablesaw.filtering.datetimes.IsMonday;
-import com.github.lwhite1.tablesaw.filtering.datetimes.IsSunday;
+import com.github.lwhite1.tablesaw.filtering.LongBiPredicate;
 import com.github.lwhite1.tablesaw.util.Selection;
 import org.junit.Before;
 import org.junit.Test;
@@ -38,7 +37,7 @@ public class LocalDateFilterTest {
     @Test
     public void testIsSunday() {
         ColumnReference reference = new ColumnReference("testing");
-        IsSunday isSunday = new IsSunday(reference);
+        DateFilter isSunday = new DateFilter(reference, PackedLocalDate::isSunday, PackedLocalDateTime::isSunday);
         Selection selection = isSunday.apply(table);
         assertTrue(selection.contains(0));
         assertFalse(selection.contains(1));
@@ -48,7 +47,7 @@ public class LocalDateFilterTest {
     @Test
     public void testIsMonday() {
         ColumnReference reference = new ColumnReference("testing");
-        IsMonday isSunday = new IsMonday(reference);
+        DateFilter isSunday = new DateFilter(reference, PackedLocalDate::isMonday, PackedLocalDateTime::isMonday);
         Selection selection = isSunday.apply(table);
         assertFalse(selection.contains(0));
         assertTrue(selection.contains(1));
@@ -58,7 +57,7 @@ public class LocalDateFilterTest {
     @Test
     public void testIsFebruary() {
         ColumnReference reference = new ColumnReference("testing");
-        IsInFebruary isFebruary = new IsInFebruary(reference);
+        DateFilter isFebruary = new DateFilter(reference, PackedLocalDate::isInFebruary, PackedLocalDateTime::isInFebruary);
         Selection selection = isFebruary.apply(table);
         assertTrue(selection.contains(0));
         assertTrue(selection.contains(1));
@@ -68,7 +67,7 @@ public class LocalDateFilterTest {
     @Test
     public void testIsMarch() {
         ColumnReference reference = new ColumnReference("testing");
-        IsInMarch result = new IsInMarch(reference);
+        DateFilter result = new DateFilter(reference, PackedLocalDate::isInMarch, PackedLocalDateTime::isInMarch);
         Selection selection = result.apply(table);
         assertFalse(selection.contains(0));
         assertFalse(selection.contains(1));
@@ -78,7 +77,7 @@ public class LocalDateFilterTest {
     @Test
     public void testIsFirstDayOfTheMonth() {
         ColumnReference reference = new ColumnReference("testing");
-        IsFirstDayOfTheMonth result = new IsFirstDayOfTheMonth(reference);
+        DateFilter result = new DateFilter(reference, PackedLocalDate::isFirstDayOfMonth, PackedLocalDateTime::isFirstDayOfMonth);
         Selection selection = result.apply(table);
         assertFalse(selection.contains(0));
         assertFalse(selection.contains(1));
@@ -88,7 +87,7 @@ public class LocalDateFilterTest {
     @Test
     public void testIsLastDayOfTheMonth() {
         ColumnReference reference = new ColumnReference("testing");
-        IsLastDayOfTheMonth result = new IsLastDayOfTheMonth(reference);
+        DateFilter result = new DateFilter(reference, PackedLocalDate::isLastDayOfMonth, PackedLocalDateTime::isLastDayOfMonth);
         Selection selection = result.apply(table);
         assertFalse(selection.contains(0));
         assertTrue(selection.contains(1));
@@ -98,12 +97,13 @@ public class LocalDateFilterTest {
     @Test
     public void testIsInYear() {
         ColumnReference reference = new ColumnReference("testing");
-        IsInYear result = new IsInYear(reference, 2016);
+        DateBiFilter result = new DateBiFilter(reference, IntBiPredicate.isInYear, LongBiPredicate.isInYear, 2016);
+
         Selection selection = result.apply(table);
         assertTrue(selection.contains(0));
         assertTrue(selection.contains(1));
         assertTrue(selection.contains(2));
-        result = new IsInYear(reference, 2015);
+        result = result = new DateBiFilter(reference, IntBiPredicate.isInYear, LongBiPredicate.isInYear, 2015);
         selection = result.apply(table);
         assertFalse(selection.contains(0));
         assertFalse(selection.contains(1));

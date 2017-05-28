@@ -14,6 +14,7 @@ public interface TimeColumnUtils extends Column, Iterable<LocalTime> {
 
     IntPredicate isMissing = i -> i == TimeColumn.MISSING_VALUE;
     IntPredicate isNotMissing = i -> i != TimeColumn.MISSING_VALUE;
+
     IntBiPredicate isGreaterThan = (valueToTest, valueToCompareAgainst) -> valueToTest > valueToCompareAgainst;
     IntBiPredicate isGreaterThanOrEqualTo = (valueToTest, valueToCompareAgainst) -> valueToTest >=
             valueToCompareAgainst;

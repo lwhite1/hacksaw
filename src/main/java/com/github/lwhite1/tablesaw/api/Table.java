@@ -30,7 +30,6 @@ import org.apache.commons.lang3.RandomUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -162,21 +161,6 @@ public class Table implements Relation, IntIterable {
      */
     public static Table createFromCsv(String csvFileName) throws IOException {
         return CsvReader.read(csvFileName, true, ',');
-    }
-
-    /**
-     * Returns a new table constructed from a character delimited (aka CSV) text file
-     *
-     * @param types     The column types
-     * @param header    true if the file has a single header row. False if it has no header row.
-     *                  Multi-line headers are not supported
-     * @param delimiter a char that divides the columns in the source file, often a comma or tab
-     * @param stream    an InputStream from a file, URL, etc.
-     * @param tableName the name of the resulting table
-     */
-    public static Table createFromStream(ColumnType[] types, boolean header, char delimiter, InputStream stream,
-                                         String tableName) throws IOException {
-        return CsvReader.read(tableName, types, header, delimiter, stream);
     }
 
     /**
@@ -707,28 +691,6 @@ public class Table implements Relation, IntIterable {
     @Override
     public void removeColumns(Column... columns) {
         columnList.removeAll(Arrays.asList(columns));
-    }
-
-    /**
-     * Removes the given column from this table and returns it
-     *
-     * @throws IllegalStateException if the given columnName does not match the name of a column in the table
-     */
-    public Column getAndRemoveColumn(String columnName) {
-        Column c = column(columnName);
-        removeColumns(c);
-        return c;
-    }
-
-    /**
-     * Removes the given column from this table and returns it
-     *
-     * @throws IndexOutOfBoundsException if the given columnIndex does not match any column in the table
-     */
-    public Column getAndRemoveColumn(int columnIndex) {
-        Column c = column(columnIndex);
-        removeColumns(c);
-        return c;
     }
 
     /**

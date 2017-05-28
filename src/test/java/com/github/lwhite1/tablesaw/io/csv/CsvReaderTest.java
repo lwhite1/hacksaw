@@ -95,7 +95,7 @@ public class CsvReaderTest {
         String location = "https://raw.githubusercontent.com/lwhite1/tablesaw/master/data/BushApproval.csv";
         Table table;
         try (InputStream input = new URL(location).openStream()) {
-            table = Table.createFromStream(types, true, ',', input, "Bush approval ratings");
+            table = CsvReader.read("Bush approval ratings", types, true, ',', input);
         }
         assertNotNull(table);
     }
