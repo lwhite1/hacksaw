@@ -14,17 +14,11 @@ import org.junit.Test;
  */
 public class HtmlTableWriterTest {
 
-    private static ColumnType[] types = {
-            ColumnType.LOCAL_DATE,     // date of poll
-            ColumnType.INTEGER,        // approval rating (pct)
-            ColumnType.CATEGORY        // polling org
-    };
-
     private Table table;
 
     @Before
     public void setUp() throws Exception {
-        table = CsvReader.read(types, "data/BushApproval.csv");
+        table = Table.createFromCsv("data/BushApproval.csv");
     }
 
     @Test

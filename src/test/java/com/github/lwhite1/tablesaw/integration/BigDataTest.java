@@ -57,7 +57,7 @@ public class BigDataTest {
 
         out(table.columnNames());
 
-        out(table.floatColumn("DEP_DELAY").summary().print());
+        out(table.numericColumn("DEP_DELAY").summary().print());
         exit(1);
 
     }

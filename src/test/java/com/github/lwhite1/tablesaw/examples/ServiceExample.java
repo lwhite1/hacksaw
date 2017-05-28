@@ -4,7 +4,6 @@ import com.github.lwhite1.tablesaw.api.DateTimeColumn;
 import com.github.lwhite1.tablesaw.api.DoubleColumn;
 import com.github.lwhite1.tablesaw.api.Table;
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
-import it.unimi.dsi.fastutil.floats.FloatArrayList;
 
 import static com.github.lwhite1.tablesaw.api.QueryHelper.*;
 
@@ -45,7 +44,7 @@ public class ServiceExample {
 
         Table durationByFacilityAndShift = q2_429_assembly.median("Duration").by("Facility", "Shift");
         // TODO(lwhite): We need a top() method that can be used to return the top table rows
-        DoubleArrayList tops = durationByFacilityAndShift.doubleColumn("Median").top(5);
+        DoubleArrayList tops = durationByFacilityAndShift.numericColumn("Median").top(5);
 
         out(durationByFacilityAndShift.print());
 

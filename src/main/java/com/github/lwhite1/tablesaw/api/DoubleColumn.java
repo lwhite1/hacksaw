@@ -464,7 +464,7 @@ public class DoubleColumn extends AbstractColumn implements DoubleIterable, Colu
     }
 
     /**
-     * Returns a doubleColumn with the absolute value of each value in this column
+     * Returns a numericColumn with the absolute value of each value in this column
      */
     public DoubleColumn abs() {
         DoubleColumn newColumn = DoubleColumn.create(name() + "[abs]", size());
@@ -475,7 +475,7 @@ public class DoubleColumn extends AbstractColumn implements DoubleIterable, Colu
     }
 
     /**
-     * Returns a doubleColumn with the square of each value in this column
+     * Returns a numericColumn with the square of each value in this column
      */
     public DoubleColumn square() {
         DoubleColumn newColumn = DoubleColumn.create(name() + "[sq]", size());

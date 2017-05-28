@@ -1,5 +1,6 @@
 package com.github.lwhite1.tablesaw.columns;
 
+import com.github.lwhite1.tablesaw.api.DoubleColumn;
 import com.github.lwhite1.tablesaw.store.ColumnMetadata;
 import org.junit.Test;
 
@@ -10,7 +11,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class ColumnMetadataTest {
 
-    private final Column d = new FloatColumn("Float col1");
+    private final Column d = new DoubleColumn("Float col1");
 
     @Test
     public void testToFromJson() {

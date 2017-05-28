@@ -202,10 +202,10 @@ public interface Relation {
         structure.addColumn(CategoryColumn.create("Last"));
 
         for (Column column : columns()) {
-            structure.doubleColumn("Index").append(columnIndex(column));
+            structure.numericColumn("Index").append(columnIndex(column));
             structure.categoryColumn("Column Name").add(column.name());
             structure.categoryColumn("Type").add(column.type().name());
-            structure.doubleColumn("Unique Values").append(column.countUnique());
+            structure.numericColumn("Unique Values").append(column.countUnique());
             structure.categoryColumn("First").add(column.first());
             structure.categoryColumn("Last").add(column.getString(column.size() - 1));
         }
@@ -234,28 +234,20 @@ public interface Relation {
         return (BooleanColumn) column(columnName);
     }
 
-    default DoubleColumn numericColumn(int columnIndex) {
-        return (DoubleColumn) column(columnIndex);
-    }
-
-    default DoubleColumn numericColumn(String columnName) {
-        return (DoubleColumn) column(columnName);
-    }
-
     /**
      * Returns the column with the given name cast to a DoubleColumn
      * <p>
      * Shorthand for numericColumn()
      */
     default DoubleColumn nCol(String columnName) {
-        return doubleColumn(columnName);
+        return numericColumn(columnName);
     }
 
-    default DoubleColumn doubleColumn(int columnIndex) {
+    default DoubleColumn numericColumn(int columnIndex) {
         return (DoubleColumn) column(columnIndex);
     }
 
-    default DoubleColumn doubleColumn(String columnName) {
+    default DoubleColumn numericColumn(String columnName) {
         return (DoubleColumn) column(columnName);
     }
 

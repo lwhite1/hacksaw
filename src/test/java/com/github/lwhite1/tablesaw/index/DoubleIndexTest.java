@@ -19,40 +19,40 @@ public class DoubleIndexTest {
     @Before
     public void setUp() throws Exception {
         table = Table.createFromCsv("data/bus_stop_test.csv");
-        index = new DoubleIndex(table.doubleColumn("stop_lat"));
+        index = new DoubleIndex(table.numericColumn("stop_lat"));
     }
 
     @Test
     public void testGet() {
-        Selection fromCol = table.doubleColumn("stop_lat").select(DoubleColumnUtils.isEqualTo, 30.330425f);
+        Selection fromCol = table.numericColumn("stop_lat").select(DoubleColumnUtils.isEqualTo, 30.330425f);
         Selection fromIdx = index.get(30.330425f);
         assertEquals(fromCol, fromIdx);
     }
 
     @Test
     public void testGTE() {
-        Selection fromCol = table.doubleColumn("stop_lat").select(DoubleColumnUtils.isGreaterThanOrEqualTo, 30.330425f);
+        Selection fromCol = table.numericColumn("stop_lat").select(DoubleColumnUtils.isGreaterThanOrEqualTo, 30.330425f);
         Selection fromIdx = index.atLeast(30.330425f);
         assertEquals(fromCol, fromIdx);
     }
 
     @Test
     public void testLTE() {
-        Selection fromCol = table.doubleColumn("stop_lat").select(DoubleColumnUtils.isLessThanOrEqualTo, 30.330425f);
+        Selection fromCol = table.numericColumn("stop_lat").select(DoubleColumnUtils.isLessThanOrEqualTo, 30.330425f);
         Selection fromIdx = index.atMost(30.330425f);
         assertEquals(fromCol, fromIdx);
     }
 
     @Test
     public void testLT() {
-        Selection fromCol = table.doubleColumn("stop_lat").select(DoubleColumnUtils.isLessThan, 30.330425f);
+        Selection fromCol = table.numericColumn("stop_lat").select(DoubleColumnUtils.isLessThan, 30.330425f);
         Selection fromIdx = index.lessThan(30.330425f);
         assertEquals(fromCol, fromIdx);
     }
 
     @Test
     public void testGT() {
-        Selection fromCol = table.doubleColumn("stop_lat").select(DoubleColumnUtils.isGreaterThan, 30.330425f);
+        Selection fromCol = table.numericColumn("stop_lat").select(DoubleColumnUtils.isGreaterThan, 30.330425f);
         Selection fromIdx = index.greaterThan(30.330425f);
         assertEquals(fromCol, fromIdx);
     }

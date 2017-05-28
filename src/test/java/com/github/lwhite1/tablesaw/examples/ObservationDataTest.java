@@ -6,7 +6,7 @@ import com.github.lwhite1.tablesaw.api.DateColumn;
 import com.github.lwhite1.tablesaw.api.DoubleColumn;
 import com.github.lwhite1.tablesaw.api.Table;
 import com.github.lwhite1.tablesaw.columns.packeddata.PackedLocalDate;
-import com.github.lwhite1.tablesaw.index.IntIndex;
+import com.github.lwhite1.tablesaw.index.DoubleIndex;
 import com.github.lwhite1.tablesaw.io.csv.CsvReader;
 import com.github.lwhite1.tablesaw.store.StorageManager;
 import com.github.lwhite1.tablesaw.util.Selection;
@@ -63,8 +63,8 @@ public class ObservationDataTest {
 
         String randomConcept1 = t.categoryColumn("concept").get(RandomUtils.nextInt(0, t.rowCount()));
         String randomConcept2 = t.categoryColumn("concept").get(RandomUtils.nextInt(0, t.rowCount()));
-        double randomPatient1 = t.doubleColumn("patient").get(RandomUtils.nextInt(0, t.rowCount()));
-        double randomPatient2 = t.doubleColumn("patient").get(RandomUtils.nextInt(0, t.rowCount()));
+        double randomPatient1 = t.numericColumn("patient").get(RandomUtils.nextInt(0, t.rowCount()));
+        double randomPatient2 = t.numericColumn("patient").get(RandomUtils.nextInt(0, t.rowCount()));
 
         stopwatch.reset().start();
         Table result = t.selectWhere(column("concept").isEqualTo(randomConcept1));
@@ -80,7 +80,7 @@ public class ObservationDataTest {
         out.println();
 
         stopwatch.reset().start();
-        DoubleColumn patients = t.doubleColumn("patient");
+        DoubleColumn patients = t.numericColumn("patient");
         DoubleIndex patientIndex = new DoubleIndex(patients);
         out.println("patient index built in " + stopwatch.elapsed(TimeUnit.SECONDS) + " seconds");
         out.println();
@@ -104,7 +104,7 @@ public class ObservationDataTest {
         out.println();
 
         stopwatch.reset().start();
-        t.doubleColumn("value").sum();
+        t.numericColumn("value").sum();
         out.println("Time to sum floats: " + stopwatch.elapsed(TimeUnit.MILLISECONDS) + "ms");
 
         System.exit(0);
@@ -173,8 +173,8 @@ public class ObservationDataTest {
 
         DateColumn dateColumn = table.dateColumn("date");
         CategoryColumn conceptColumn = table.categoryColumn("concept");
-        DoubleColumn valueColumn = table.doubleColumn("value");
-        DoubleColumn patientColumn = table.doubleColumn("patient");
+        DoubleColumn valueColumn = table.numericColumn("value");
+        DoubleColumn patientColumn = table.numericColumn("patient");
 
         CSVWriter writer = new CSVWriter(new FileWriter(CSV_FILE));
         String[] line = new String[4];

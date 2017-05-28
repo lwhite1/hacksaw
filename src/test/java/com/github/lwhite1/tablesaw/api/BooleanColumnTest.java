@@ -67,12 +67,12 @@ public class BooleanColumnTest {
     @Test
     public void testSummary() throws Exception {
         Table summary = column.summary();
-        assertEquals(2, summary.columnCount());
-        assertEquals(2, summary.rowCount());
+        assertEquals(2.0, summary.columnCount(), 0.01);
+        assertEquals(2.0, summary.rowCount(), 0.01);
         assertEquals("true", summary.get(0, 1));
         assertEquals("false", summary.get(0, 0));
-        assertEquals("5", summary.get(1, 0));
-        assertEquals("2", summary.get(1, 1));
+        assertEquals("5.0", summary.get(1, 0));
+        assertEquals("2.0", summary.get(1, 1));
     }
 
     @Test
@@ -93,8 +93,8 @@ public class BooleanColumnTest {
         assertEquals(2, summary.rowCount());
         assertEquals("true", summary.get(0, 1));
         assertEquals("false", summary.get(0, 0));
-        assertEquals("5", summary.get(1, 1));
-        assertEquals("2", summary.get(1, 0));
+        assertEquals("5.0", summary.get(1, 1));
+        assertEquals("2.0", summary.get(1, 0));
     }
 
     @Test

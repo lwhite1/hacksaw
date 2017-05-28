@@ -44,7 +44,7 @@ public class DoubleIndex {
      *
      * @param value This is a 'key' from the index perspective, meaning it is a value from the standpoint of the column
      */
-    public Selection get(float value) {
+    public Selection get(double value) {
         Selection selection = new BitmapBackedSelection();
         IntArrayList list = index.get(value);
         addAllToSelection(list, selection);

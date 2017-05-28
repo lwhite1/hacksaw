@@ -117,7 +117,7 @@ public class StorageManagerTest {
 
         StorageManager.saveTable("/tmp/mytables2", table);
         com.github.lwhite1.tablesaw.api.Table t = StorageManager.readTable("/tmp/mytables2/t.saw");
-        t.doubleColumn("float").setName("a float column");
+        t.numericColumn("float").setName("a float column");
 
         StorageManager.saveTable("/tmp/mytables2", table);
         t = StorageManager.readTable("/tmp/mytables2/t.saw");

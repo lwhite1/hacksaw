@@ -149,7 +149,7 @@ public class Stats {
         Table t = asTable();
 
         CategoryColumn measure = t.categoryColumn("Measure");
-        DoubleColumn value = t.doubleColumn("Value");
+        DoubleColumn value = t.numericColumn("Value");
 
         measure.add("Sum of Squares");
         value.append(sumOfSquares());

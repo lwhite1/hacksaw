@@ -26,13 +26,13 @@ public class IntIndexTest {
     public void setUp() throws Exception {
         Stopwatch stopwatch = Stopwatch.createStarted();
         table = Table.createFromCsv("data/BushApproval.csv");
-        index = new DoubleIndex(table.doubleColumn("approval"));
+        index = new DoubleIndex(table.numericColumn("approval"));
         dateIndex = new DateIndex(table.dateColumn("date"));
     }
 
     @Test
     public void testGet() {
-        Selection fromCol = table.doubleColumn("approval").select(DoubleColumnUtils.isEqualTo, 71);
+        Selection fromCol = table.numericColumn("approval").select(DoubleColumnUtils.isEqualTo, 71);
         Selection fromIdx = index.get(71);
         assertEquals(fromCol, fromIdx);
     }
@@ -48,7 +48,7 @@ public class IntIndexTest {
 
     @Test
     public void testGTE() {
-        Selection fromCol = table.doubleColumn("approval").select(DoubleColumnUtils.isGreaterThanOrEqualTo, 71);
+        Selection fromCol = table.numericColumn("approval").select(DoubleColumnUtils.isGreaterThanOrEqualTo, 71);
         Selection fromIdx = index.atLeast(71);
         assertEquals(fromCol, fromIdx);
     }

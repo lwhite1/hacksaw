@@ -39,7 +39,7 @@ public class FxPareto extends FxBuilder {
         List<XYChart.Data<String, Number>> d2 = new ArrayList<>(x.size());
 
         for (int i = 0; i < x.size(); i++) {
-            d2.add(new XYChart.Data<>(t.categoryColumn(0).get(i), t.doubleColumn(1).getFloat(i)));
+            d2.add(new XYChart.Data<>(t.categoryColumn(0).get(i), t.numericColumn(1).getFloat(i)));
         }
         XYChart.Series<String, Number> series1
                 = new XYChart.Series<>(FXCollections.observableList(d2));

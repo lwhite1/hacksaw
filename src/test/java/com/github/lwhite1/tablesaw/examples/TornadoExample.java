@@ -104,7 +104,7 @@ public class TornadoExample {
         out(fatal.first(5).print());
 
         out();
-        out("Total fatalities: " + fatal.doubleColumn("Fatalities").sum());
+        out("Total fatalities: " + fatal.numericColumn("Fatalities").sum());
 
         out();
         out("Sorting on Fatalities in descending order");
@@ -113,7 +113,7 @@ public class TornadoExample {
 
         out("");
         out("Calculating basic descriptive statistics on Fatalities");
-        out(fatal.doubleColumn("Fatalities").summary().print());
+        out(fatal.numericColumn("Fatalities").summary().print());
 
 
         //TODO(lwhite): Provide a param for title of the new table (or auto-generate a better one).

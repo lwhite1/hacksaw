@@ -1,6 +1,7 @@
 package com.github.lwhite1.tablesaw.io.csv;
 
 import com.github.lwhite1.tablesaw.api.ColumnType;
+import com.github.lwhite1.tablesaw.api.DoubleColumn;
 import com.github.lwhite1.tablesaw.api.Table;
 import com.github.lwhite1.tablesaw.columns.Column;
 import org.junit.Ignore;
@@ -19,7 +20,7 @@ import static org.junit.Assert.*;
  */
 public class CsvReaderTest {
 
-    private final ColumnType[] bus_types = {SHORT_INT, CATEGORY, CATEGORY, FLOAT, FLOAT};
+    private final ColumnType[] bus_types = {DOUBLE, CATEGORY, CATEGORY, DOUBLE, DOUBLE};
 
     @Test
     public void testWithBusData() throws Exception {
@@ -32,7 +33,7 @@ public class CsvReaderTest {
         table = table.sortDescendingOn("stop_id");
         table.removeColumns("stop_desc");
 
-        Column c = table.floatColumn("stop_lat");
+        Column c = table.numericColumn("stop_lat");
         Table v = table.selectWhere(column("stop_lon").isGreaterThan(-0.1f));
     }
 
@@ -40,7 +41,7 @@ public class CsvReaderTest {
     public void testWithBushData() throws Exception {
 
         // Read the CSV file
-        ColumnType[] types = {LOCAL_DATE, SHORT_INT, CATEGORY};
+        ColumnType[] types = {LOCAL_DATE, DOUBLE, CATEGORY};
         Table table = CsvReader.read(types, "data/BushApproval.csv");
 
         assertEquals(323, table.rowCount());
@@ -72,9 +73,9 @@ public class CsvReaderTest {
     public void testPrintStructure() throws Exception {
         String output =
                 "ColumnType[] columnTypes = {\n" +
-                        "LOCAL_DATE, // 0     date        \n" +
-                        "SHORT_INT,  // 1     approval    \n" +
-                        "CATEGORY,   // 2     who         \n" +
+                        "LOCAL_DATE, // 0.0   date        \n" +
+                        "DOUBLE,     // 1.0   approval    \n" +
+                        "CATEGORY,   // 2.0   who         \n" +
                         "}\n";
         assertEquals(output, CsvReader.printColumnTypes("data/BushApproval.csv", true, ','));
     }
@@ -83,14 +84,14 @@ public class CsvReaderTest {
     public void testDataTypeDetection2() throws Exception {
         ColumnType[] columnTypes = CsvReader.detectColumnTypes("data/BushApproval.csv", true, ',', false);
         assertEquals(ColumnType.LOCAL_DATE, columnTypes[0]);
-        assertEquals(ColumnType.SHORT_INT, columnTypes[1]);
+        assertEquals(ColumnType.DOUBLE, columnTypes[1]);
         assertEquals(ColumnType.CATEGORY, columnTypes[2]);
     }
 
     @Ignore
     @Test
     public void testLoadFromUrl() throws Exception {
-        ColumnType[] types = {LOCAL_DATE, SHORT_INT, CATEGORY};
+        ColumnType[] types = {LOCAL_DATE, DOUBLE, CATEGORY};
         String location = "https://raw.githubusercontent.com/lwhite1/tablesaw/master/data/BushApproval.csv";
         Table table;
         try (InputStream input = new URL(location).openStream()) {
@@ -115,7 +116,7 @@ public class CsvReaderTest {
     public void testReadFailure() throws Exception {
         Table table1 = Table.createFromCsv("data/read_failure_test.csv");
         table1.structure(); // just make sure the import completed
-        ShortColumn test = table1.shortColumn("Test");
+        DoubleColumn test = table1.numericColumn("Test");
         System.out.println(test.summary().print());
     }
 
@@ -123,7 +124,7 @@ public class CsvReaderTest {
     public void testReadFailure2() throws Exception {
         Table table1 = Table.createFromCsv("data/read_failure_test2.csv");
         table1.structure(); // just make sure the import completed
-        ShortColumn test = table1.shortColumn("Test");
+        DoubleColumn test = table1.numericColumn("Test");
         System.out.println(test.summary().print());
     }
 }

@@ -50,7 +50,7 @@ public class SubTable extends Table {
             switch (type) {
                 case DOUBLE:
                     DoubleColumn floatColumn = (DoubleColumn) column;
-                    floatColumn.append(sourceTable.doubleColumn(i).get(rowIndex));
+                    floatColumn.append(sourceTable.numericColumn(i).get(rowIndex));
                     break;
                 case BOOLEAN:
                     BooleanColumn booleanColumn = (BooleanColumn) column;

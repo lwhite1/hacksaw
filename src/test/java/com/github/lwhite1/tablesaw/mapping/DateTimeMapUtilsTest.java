@@ -31,7 +31,7 @@ public class DateTimeMapUtilsTest {
 
         assertEquals(100_000L, startCol.difference(pStart, pStop, ChronoUnit.MILLIS));
         DoubleColumn result = startCol.differenceInMilliseconds(stopCol);
-        assertEquals(100_000L, result.firstElement());
+        assertEquals(100_000L, result.firstElement(), 0.0001);
     }
 
     @Test
@@ -42,7 +42,7 @@ public class DateTimeMapUtilsTest {
         stopCol.add(stop);
 
         DoubleColumn result = startCol.differenceInSeconds(stopCol);
-        assertEquals(100_000L, result.firstElement());
+        assertEquals(100_000L, result.firstElement(), 0.0001);
     }
 
     @Test
@@ -53,7 +53,7 @@ public class DateTimeMapUtilsTest {
         stopCol.add(stop);
 
         DoubleColumn result = startCol.differenceInMinutes(stopCol);
-        assertEquals(100_000L, result.firstElement());
+        assertEquals(100_000L, result.firstElement(), 0.0001);
     }
 
     @Test
@@ -64,7 +64,7 @@ public class DateTimeMapUtilsTest {
         stopCol.add(stop);
 
         DoubleColumn result = startCol.differenceInHours(stopCol);
-        assertEquals(100_000L, result.firstElement());
+        assertEquals(100_000L, result.firstElement(), 0.0001);
 
     }
 
@@ -76,7 +76,7 @@ public class DateTimeMapUtilsTest {
         stopCol.add(stop);
 
         DoubleColumn result = startCol.differenceInDays(stopCol);
-        assertEquals(100_000L, result.firstElement());
+        assertEquals(100_000L, result.firstElement(), 0.0001);
     }
 
     @Test
@@ -87,13 +87,13 @@ public class DateTimeMapUtilsTest {
         stopCol.add(stop);
 
         DoubleColumn result = startCol.differenceInYears(stopCol);
-        assertEquals(10_000L, result.firstElement());
+        assertEquals(10_000L, result.firstElement(), 0.0001);
     }
 
     @Test
     public void testHour() throws Exception {
         startCol.add(LocalDateTime.of(1984, 12, 12, 7, 30));
         DoubleColumn hour = startCol.hour();
-        assertEquals(7, hour.firstElement());
+        assertEquals(7, hour.firstElement(), 0.0001);
     }
 }

@@ -2,6 +2,7 @@ package com.github.lwhite1.tablesaw.filters;
 
 import com.github.lwhite1.tablesaw.api.CategoryColumn;
 import com.github.lwhite1.tablesaw.api.DateColumn;
+import com.github.lwhite1.tablesaw.api.DoubleColumn;
 import com.github.lwhite1.tablesaw.api.Table;
 import com.github.lwhite1.tablesaw.columns.ColumnReference;
 import com.github.lwhite1.tablesaw.columns.packeddata.PackedLocalDate;
@@ -74,7 +75,7 @@ public class TimeDependentFilteringTest {
                 both(concept.isEqualTo(conceptA),
                         (concept.isNotEqualTo(conceptB))));
 
-        IntColumn ntPatients = nt.intColumn("patient");
+        DoubleColumn ntPatients = nt.numericColumn("patient");
 
         // Group the original table by patient id
         ViewGroup patients = ViewGroup.create(t, "patient");
@@ -140,8 +141,8 @@ public class TimeDependentFilteringTest {
         t = Table.create("Observations");
         CategoryColumn conceptId = CategoryColumn.create("concept");
         DateColumn date = DateColumn.create("date");
-        FloatColumn value = FloatColumn.create("value");
-        IntColumn patientId = IntColumn.create("patient");
+        DoubleColumn value = DoubleColumn.create("value");
+        DoubleColumn patientId = DoubleColumn.create("patient");
 
         t.addColumn(conceptId);
         t.addColumn(date);
@@ -176,8 +177,8 @@ public class TimeDependentFilteringTest {
 
         DateColumn dateColumn = table.dateColumn("date");
         CategoryColumn conceptColumn = table.categoryColumn("concept");
-        FloatColumn valueColumn = table.floatColumn("value");
-        IntColumn patientColumn = table.intColumn("patient");
+        DoubleColumn valueColumn = table.numericColumn("value");
+        DoubleColumn patientColumn = table.numericColumn("patient");
 
         // sample from the pools to write the data
         for (int i = 0; i < observationCount; i++) {

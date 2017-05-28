@@ -213,11 +213,11 @@ public class TemporaryView implements Relation, IntIterable {
         return (BooleanColumn) column(columnName).subset(rowMap);
     }
 
-    public DoubleColumn doubleColumn(int columnIndex) {
+    public DoubleColumn numericColumn(int columnIndex) {
         return (DoubleColumn) column(columnIndex).subset(rowMap);
     }
 
-    public DoubleColumn doubleColumn(String columnName) {
+    public DoubleColumn numericColumn(String columnName) {
         return (DoubleColumn) column(columnName).subset(rowMap);
     }
 
@@ -253,11 +253,11 @@ public class TemporaryView implements Relation, IntIterable {
         return (CategoryColumn) column(columnIndex).subset(rowMap);
     }
 
-    public DoubleColumn numericColumn(int columnIndex) {
+    public DoubleColumn doubleColumn(int columnIndex) {
         return (DoubleColumn) column(columnIndex).subset(rowMap);
     }
 
-    public DoubleColumn numericColumn(String columnName) {
+    public DoubleColumn doubleColumn(String columnName) {
         return (DoubleColumn) column(columnName).subset(rowMap);
     }
 

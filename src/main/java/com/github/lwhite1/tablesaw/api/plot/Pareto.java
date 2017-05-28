@@ -23,10 +23,10 @@ public class Pareto extends FxBuilder {
         SwingUtilities.invokeLater(() -> {
             try {
                 if (table.column(0) instanceof CategoryColumn) {
-                    initAndShowGUI(title, table.categoryColumn(0), table.doubleColumn(1), 640, 480);
+                    initAndShowGUI(title, table.categoryColumn(0), table.numericColumn(1), 640, 480);
                 }
                 if (table.column(0) instanceof DoubleColumn) {
-                    initAndShowGUI(title, table.doubleColumn(0), table.doubleColumn(1), 640, 480);
+                    initAndShowGUI(title, table.numericColumn(0), table.numericColumn(1), 640, 480);
                 }
             } catch (Exception e) {
                 e.printStackTrace();

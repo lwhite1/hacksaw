@@ -19,7 +19,7 @@ public class ExamplesTest {
         out("Some Examples: ");
 
         // Read the CSV file
-        ColumnType[] types = {INTEGER, CATEGORY, CATEGORY, FLOAT, FLOAT};
+        ColumnType[] types = {DOUBLE, CATEGORY, CATEGORY, DOUBLE, DOUBLE};
         Table table = CsvReader.read(types, "data/bus_stop_test.csv");
 
         // Look at the column names
@@ -40,7 +40,7 @@ public class ExamplesTest {
 
         // Lets take a look at the latitude and longitude columns
         // out(table.realColumn("stop_lat").rowSummary().out());
-        out(table.floatColumn("stop_lat").summary().print());
+        out(table.numericColumn("stop_lat").summary().print());
 
         // Now lets fill a column based on data in the existing columns
 

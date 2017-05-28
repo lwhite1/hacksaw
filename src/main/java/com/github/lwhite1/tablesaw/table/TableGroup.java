@@ -7,6 +7,7 @@ import com.github.lwhite1.tablesaw.columns.Column;
 import com.github.lwhite1.tablesaw.reducing.NumericReduceFunction;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Splitter;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -150,6 +151,7 @@ public class TableGroup implements Iterable<SubTable> {
      *
      * @return an Iterator.
      */
+    @NotNull
     @Override
     public Iterator<SubTable> iterator() {
         return subTables.iterator();

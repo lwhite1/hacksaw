@@ -4,8 +4,6 @@ import com.github.lwhite1.tablesaw.api.CategoryColumn;
 import com.github.lwhite1.tablesaw.api.ColumnType;
 import com.github.lwhite1.tablesaw.api.DoubleColumn;
 import com.github.lwhite1.tablesaw.api.Table;
-import com.github.lwhite1.tablesaw.api.ml.classification.ConfusionMatrix;
-import com.github.lwhite1.tablesaw.api.ml.classification.LogisticRegression;
 import com.github.lwhite1.tablesaw.io.csv.CsvReader;
 
 import static com.github.lwhite1.tablesaw.api.ColumnType.*;
@@ -24,7 +22,7 @@ public class SfCrimeTest {
 
         crime.removeColumns("DayOfWeek");
 
-        DoubleColumn precinct = crime.categoryColumn("PdDistrict").toDoubleColumn();
+        DoubleColumn precinct = crime.categoryColumn("PdDistrict").toIntColumn();
         precinct.setName("Precinct");
         crime.addColumn(precinct);
 
@@ -56,6 +54,7 @@ public class SfCrimeTest {
         out(CsvReader.printColumnTypes("/Users/larrywhite/IdeaProjects/testdata/bigdata/sampleSubmission.csv", true,
                 ','));
 
+/*
         LogisticRegression model = LogisticRegression.learn(
                 train.categoryColumn("Category"),
                 0.1,
@@ -82,6 +81,7 @@ public class SfCrimeTest {
 
         out(matrix.accuracy());
         out(matrix.toTable().print());
+*/
 
         // Table trueCrime = Table.createFromCsv("/Users/larrywhite/IdeaProjects/testdata/bigdata/test.csv");
         // out(CsvReader.printColumnTypes("/Users/larrywhite/IdeaProjects/testdata/bigdata/sampleSubmission.csv",
@@ -133,9 +133,10 @@ public class SfCrimeTest {
         Table results = Table.createFromCsv(columnTypes,
                 "/Users/larrywhite/IdeaProjects/testdata/bigdata/sampleSubmission.csv");
 
-        DoubleColumn larceny = results.floatColumn("LARCENY/THEFT");
-        DoubleColumn warrants = results.floatColumn("WARRANTS");
+        DoubleColumn larceny = results.numericColumn("LARCENY/THEFT");
+        DoubleColumn warrants = results.numericColumn("WARRANTS");
 
+/*
         Table trueCrime = testData();
         for (int row : trueCrime) {
             double[] posteriori = new double[39];
@@ -153,6 +154,7 @@ public class SfCrimeTest {
             warrants.set(row, 0f);
         }
         results.exportToCsv("newSubmission.csv");
+*/
     }
 
     private static Table testData() throws Exception {
@@ -161,7 +163,7 @@ public class SfCrimeTest {
 
         trueCrime.removeColumns("DayOfWeek");
 
-        DoubleColumn precinctT = trueCrime.categoryColumn("PdDistrict").toDoubleColumn;
+        DoubleColumn precinctT = trueCrime.categoryColumn("PdDistrict").toIntColumn();
         precinctT.setName("Precinct");
         trueCrime.addColumn(precinctT);
 

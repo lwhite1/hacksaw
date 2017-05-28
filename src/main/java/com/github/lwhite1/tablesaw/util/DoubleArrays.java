@@ -40,7 +40,7 @@ public class DoubleArrays {
         for (int viewNumber = 0; viewNumber < viewCount; viewNumber++) {
             TemporaryView view = views.get(viewNumber);
             allVals[viewNumber] = new double[view.rowCount()];
-            DoubleColumn numericColumn = view.numericColumn(columnNumber);
+            DoubleColumn numericColumn = view.doubleColumn(columnNumber);
             for (int r = 0; r < view.rowCount(); r++) {
                 allVals[viewNumber][r] = numericColumn.getFloat(r);
             }

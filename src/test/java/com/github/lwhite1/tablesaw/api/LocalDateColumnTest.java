@@ -40,10 +40,10 @@ public class LocalDateColumnTest {
         column1.appendCell("12-May-2015");
         column1.appendCell("14-Jan-2015");
         DoubleColumn c2 = column1.dayOfMonth();
-        assertEquals(23, c2.get(0));
-        assertEquals(24, c2.get(1));
-        assertEquals(12, c2.get(2));
-        assertEquals(14, c2.get(3));
+        assertEquals(23, c2.get(0), 0.00001);
+        assertEquals(24, c2.get(1), 0.00001);
+        assertEquals(12, c2.get(2), 0.00001);
+        assertEquals(14, c2.get(3), 0.00001);
     }
 
     @Test
@@ -53,10 +53,10 @@ public class LocalDateColumnTest {
         column1.appendCell("12-May-2015");
         column1.appendCell("14-Jan-2015");
         DoubleColumn c2 = column1.monthValue();
-        assertEquals(10, c2.get(0));
-        assertEquals(12, c2.get(1));
-        assertEquals(5, c2.get(2));
-        assertEquals(1, c2.get(3));
+        assertEquals(10, c2.get(0), 0.00001);
+        assertEquals(12, c2.get(1), 0.00001);
+        assertEquals(5, c2.get(2), 0.00001);
+        assertEquals(1, c2.get(3), 0.00001);
     }
 
     @Test
@@ -65,9 +65,9 @@ public class LocalDateColumnTest {
         column1.appendCell("12/24/1924");
         column1.appendCell("12-May-2015");
         DoubleColumn c2 = column1.year();
-        assertEquals(2013, c2.get(0));
-        assertEquals(1924, c2.get(1));
-        assertEquals(2015, c2.get(2));
+        assertEquals(2013, c2.get(0), 0.00001);
+        assertEquals(1924, c2.get(1), 0.00001);
+        assertEquals(2015, c2.get(2), 0.00001);
     }
 
     @Test

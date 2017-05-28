@@ -47,12 +47,12 @@ public class LargeDataTest {
         System.out.println();
 
         stopwatch.reset().start();
-        System.out.println(t.doubleColumn("weight").summary().print());
+        System.out.println(t.numericColumn("weight").summary().print());
         System.out.println("Time to summarize weight column " + stopwatch.elapsed(TimeUnit.SECONDS) + " seconds");
         System.out.println();
 
         stopwatch.reset().start();
-        System.out.println(t.doubleColumn("height").summary().print());
+        System.out.println(t.numericColumn("height").summary().print());
         System.out.println("Time to summarize height column " + stopwatch.elapsed(TimeUnit.SECONDS) + " seconds");
         System.out.println();
 

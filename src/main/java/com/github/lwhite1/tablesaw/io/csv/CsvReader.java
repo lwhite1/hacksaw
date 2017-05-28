@@ -9,7 +9,6 @@ import com.google.common.collect.Lists;
 import com.opencsv.CSVReader;
 import org.apache.commons.lang3.StringUtils;
 
-import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -38,37 +37,7 @@ public class CsvReader {
 
     private static java.util.function.Predicate<String> isBoolean = s ->
             TypeUtils.TRUE_STRINGS_FOR_DETECTION.contains(s) || TypeUtils.FALSE_STRINGS_FOR_DETECTION.contains(s);
-    private static Predicate<String> isLong = new Predicate<String>() {
 
-        @Override
-        public boolean test(@Nullable String s) {
-            try {
-                Long.parseLong(s);
-                return true;
-            } catch (NumberFormatException e) {
-                // it's all part of the plan
-                return false;
-            }
-        }
-    };
-    private static Predicate<String> isInteger = s -> {
-        try {
-            Integer.parseInt(s);
-            return true;
-        } catch (NumberFormatException e) {
-            // it's all part of the plan
-            return false;
-        }
-    };
-    private static Predicate<String> isFloat = s -> {
-        try {
-            Float.parseFloat(s);
-            return true;
-        } catch (NumberFormatException e) {
-            // it's all part of the plan
-            return false;
-        }
-    };
     private static Predicate<String> isDouble = s -> {
         try {
             Double.parseDouble(s);
@@ -78,15 +47,7 @@ public class CsvReader {
             return false;
         }
     };
-    private static Predicate<String> isShort = s -> {
-        try {
-            Short.parseShort(s);
-            return true;
-        } catch (NumberFormatException e) {
-            // it's all part of the plan
-            return false;
-        }
-    };
+
     private static Predicate<String> isLocalDate = s -> {
         try {
             LocalDate.parse(s, TypeUtils.DATE_FORMATTER);
