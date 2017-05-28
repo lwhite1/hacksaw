@@ -1,7 +1,6 @@
 package com.github.lwhite1.tablesaw.index;
 
 import com.github.lwhite1.tablesaw.api.Table;
-import com.github.lwhite1.tablesaw.columns.FloatColumnUtils;
 import com.github.lwhite1.tablesaw.util.Selection;
 import org.junit.Before;
 import org.junit.Test;

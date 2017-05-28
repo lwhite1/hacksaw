@@ -1,7 +1,6 @@
 package com.github.lwhite1.tablesaw.index;
 
 import com.github.lwhite1.tablesaw.api.DateColumn;
-import com.github.lwhite1.tablesaw.api.IntColumn;
 import com.github.lwhite1.tablesaw.api.TimeColumn;
 import com.github.lwhite1.tablesaw.util.BitmapBackedSelection;
 import com.github.lwhite1.tablesaw.util.Selection;
@@ -116,7 +115,7 @@ public class IntIndex {
 
     public Selection atMost(int value) {
         Selection selection = new BitmapBackedSelection();
-        Int2ObjectSortedMap<IntArrayList> head = index.headMap(value + 1);  // we add 1 to get values equal to the arg
+        Int2ObjectSortedMap<IntArrayList> head = index.headMap(value + 1);  // we append 1 to get values equal to the arg
         for (IntArrayList keys : head.values()) {
             addAllToSelection(keys, selection);
         }
@@ -125,7 +124,7 @@ public class IntIndex {
 
     public Selection lessThan(int value) {
         Selection selection = new BitmapBackedSelection();
-        Int2ObjectSortedMap<IntArrayList> head = index.headMap(value);  // we add 1 to get values equal to the arg
+        Int2ObjectSortedMap<IntArrayList> head = index.headMap(value);  // we append 1 to get values equal to the arg
         for (IntArrayList keys : head.values()) {
             addAllToSelection(keys, selection);
         }
