@@ -29,15 +29,19 @@ public final class TypeUtils {
     // These Strings will convert to true booleans
     public static final List<String> TRUE_STRINGS =
             Arrays.asList("T", "t", "Y", "y", "TRUE", "true", "1");
+
     // A more restricted set of 'true' strings that is used for column type detection
     public static final List<String> TRUE_STRINGS_FOR_DETECTION =
             Arrays.asList("T", "t", "Y", "y", "TRUE", "true");
+
     // These Strings will convert to false booleans
     public static final List<String> FALSE_STRINGS =
             Arrays.asList("F", "f", "N", "n", "FALSE", "false", "0");
+
     // A more restricted set of 'false' strings that is used for column type detection
     public static final List<String> FALSE_STRINGS_FOR_DETECTION =
             Arrays.asList("F", "f", "N", "n", "FALSE", "false");
+
     // Formats that we accept in parsing dates from strings
     // TODO: Add more types, especially dates with month names spelled-out fully.
     private static final DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("yyyyMMdd");

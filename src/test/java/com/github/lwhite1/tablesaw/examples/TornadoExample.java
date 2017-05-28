@@ -4,6 +4,7 @@ import com.github.lwhite1.tablesaw.api.CategoryColumn;
 import com.github.lwhite1.tablesaw.api.ColumnType;
 import com.github.lwhite1.tablesaw.api.Table;
 import com.github.lwhite1.tablesaw.api.plot.Scatter;
+import com.github.lwhite1.tablesaw.io.csv.CsvReader;
 
 import static com.github.lwhite1.tablesaw.api.ColumnType.*;
 import static com.github.lwhite1.tablesaw.api.QueryHelper.column;
@@ -46,7 +47,7 @@ public class TornadoExample {
 
     public static void main(String[] args) throws Exception {
 
-        Table tornadoes = Table.createFromCsv(COLUMN_TYPES_OLD, "data/1950-2014_torn.csv");
+        Table tornadoes = CsvReader.read(COLUMN_TYPES_OLD, "data/1950-2014_torn.csv");
         assert (tornadoes != null);
 
         out(tornadoes.structure().print());
@@ -116,6 +117,7 @@ public class TornadoExample {
         out(fatal.numericColumn("Fatalities").summary().print());
 
 
+/*
         //TODO(lwhite): Provide a param for title of the new table (or auto-generate a better one).
         Table injuriesByScale = tornadoes.median("Injuries").by("Scale");
         Table fob = tornadoes.minimum("Injuries").by("Scale", "State");
@@ -129,6 +131,7 @@ public class TornadoExample {
         injuriesByScaleState.setName("Median injuries by Tornado Scale and State");
         out(injuriesByScaleState.print());
 
+*/
 
         out();
         out("Writing the revised table to a new csv file");

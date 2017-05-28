@@ -1,4 +1,4 @@
-package com.github.lwhite1.tablesaw.reducing.functions;
+package com.github.lwhite1.tablesaw.reducing;
 
 import com.github.lwhite1.tablesaw.api.Table;
 import com.github.lwhite1.tablesaw.reducing.NumericReduceFunction;
@@ -8,14 +8,16 @@ import com.github.lwhite1.tablesaw.table.ViewGroup;
 /**
  *
  */
-public abstract class SummaryFunction {
+public class SummaryFunction {
 
     private final Table original;
     private final String summarizedColumnName;
+    private final NumericReduceFunction function;
 
-    public SummaryFunction(Table original, String summarizedColumnName) {
+    public SummaryFunction(Table original, String summarizedColumnName, NumericReduceFunction function) {
         this.original = original;
         this.summarizedColumnName = summarizedColumnName;
+        this.function = function;
     }
 
     public String summarizedColumnName() {
@@ -38,5 +40,7 @@ public abstract class SummaryFunction {
         return original.reduce(summarizedColumnName, function());
     }
 
-    public abstract NumericReduceFunction function();
+    public NumericReduceFunction function() {
+        return function;
+    }
 }

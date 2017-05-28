@@ -2,6 +2,7 @@ package com.github.lwhite1.tablesaw;
 
 import com.github.lwhite1.tablesaw.api.ColumnType;
 import com.github.lwhite1.tablesaw.api.Table;
+import com.github.lwhite1.tablesaw.io.csv.CsvReader;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -64,7 +65,7 @@ public enum TestData {
     TestData(String[] columnNames, ColumnType[] columnTypes, String csvSource) {
         this.columnNames = columnNames;
         try {
-            this.table = Table.createFromCsv(columnTypes, csvSource);
+            this.table = CsvReader.read(columnTypes, csvSource);
         } catch (IOException e) {
             e.printStackTrace();
             throw new RuntimeException("Unable to read from CSV file");

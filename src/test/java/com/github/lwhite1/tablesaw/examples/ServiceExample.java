@@ -6,6 +6,7 @@ import com.github.lwhite1.tablesaw.api.Table;
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 
 import static com.github.lwhite1.tablesaw.api.QueryHelper.*;
+import static com.github.lwhite1.tablesaw.reducing.NumericReduceUtils.median;
 
 /**
  * Usage example using a Tornado dataset
@@ -42,7 +43,10 @@ public class ServiceExample {
                                 (column("SKU").startsWith("429")),
                                 (column("Operation").isEqualTo("Assembly"))));
 
-        Table durationByFacilityAndShift = q2_429_assembly.median("Duration").by("Facility", "Shift");
+
+        Table durationByFacilityAndShift = q2_429_assembly
+                .summarize("Duration", median)
+                .by("Facility", "Shift");
         // TODO(lwhite): We need a top() method that can be used to return the top table rows
         DoubleArrayList tops = durationByFacilityAndShift.numericColumn("Median").top(5);
 

@@ -38,13 +38,14 @@ public class TableGroupTest {
         String[] splitColumnNames = {table.column(2).name(), "month"};
         TableGroup tableGroup = new TableGroup(table, splitColumnNames);
         List<SubTable> tables = tableGroup.getSubTables();
-        Table t = table.sum("approval").by(splitColumnNames);
+      //  Table t = table.sum("approval").by(splitColumnNames);
 
         // compare the sum of the original column with the sum of the sums of the group table
-        assertEquals(table.numericColumn(1).sum(), Math.round(t.numericColumn(2).sum()), 0.001);
+     //   assertEquals(table.numericColumn(1).sum(), Math.round(t.numericColumn(2).sum()), 0.001);
         assertEquals(65, tables.size());
     }
 
+/*
     @Test
     public void testCountByGroup() {
         Table groups = table.count("approval").by("who");
@@ -60,4 +61,5 @@ public class TableGroupTest {
         // compare the sum of the original column with the sum of the sums of the group table
         assertEquals(table.numericColumn(1).sum(), Math.round(groups.numericColumn(1).sum()), 0.001);
     }
+*/
 }

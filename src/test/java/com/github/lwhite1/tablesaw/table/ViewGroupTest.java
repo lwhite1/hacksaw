@@ -3,12 +3,14 @@ package com.github.lwhite1.tablesaw.table;
 import com.github.lwhite1.tablesaw.api.CategoryColumn;
 import com.github.lwhite1.tablesaw.api.Table;
 import com.github.lwhite1.tablesaw.reducing.NumericReduceFunction;
+import com.github.lwhite1.tablesaw.reducing.NumericReduceUtils;
 import org.apache.commons.math3.stat.StatUtils;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
 
+import static com.github.lwhite1.tablesaw.reducing.NumericReduceUtils.*;
 import static org.junit.Assert.*;
 
 /**
@@ -70,7 +72,7 @@ public class ViewGroupTest {
         String[] splitColumnNames = {table.column(2).name(), "month"};
         ViewGroup tableGroup = ViewGroup.create(table, splitColumnNames);
         List<TemporaryView> tables = tableGroup.getSubTables();
-        Table t = table.sum("approval").by(splitColumnNames);
+        Table t = table.summarize("approval", sum).by(splitColumnNames);
 
         // compare the sum of the original column with the sum of the sums of the group table
         assertEquals(table.numericColumn(1).sum(), Math.round(t.numericColumn(2).sum()), 0.001);
@@ -79,7 +81,7 @@ public class ViewGroupTest {
 
     @Test
     public void testCountByGroup() {
-        Table groups = table.count("approval").by("who");
+        Table groups = table.summarize("approval", n).by("who");
         assertEquals(2, groups.columnCount());
         assertEquals(6, groups.rowCount());
         CategoryColumn group = groups.categoryColumn(0);
@@ -95,7 +97,7 @@ public class ViewGroupTest {
 
     @Test
     public void testSumGroup() {
-        Table groups = table.sum("approval").by("who");
+        Table groups = table.summarize("approval", sum).by("who");
         // compare the sum of the original column with the sum of the sums of the group table
         assertEquals(table.numericColumn(1).sum(), Math.round(groups.numericColumn(1).sum()), 0.001);
     }

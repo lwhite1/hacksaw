@@ -2,6 +2,7 @@ package com.github.lwhite1.tablesaw.integration;
 
 import com.github.lwhite1.tablesaw.api.ColumnType;
 import com.github.lwhite1.tablesaw.api.Table;
+import com.github.lwhite1.tablesaw.io.csv.CsvReader;
 import com.github.lwhite1.tablesaw.store.StorageManager;
 import com.google.common.base.Stopwatch;
 
@@ -69,7 +70,7 @@ public class BigDataTest {
     //@Test
     public void readCsvTest() throws Exception {
         Stopwatch stopwatch = Stopwatch.createStarted();
-        Table table = Table.createFromCsv(types, "data/BigData.csv", true);
+        Table table = CsvReader.read(types, "data/BigData.csv");
         table.first(3).print();
         out(table.rowCount());
         out("Table read from csv file");

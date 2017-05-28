@@ -9,7 +9,7 @@ import com.google.gson.Gson;
  */
 public class ColumnMetadata {
 
-    static final Gson GSON = new Gson();
+    private static final Gson GSON = new Gson();
 
     private final String id;
 

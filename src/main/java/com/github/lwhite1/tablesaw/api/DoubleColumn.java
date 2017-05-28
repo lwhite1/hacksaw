@@ -22,7 +22,6 @@ import it.unimi.dsi.fastutil.doubles.DoubleSet;
 import it.unimi.dsi.fastutil.ints.IntComparator;
 
 import java.nio.ByteBuffer;
-import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -373,12 +372,12 @@ public class DoubleColumn extends AbstractColumn implements DoubleIterable, Colu
 
     @Override
     public void sortAscending() {
-        Arrays.parallelSort(data.elements());
+        DoubleArrays.parallelQuickSort(data.elements(), 0, data.size());
     }
 
     @Override
     public void sortDescending() {
-        DoubleArrays.parallelQuickSort(data.elements(), reverseDoubleComparator);
+        DoubleArrays.parallelQuickSort(data.elements(), 0, data.size(), reverseDoubleComparator);
     }
 
     @Override

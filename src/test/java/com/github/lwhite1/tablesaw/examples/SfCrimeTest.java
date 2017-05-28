@@ -130,7 +130,7 @@ public class SfCrimeTest {
                 DOUBLE,  // 39    WEAPON LAWS
         };
 
-        Table results = Table.createFromCsv(columnTypes,
+        Table results = CsvReader.read(columnTypes,
                 "/Users/larrywhite/IdeaProjects/testdata/bigdata/sampleSubmission.csv");
 
         DoubleColumn larceny = results.numericColumn("LARCENY/THEFT");

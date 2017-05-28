@@ -43,8 +43,13 @@ public class CsvReader {
             Double.parseDouble(s);
             return true;
         } catch (NumberFormatException e) {
-            // it's all part of the plan
-            return false;
+            try {
+                Integer.parseInt(s);
+                return true;
+            } catch (NumberFormatException ex) {
+                // it's all part of the plan
+                return false;
+            }
         }
     };
 
@@ -111,15 +116,15 @@ public class CsvReader {
      *
      * @param types           An array of the types of columns in the file, in the order they appear
      * @param header          Is the first row in the file a header?
-     * @param columnSeparator the delimiter
+     * @param delimiter the delimiter
      * @param fileName        The fully specified file name. It is used to provide a default name for the table
      * @return A Table containing the data in the csv file.
      * @throws IOException if file cannot be read
      */
-    public static Table read(ColumnType types[], boolean header, char columnSeparator, String fileName) throws
+    public static Table read(ColumnType types[], boolean header, char delimiter, String fileName) throws
             IOException {
         InputStream stream = new FileInputStream(fileName);
-        return read(fileName, types, header, columnSeparator, stream);
+        return read(fileName, types, header, delimiter, stream);
     }
 
     /**
