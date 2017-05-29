@@ -6,7 +6,6 @@ import com.github.lwhite1.tablesaw.util.DictionaryMap;
 import com.github.lwhite1.tablesaw.util.Selection;
 import it.unimi.dsi.fastutil.ints.IntRBTreeSet;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -82,78 +81,6 @@ public interface CategoryFilters extends CategoryColumnUtils {
         for (String next : this) {
             Matcher m = p.matcher(next);
             if (m.matches()) {
-                results.add(i);
-            }
-            i++;
-        }
-        return results;
-    }
-
-    default Selection empty() {
-        Selection results = new BitmapBackedSelection();
-        int i = 0;
-        for (String next : this) {
-            if (next.isEmpty()) {
-                results.add(i);
-            }
-            i++;
-        }
-        return results;
-    }
-
-    default Selection isAlpha() {
-        Selection results = new BitmapBackedSelection();
-        int i = 0;
-        for (String next : this) {
-            if (StringUtils.isAlpha(next)) {
-                results.add(i);
-            }
-            i++;
-        }
-        return results;
-    }
-
-    default Selection isNumeric() {
-        Selection results = new BitmapBackedSelection();
-        int i = 0;
-        for (String next : this) {
-            if (StringUtils.isNumeric(next)) {
-                results.add(i);
-            }
-            i++;
-        }
-        return results;
-    }
-
-    default Selection isAlphaNumeric() {
-        Selection results = new BitmapBackedSelection();
-        int i = 0;
-        for (String next : this) {
-            if (StringUtils.isAlphanumeric(next)) {
-                results.add(i);
-            }
-            i++;
-        }
-        return results;
-    }
-
-    default Selection isUpperCase() {
-        Selection results = new BitmapBackedSelection();
-        int i = 0;
-        for (String next : this) {
-            if (StringUtils.isAllUpperCase(next)) {
-                results.add(i);
-            }
-            i++;
-        }
-        return results;
-    }
-
-    default Selection isLowerCase() {
-        Selection results = new BitmapBackedSelection();
-        int i = 0;
-        for (String next : this) {
-            if (StringUtils.isAllLowerCase(next)) {
                 results.add(i);
             }
             i++;

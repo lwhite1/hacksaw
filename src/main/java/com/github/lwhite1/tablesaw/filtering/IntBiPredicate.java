@@ -1,13 +1,9 @@
 package com.github.lwhite1.tablesaw.filtering;
 
-import com.github.lwhite1.tablesaw.columns.packeddata.PackedLocalDate;
-
 /**
  *
  */
 public interface IntBiPredicate {
-
-    IntBiPredicate isInYear = PackedLocalDate::isInYear;
 
     /**
      * Returns true if valueToTest meets the criteria of this predicate when valueToCompareAgainst is considered

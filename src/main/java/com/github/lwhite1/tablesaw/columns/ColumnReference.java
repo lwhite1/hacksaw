@@ -3,6 +3,7 @@ package com.github.lwhite1.tablesaw.columns;
 import com.github.lwhite1.tablesaw.api.DoubleColumn;
 import com.github.lwhite1.tablesaw.columns.packeddata.PackedLocalDate;
 import com.github.lwhite1.tablesaw.columns.packeddata.PackedLocalDateTime;
+import com.github.lwhite1.tablesaw.columns.packeddata.PackedLocalTime;
 import com.github.lwhite1.tablesaw.filtering.BooleanIsFalse;
 import com.github.lwhite1.tablesaw.filtering.BooleanIsTrue;
 import com.github.lwhite1.tablesaw.filtering.DateBiFilter;
@@ -12,41 +13,27 @@ import com.github.lwhite1.tablesaw.filtering.DoubleBiFilter;
 import com.github.lwhite1.tablesaw.filtering.Filter;
 import com.github.lwhite1.tablesaw.filtering.DoubleBetween;
 import com.github.lwhite1.tablesaw.filtering.DoubleIsIn;
-import com.github.lwhite1.tablesaw.filtering.IntBiPredicate;
 import com.github.lwhite1.tablesaw.filtering.IsMissing;
 import com.github.lwhite1.tablesaw.filtering.IsNotMissing;
 import com.github.lwhite1.tablesaw.filtering.LocalDateBetween;
 import com.github.lwhite1.tablesaw.filtering.LongBiPredicate;
+import com.github.lwhite1.tablesaw.filtering.StringBiFilter;
 import com.github.lwhite1.tablesaw.filtering.StringEqualTo;
+import com.github.lwhite1.tablesaw.filtering.StringFilter;
 import com.github.lwhite1.tablesaw.filtering.StringNotEqualTo;
 import com.github.lwhite1.tablesaw.filtering.TimeEqualTo;
+import com.github.lwhite1.tablesaw.filtering.TimeFilter;
 import com.github.lwhite1.tablesaw.filtering.dates.LocalDateIsAfter;
-import com.github.lwhite1.tablesaw.filtering.dates.LocalDateIsBefore;
-import com.github.lwhite1.tablesaw.filtering.datetimes.DateTimeIsBefore;
-import com.github.lwhite1.tablesaw.filtering.text.TextContains;
-import com.github.lwhite1.tablesaw.filtering.text.TextEndsWith;
-import com.github.lwhite1.tablesaw.filtering.text.TextEqualToIgnoringCase;
 import com.github.lwhite1.tablesaw.filtering.text.TextHasLengthEqualTo;
-import com.github.lwhite1.tablesaw.filtering.text.TextIsAlpha;
-import com.github.lwhite1.tablesaw.filtering.text.TextIsAlphaNumeric;
-import com.github.lwhite1.tablesaw.filtering.text.TextIsEmpty;
 import com.github.lwhite1.tablesaw.filtering.text.TextIsIn;
 import com.github.lwhite1.tablesaw.filtering.text.TextIsLongerThan;
-import com.github.lwhite1.tablesaw.filtering.text.TextIsLowerCase;
-import com.github.lwhite1.tablesaw.filtering.text.TextIsNumeric;
 import com.github.lwhite1.tablesaw.filtering.text.TextIsShorterThan;
-import com.github.lwhite1.tablesaw.filtering.text.TextIsUpperCase;
 import com.github.lwhite1.tablesaw.filtering.text.TextMatchesRegex;
-import com.github.lwhite1.tablesaw.filtering.text.TextStartsWith;
 import com.github.lwhite1.tablesaw.filtering.times.IsAfter;
-import com.github.lwhite1.tablesaw.filtering.times.IsAfterNoon;
 import com.github.lwhite1.tablesaw.filtering.times.IsBefore;
-import com.github.lwhite1.tablesaw.filtering.times.IsBeforeNoon;
-import com.github.lwhite1.tablesaw.filtering.times.IsMidnight;
-import com.github.lwhite1.tablesaw.filtering.times.IsNoon;
+import org.apache.commons.lang3.StringUtils;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 /**
@@ -138,27 +125,27 @@ public class ColumnReference {
     }
 
     public Filter isMidnight() {
-        return new IsMidnight(this);
+        return new TimeFilter(this, PackedLocalTime::isMidnight, PackedLocalDateTime::isMidnight);
     }
 
     public Filter isNoon() {
-        return new IsNoon(this);
+        return new TimeFilter(this, PackedLocalTime::isNoon, PackedLocalDateTime::isNoon);
     }
 
     public Filter isBeforeNoon() {
-        return new IsBeforeNoon(this);
+        return new TimeFilter(this, PackedLocalTime::AM, PackedLocalDateTime::AM);
     }
 
     public Filter isAfterNoon() {
-        return new IsAfterNoon(this);
+        return new TimeFilter(this, PackedLocalTime::PM, PackedLocalDateTime::PM);
     }
 
     public Filter isBefore(LocalTime value) {
         return new IsBefore(this, value);
     }
 
-    public Filter isBefore(LocalDateTime value) {
-        return new DateTimeIsBefore(this, value);
+    public Filter isBefore(LocalDate value) {
+        return new DateBiFilter(this,PackedLocalDate::isBefore, PackedLocalDateTime::isBefore, PackedLocalDate.pack(value));
     }
 
     public Filter isAfter(LocalTime value) {
@@ -266,11 +253,7 @@ public class ColumnReference {
     }
 
     public Filter isInYear(int year) {
-        return new DateBiFilter(this, IntBiPredicate.isInYear, LongBiPredicate.isInYear, year);
-    }
-
-    public Filter isBefore(LocalDate date) {
-        return new LocalDateIsBefore(this, PackedLocalDate.pack(date));
+        return new DateBiFilter(this, PackedLocalDate::isInYear, LongBiPredicate.isInYear, year);
     }
 
     public Filter isAfter(LocalDate date) {
@@ -278,27 +261,27 @@ public class ColumnReference {
     }
 
     public Filter isUpperCase() {
-        return new TextIsUpperCase(this);
+        return new StringFilter(this, StringUtils::isAllUpperCase);
     }
 
     public Filter isLowerCase() {
-        return new TextIsLowerCase(this);
+        return new StringFilter(this, StringUtils::isAllLowerCase);
     }
 
     public Filter isAlpha() {
-        return new TextIsAlpha(this);
+        return new StringFilter(this, StringUtils::isAlpha);
     }
 
     public Filter isAlphaNumeric() {
-        return new TextIsAlphaNumeric(this);
+        return new StringFilter(this, StringUtils::isAlphanumeric);
     }
 
     public Filter isNumeric() {
-        return new TextIsNumeric(this);
+        return new StringFilter(this, StringUtils::isNumeric);
     }
 
     public Filter isEmpty() {
-        return new TextIsEmpty(this);
+        return new StringFilter(this, String::isEmpty);
     }
 
     public Filter isLongerThan(int length) {
@@ -314,19 +297,19 @@ public class ColumnReference {
     }
 
     public Filter equalToIgnoringCase(String string) {
-        return new TextEqualToIgnoringCase(this, string);
+        return new StringBiFilter(this, String::equalsIgnoreCase, string);
     }
 
     public Filter startsWith(String string) {
-        return new TextStartsWith(this, string);
+        return new StringBiFilter(this, String::startsWith, string);
     }
 
     public Filter endsWith(String string) {
-        return new TextEndsWith(this, string);
+        return new StringBiFilter(this, String::endsWith, string);
     }
 
     public Filter contains(String string) {
-        return new TextContains(this, string);
+        return new StringBiFilter(this, String::contains, string);
     }
 
     public Filter matchesRegex(String string) {

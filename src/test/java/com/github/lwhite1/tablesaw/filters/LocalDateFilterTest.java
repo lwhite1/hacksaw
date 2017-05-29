@@ -97,13 +97,13 @@ public class LocalDateFilterTest {
     @Test
     public void testIsInYear() {
         ColumnReference reference = new ColumnReference("testing");
-        DateBiFilter result = new DateBiFilter(reference, IntBiPredicate.isInYear, LongBiPredicate.isInYear, 2016);
+        DateBiFilter result = new DateBiFilter(reference, PackedLocalDate::isInYear, LongBiPredicate.isInYear, 2016);
 
         Selection selection = result.apply(table);
         assertTrue(selection.contains(0));
         assertTrue(selection.contains(1));
         assertTrue(selection.contains(2));
-        result = result = new DateBiFilter(reference, IntBiPredicate.isInYear, LongBiPredicate.isInYear, 2015);
+        result = new DateBiFilter(reference, PackedLocalDate::isInYear, LongBiPredicate.isInYear, 2015);
         selection = result.apply(table);
         assertFalse(selection.contains(0));
         assertFalse(selection.contains(1));

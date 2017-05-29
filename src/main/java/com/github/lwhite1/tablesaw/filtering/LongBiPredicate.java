@@ -8,6 +8,7 @@ import com.github.lwhite1.tablesaw.columns.packeddata.PackedLocalDateTime;
 public interface LongBiPredicate {
 
     LongBiPredicate isInYear = (packedDateTime, year) -> PackedLocalDateTime.isInYear(packedDateTime, (int) year);
+    LongBiPredicate isBefore = PackedLocalDateTime::isBefore;
 
     /**
      * Returns true if valueToTest meets the criteria of this predicate when valueToCompareAgainst is considered
@@ -16,7 +17,7 @@ public interface LongBiPredicate {
      * the value to compare against
      *
      * @param valueToTest           the value you're checking. Often this is the value of a cell in an int column
-     * @param valueToCompareAgainst the value to compare against. Often this is a single value for all comparisions
+     * @param valueToCompareAgainst the value to compare against. Often this is a single value for all comparisons
      */
     boolean test(long valueToTest, long valueToCompareAgainst);
 }

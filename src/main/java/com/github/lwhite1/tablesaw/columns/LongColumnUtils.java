@@ -9,18 +9,6 @@ import it.unimi.dsi.fastutil.longs.LongIterable;
  */
 public interface LongColumnUtils extends Column, LongIterable {
 
-    LongPredicate isZero = i -> i == 0;
-
-    LongPredicate isNegative = i -> i < 0;
-
-    LongPredicate isPositive = i -> i > 0;
-
-    LongPredicate isNonNegative = i -> i >= 0;
-
-    LongPredicate isEven = i -> (i & 1) == 0;
-
-    LongPredicate isOdd = i -> (i & 1) != 0;
-
     LongBiPredicate isGreaterThan = (valueToTest, valueToCompareAgainst) -> valueToTest > valueToCompareAgainst;
 
     LongBiPredicate isGreaterThanOrEqualTo = (valueToTest, valueToCompareAgainst) -> valueToTest >=
