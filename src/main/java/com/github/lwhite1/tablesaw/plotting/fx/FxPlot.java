@@ -11,6 +11,7 @@ public abstract class FxPlot {
 
     public static JFXPanel getJfxPanel(String title, int width, int height) {
         JFrame frame = new JFrame(title);
+
         final JFXPanel fxPanel = new JFXPanel();
         frame.add(fxPanel);
         frame.setSize(width, height);

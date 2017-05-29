@@ -1,5 +1,8 @@
 package com.github.lwhite1.tablesaw.kapi
 
+import com.github.lwhite1.tablesaw.api.Table
+import com.github.lwhite1.tablesaw.api.plot.Bar
+import com.github.lwhite1.tablesaw.api.plot.Pareto
 import com.github.lwhite1.tablesaw.reducing.NumericReduceFunction
 import com.github.lwhite1.tablesaw.reducing.NumericReduceUtils
 import org.junit.Test
@@ -80,10 +83,19 @@ class DataframeTest {
 
     @Test
     fun selectWhere() {
+        val table = Table.createFromCsv("data/tornadoes_1950-2014.csv")
+        //Table t2 = table.countBy(table.categoryColumn("State"));
+        //show("tornadoes by state", t2.categoryColumn("Category"), t2.numericColumn("Count"));
+
+        //show("T", table.summarize("fatalities", sum).by("State"));
+        Bar.show("T", table.summarize("fatalities", NumericReduceUtils.sum).by("Scale"))
     }
 
     @Test
     fun setName() {
+        val frame = Dataframe.createFromCsv("data/BushApproval.csv")
+        frame.setName("Duh")
+        assertEquals("Duh", frame.name())
     }
 
     @Test
@@ -102,9 +114,9 @@ class DataframeTest {
     fun summarize() {
         val frame = Dataframe.createFromCsv("data/BushApproval.csv")
         val result = frame.summarize("approval", NumericReduceUtils.mean).by("who")
-        val result1 = frame.sum("approval").by("who")
-        val result2 = frame.max("approval").by("who")
-        val result3 = frame.median("approval").by("who")
+        val result1 = frame.summarize("approval", NumericReduceUtils.sum).by("who")
+        val result2 = frame.summarize("approval", NumericReduceUtils.max).by("who")
+        val result3 = frame.summarize("approval", NumericReduceUtils.median).by("who")
         println(result.print())
         println(result1.print())
         println(result2.print())

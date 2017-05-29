@@ -508,7 +508,6 @@ public class Table implements Relation, IntIterable {
     }
 
     /**
-     * Returns a copy of this table sorted in the order of the given column names, in ascending order
      */
     public Table sortAscendingOn(String... columnNames) {
         return this.sortOn(columnNames);

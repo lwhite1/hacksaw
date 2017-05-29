@@ -30,7 +30,7 @@ public class FxPareto extends FxBuilder {
         yAxis.setLabel(y.name());
 
         Table t = Table.create("", x, y);
-        t = t.sortDescendingOn(y.name());
+        t = t.sortOn("-"+y.name());
 
         final BarChart<String, Number> bar = new BarChart<>(xAxis, yAxis);
 
@@ -60,7 +60,7 @@ public class FxPareto extends FxBuilder {
             numericColumn) {
 
         Table t = Table.create("", categoryColumn, numericColumn);
-        t = t.sortDescendingOn(numericColumn.name());
+        t = t.sortOn("-" + numericColumn.name());
 
         final CategoryAxis categoryAxis = getCategoryAxis(t.categoryColumn(0));
         final NumberAxis numberAxis = getNumberAxis(t.numericColumn(1));
