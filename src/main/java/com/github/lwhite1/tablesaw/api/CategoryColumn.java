@@ -3,8 +3,8 @@ package com.github.lwhite1.tablesaw.api;
 import com.github.lwhite1.tablesaw.columns.AbstractColumn;
 import com.github.lwhite1.tablesaw.columns.CategoryColumnUtils;
 import com.github.lwhite1.tablesaw.columns.Column;
-import com.github.lwhite1.tablesaw.filtering.StringBiPredicate;
-import com.github.lwhite1.tablesaw.filtering.StringPredicate;
+import com.github.lwhite1.tablesaw.filtering.predicates.StringStringPredicate;
+import com.github.lwhite1.tablesaw.filtering.predicates.StringPredicate;
 import com.github.lwhite1.tablesaw.filtering.text.CategoryFilters;
 import com.github.lwhite1.tablesaw.io.TypeUtils;
 import com.github.lwhite1.tablesaw.store.ColumnMetadata;
@@ -23,6 +23,7 @@ import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntArrays;
 import it.unimi.dsi.fastutil.ints.IntComparator;
 import it.unimi.dsi.fastutil.ints.IntListIterator;
+import org.apache.commons.lang3.StringUtils;
 
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
@@ -340,18 +341,7 @@ public class CategoryColumn extends AbstractColumn
     }
 
     public Selection isEqualTo(String string) {
-        Selection results = new BitmapBackedSelection();
-        int key = lookupTable.get(string);
-        if (key >= 0) {
-            int i = 0;
-            for (int next : values) {
-                if (key == next) {
-                    results.add(i);
-                }
-                i++;
-            }
-        }
-        return results;
+        return select(String::equalsIgnoreCase, string);
     }
 
     public Selection isNotEqualTo(String string) {
@@ -537,6 +527,33 @@ public class CategoryColumn extends AbstractColumn
         return select(isNotMissing);
     }
 
+    public Selection endsWith(String string) {
+        return select(String::endsWith, string);
+    }
+
+    public Selection stringContains(String string) {
+        return select(String::contains, string);
+    }
+
+    public Selection isUpperCase() {
+        return select(StringUtils::isAllUpperCase);
+    }
+
+    public Selection isLowerCase() {
+        return select(StringUtils::isAllLowerCase);
+    }
+
+    public Selection isAlpha() {
+        return select(StringUtils::isAlpha);
+    }
+
+    public Selection isAlphaNumeric() {
+        return select(StringUtils::isAlphanumeric);
+    }
+
+    public Selection isNumeric() {
+        return select(StringUtils::isNumeric);
+    }
 
     public Selection select(StringPredicate predicate) {
         Selection selection = new BitmapBackedSelection();
@@ -549,7 +566,7 @@ public class CategoryColumn extends AbstractColumn
         return selection;
     }
 
-    public Selection select(StringBiPredicate predicate, String value) {
+    public Selection select(StringStringPredicate predicate, String value) {
         Selection selection = new BitmapBackedSelection();
         for (int idx = 0; idx < data().size(); idx++) {
             int next = data().getInt(idx);
@@ -607,6 +624,10 @@ public class CategoryColumn extends AbstractColumn
                 return lookupTable.get(valuesIt.next());
             }
         };
+    }
+
+    public Selection equalToIgnoringCase(String string) {
+        return select(String::equalsIgnoreCase, string);
     }
 
     public CategoryColumn selectIf(StringPredicate predicate) {

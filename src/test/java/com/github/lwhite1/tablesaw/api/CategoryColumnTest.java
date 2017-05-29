@@ -83,6 +83,9 @@ public class CategoryColumnTest {
         selection = categoryColumn.startsWith("T");
         assertEquals("Tennessee", categoryColumn.get(selection.get(0)));
         assertEquals("Texas", categoryColumn.get(selection.get(1)));
+
+        selection = categoryColumn.endsWith("a");
+        assertEquals("Alabama", categoryColumn.get(selection.get(0)));
     }
 
     @Test

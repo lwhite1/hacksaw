@@ -3,6 +3,7 @@ package com.github.lwhite1.tablesaw.filtering;
 import com.github.lwhite1.tablesaw.api.DoubleColumn;
 import com.github.lwhite1.tablesaw.api.Table;
 import com.github.lwhite1.tablesaw.columns.ColumnReference;
+import com.github.lwhite1.tablesaw.filtering.predicates.DoubleDoublePredicate;
 import com.github.lwhite1.tablesaw.util.Selection;
 
 /**
@@ -10,10 +11,10 @@ import com.github.lwhite1.tablesaw.util.Selection;
  */
 public class DoubleBiFilter extends ColumnFilter {
 
-    private final DoubleBiPredicate predicate;
+    private final DoubleDoublePredicate predicate;
     private final float value;
 
-    public DoubleBiFilter(ColumnReference columnReference, DoubleBiPredicate predicate, float value) {
+    public DoubleBiFilter(ColumnReference columnReference, DoubleDoublePredicate predicate, float value) {
         super(columnReference);
         this.predicate = predicate;
         this.value = value;

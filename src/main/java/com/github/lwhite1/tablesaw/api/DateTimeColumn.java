@@ -4,9 +4,9 @@ import com.github.lwhite1.tablesaw.columns.AbstractColumn;
 import com.github.lwhite1.tablesaw.columns.Column;
 import com.github.lwhite1.tablesaw.columns.LongColumnUtils;
 import com.github.lwhite1.tablesaw.columns.packeddata.PackedLocalDateTime;
-import com.github.lwhite1.tablesaw.filtering.LocalDateTimePredicate;
-import com.github.lwhite1.tablesaw.filtering.LongBiPredicate;
-import com.github.lwhite1.tablesaw.filtering.LongPredicate;
+import com.github.lwhite1.tablesaw.filtering.predicates.LocalDateTimePredicate;
+import com.github.lwhite1.tablesaw.filtering.predicates.LongLongPredicate;
+import com.github.lwhite1.tablesaw.filtering.predicates.LongPredicate;
 import com.github.lwhite1.tablesaw.io.TypeUtils;
 import com.github.lwhite1.tablesaw.mapping.DateTimeMapUtils;
 import com.github.lwhite1.tablesaw.store.ColumnMetadata;
@@ -719,7 +719,7 @@ public class DateTimeColumn extends AbstractColumn implements DateTimeMapUtils, 
         return bitmap;
     }
 
-    public Selection select(LongBiPredicate predicate, long value) {
+    public Selection select(LongLongPredicate predicate, long value) {
         Selection bitmap = new BitmapBackedSelection();
         for (int idx = 0; idx < data.size(); idx++) {
             long next = data.getLong(idx);

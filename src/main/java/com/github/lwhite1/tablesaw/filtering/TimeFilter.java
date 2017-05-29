@@ -6,6 +6,8 @@ import com.github.lwhite1.tablesaw.api.Table;
 import com.github.lwhite1.tablesaw.api.TimeColumn;
 import com.github.lwhite1.tablesaw.columns.Column;
 import com.github.lwhite1.tablesaw.columns.ColumnReference;
+import com.github.lwhite1.tablesaw.filtering.predicates.IntPredicate;
+import com.github.lwhite1.tablesaw.filtering.predicates.LongPredicate;
 import com.github.lwhite1.tablesaw.util.Selection;
 
 /**

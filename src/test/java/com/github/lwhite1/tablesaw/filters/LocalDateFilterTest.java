@@ -7,9 +7,8 @@ import com.github.lwhite1.tablesaw.columns.packeddata.PackedLocalDate;
 import com.github.lwhite1.tablesaw.columns.packeddata.PackedLocalDateTime;
 import com.github.lwhite1.tablesaw.filtering.DateBiFilter;
 import com.github.lwhite1.tablesaw.filtering.DateFilter;
-import com.github.lwhite1.tablesaw.filtering.IntBiPredicate;
-import com.github.lwhite1.tablesaw.filtering.LocalDatePredicate;
-import com.github.lwhite1.tablesaw.filtering.LongBiPredicate;
+import com.github.lwhite1.tablesaw.filtering.predicates.LocalDatePredicate;
+import com.github.lwhite1.tablesaw.filtering.predicates.LongLongPredicate;
 import com.github.lwhite1.tablesaw.util.Selection;
 import org.junit.Before;
 import org.junit.Test;
@@ -97,13 +96,13 @@ public class LocalDateFilterTest {
     @Test
     public void testIsInYear() {
         ColumnReference reference = new ColumnReference("testing");
-        DateBiFilter result = new DateBiFilter(reference, PackedLocalDate::isInYear, LongBiPredicate.isInYear, 2016);
+        DateBiFilter result = new DateBiFilter(reference, PackedLocalDate::isInYear, LongLongPredicate.isInYear, 2016);
 
         Selection selection = result.apply(table);
         assertTrue(selection.contains(0));
         assertTrue(selection.contains(1));
         assertTrue(selection.contains(2));
-        result = new DateBiFilter(reference, PackedLocalDate::isInYear, LongBiPredicate.isInYear, 2015);
+        result = new DateBiFilter(reference, PackedLocalDate::isInYear, LongLongPredicate.isInYear, 2015);
         selection = result.apply(table);
         assertFalse(selection.contains(0));
         assertFalse(selection.contains(1));

@@ -4,8 +4,7 @@ import com.github.lwhite1.tablesaw.api.DoubleColumn;
 import com.github.lwhite1.tablesaw.columns.packeddata.PackedLocalDate;
 import com.github.lwhite1.tablesaw.columns.packeddata.PackedLocalDateTime;
 import com.github.lwhite1.tablesaw.columns.packeddata.PackedLocalTime;
-import com.github.lwhite1.tablesaw.filtering.BooleanIsFalse;
-import com.github.lwhite1.tablesaw.filtering.BooleanIsTrue;
+import com.github.lwhite1.tablesaw.filtering.BooleanFilter;
 import com.github.lwhite1.tablesaw.filtering.DateBiFilter;
 import com.github.lwhite1.tablesaw.filtering.DateEqualTo;
 import com.github.lwhite1.tablesaw.filtering.DateFilter;
@@ -16,7 +15,7 @@ import com.github.lwhite1.tablesaw.filtering.DoubleIsIn;
 import com.github.lwhite1.tablesaw.filtering.IsMissing;
 import com.github.lwhite1.tablesaw.filtering.IsNotMissing;
 import com.github.lwhite1.tablesaw.filtering.LocalDateBetween;
-import com.github.lwhite1.tablesaw.filtering.LongBiPredicate;
+import com.github.lwhite1.tablesaw.filtering.predicates.LongLongPredicate;
 import com.github.lwhite1.tablesaw.filtering.StringBiFilter;
 import com.github.lwhite1.tablesaw.filtering.StringEqualTo;
 import com.github.lwhite1.tablesaw.filtering.StringFilter;
@@ -253,7 +252,7 @@ public class ColumnReference {
     }
 
     public Filter isInYear(int year) {
-        return new DateBiFilter(this, PackedLocalDate::isInYear, LongBiPredicate.isInYear, year);
+        return new DateBiFilter(this, PackedLocalDate::isInYear, LongLongPredicate.isInYear, year);
     }
 
     public Filter isAfter(LocalDate date) {
@@ -317,10 +316,10 @@ public class ColumnReference {
     }
 
     public Filter isTrue() {
-        return new BooleanIsTrue(this);
+        return new BooleanFilter(this, BooleanColumnUtils.isTrue);
     }
 
     public Filter isFalse() {
-        return new BooleanIsFalse(this);
+        return new BooleanFilter(this, BooleanColumnUtils.isFalse);
     }
 }

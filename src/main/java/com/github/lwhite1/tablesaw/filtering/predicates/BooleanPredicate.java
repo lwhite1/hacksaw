@@ -1,4 +1,4 @@
-package com.github.lwhite1.tablesaw.filtering;
+package com.github.lwhite1.tablesaw.filtering.predicates;
 
 /**
  *

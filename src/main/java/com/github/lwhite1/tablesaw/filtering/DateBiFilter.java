@@ -6,17 +6,19 @@ import com.github.lwhite1.tablesaw.api.DateTimeColumn;
 import com.github.lwhite1.tablesaw.api.Table;
 import com.github.lwhite1.tablesaw.columns.Column;
 import com.github.lwhite1.tablesaw.columns.ColumnReference;
+import com.github.lwhite1.tablesaw.filtering.predicates.IntIntPredicate;
+import com.github.lwhite1.tablesaw.filtering.predicates.LongLongPredicate;
 import com.github.lwhite1.tablesaw.util.Selection;
 
 /**
  */
 public class DateBiFilter extends ColumnFilter {
 
-    private final IntBiPredicate intPredicate;
-    private final LongBiPredicate longPredicate;
+    private final IntIntPredicate intPredicate;
+    private final LongLongPredicate longPredicate;
     private final int value;
 
-    public DateBiFilter(ColumnReference columnReference, IntBiPredicate intPredicate, LongBiPredicate longPredicate, int value) {
+    public DateBiFilter(ColumnReference columnReference, IntIntPredicate intPredicate, LongLongPredicate longPredicate, int value) {
         super(columnReference);
         this.intPredicate = intPredicate;
         this.longPredicate = longPredicate;

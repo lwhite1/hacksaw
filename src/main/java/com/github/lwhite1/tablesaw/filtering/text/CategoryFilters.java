@@ -15,18 +15,6 @@ import java.util.regex.Pattern;
  */
 public interface CategoryFilters extends CategoryColumnUtils {
 
-    default Selection equalToIgnoringCase(String string) {
-        Selection results = new BitmapBackedSelection();
-        int i = 0;
-        for (String next : this) {
-            if (next.endsWith(string)) {
-                results.add(i);
-            }
-            i++;
-        }
-        return results;
-    }
-
     default Selection startsWith(String string) {
         Selection results = new BitmapBackedSelection();
 
@@ -43,30 +31,6 @@ public interface CategoryFilters extends CategoryColumnUtils {
         int i = 0;
         for (int next : values()) {
             if (sorted.contains(next)) {
-                results.add(i);
-            }
-            i++;
-        }
-        return results;
-    }
-
-    default Selection endsWith(String string) {
-        Selection results = new BitmapBackedSelection();
-        int i = 0;
-        for (String next : this) {
-            if (next.endsWith(string)) {
-                results.add(i);
-            }
-            i++;
-        }
-        return results;
-    }
-
-    default Selection stringContains(String string) {
-        Selection results = new BitmapBackedSelection();
-        int i = 0;
-        for (String next : this) {
-            if (next.contains(string)) {
                 results.add(i);
             }
             i++;

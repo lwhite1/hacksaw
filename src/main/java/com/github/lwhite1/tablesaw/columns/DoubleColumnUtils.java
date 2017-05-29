@@ -1,7 +1,7 @@
 package com.github.lwhite1.tablesaw.columns;
 
-import com.github.lwhite1.tablesaw.filtering.DoubleBiPredicate;
-import com.github.lwhite1.tablesaw.filtering.DoublePredicate;
+import com.github.lwhite1.tablesaw.filtering.predicates.DoubleDoublePredicate;
+import com.github.lwhite1.tablesaw.filtering.predicates.DoublePredicate;
 import it.unimi.dsi.fastutil.ints.IntIterable;
 
 /**
@@ -17,17 +17,17 @@ public interface DoubleColumnUtils extends Column, IntIterable {
 
     DoublePredicate isNonNegative = i -> i >= 0f;
 
-    DoubleBiPredicate isGreaterThan = (valueToTest, valueToCompareAgainst) -> valueToTest > valueToCompareAgainst;
+    DoubleDoublePredicate isGreaterThan = (valueToTest, valueToCompareAgainst) -> valueToTest > valueToCompareAgainst;
 
-    DoubleBiPredicate isGreaterThanOrEqualTo = (valueToTest, valueToCompareAgainst) -> valueToTest >=
+    DoubleDoublePredicate isGreaterThanOrEqualTo = (valueToTest, valueToCompareAgainst) -> valueToTest >=
             valueToCompareAgainst;
 
-    DoubleBiPredicate isLessThan = (valueToTest, valueToCompareAgainst) -> valueToTest < valueToCompareAgainst;
+    DoubleDoublePredicate isLessThan = (valueToTest, valueToCompareAgainst) -> valueToTest < valueToCompareAgainst;
 
-    DoubleBiPredicate isLessThanOrEqualTo = (valueToTest, valueToCompareAgainst) -> valueToTest <=
+    DoubleDoublePredicate isLessThanOrEqualTo = (valueToTest, valueToCompareAgainst) -> valueToTest <=
             valueToCompareAgainst;
 
-    DoubleBiPredicate isEqualTo = (valueToTest, valueToCompareAgainst) -> valueToTest == valueToCompareAgainst;
+    DoubleDoublePredicate isEqualTo = (valueToTest, valueToCompareAgainst) -> valueToTest == valueToCompareAgainst;
 
     DoublePredicate isMissing = i -> i != i;
 

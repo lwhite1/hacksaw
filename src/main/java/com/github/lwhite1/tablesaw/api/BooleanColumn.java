@@ -2,7 +2,7 @@ package com.github.lwhite1.tablesaw.api;
 
 import com.github.lwhite1.tablesaw.columns.AbstractColumn;
 import com.github.lwhite1.tablesaw.columns.Column;
-import com.github.lwhite1.tablesaw.filtering.BooleanPredicate;
+import com.github.lwhite1.tablesaw.filtering.predicates.BooleanPredicate;
 import com.github.lwhite1.tablesaw.io.TypeUtils;
 import com.github.lwhite1.tablesaw.mapping.BooleanMapUtils;
 import com.github.lwhite1.tablesaw.store.ColumnMetadata;

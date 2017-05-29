@@ -2,8 +2,8 @@ package com.github.lwhite1.tablesaw.api;
 
 import com.github.lwhite1.tablesaw.columns.AbstractColumn;
 import com.github.lwhite1.tablesaw.columns.Column;
-import com.github.lwhite1.tablesaw.filtering.DoubleBiPredicate;
-import com.github.lwhite1.tablesaw.filtering.DoublePredicate;
+import com.github.lwhite1.tablesaw.filtering.predicates.DoubleDoublePredicate;
+import com.github.lwhite1.tablesaw.filtering.predicates.DoublePredicate;
 import com.github.lwhite1.tablesaw.io.TypeUtils;
 import com.github.lwhite1.tablesaw.reducing.NumericReduceUtils;
 import com.github.lwhite1.tablesaw.store.ColumnMetadata;
@@ -678,7 +678,7 @@ public class DoubleColumn extends AbstractColumn implements DoubleIterable, Colu
         return bitmap;
     }
 
-    public Selection select(DoubleBiPredicate predicate, double value) {
+    public Selection select(DoubleDoublePredicate predicate, double value) {
         Selection bitmap = new BitmapBackedSelection();
         for (int idx = 0; idx < data.size(); idx++) {
             double next = data.getDouble(idx);

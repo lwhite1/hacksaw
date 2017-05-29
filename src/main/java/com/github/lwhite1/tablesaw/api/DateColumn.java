@@ -5,9 +5,9 @@ import com.github.lwhite1.tablesaw.columns.Column;
 import com.github.lwhite1.tablesaw.columns.IntColumnUtils;
 import com.github.lwhite1.tablesaw.columns.packeddata.PackedLocalDate;
 import com.github.lwhite1.tablesaw.columns.packeddata.PackedLocalDateTime;
-import com.github.lwhite1.tablesaw.filtering.IntBiPredicate;
-import com.github.lwhite1.tablesaw.filtering.IntPredicate;
-import com.github.lwhite1.tablesaw.filtering.LocalDatePredicate;
+import com.github.lwhite1.tablesaw.filtering.predicates.IntIntPredicate;
+import com.github.lwhite1.tablesaw.filtering.predicates.IntPredicate;
+import com.github.lwhite1.tablesaw.filtering.predicates.LocalDatePredicate;
 import com.github.lwhite1.tablesaw.io.TypeUtils;
 import com.github.lwhite1.tablesaw.mapping.DateMapUtils;
 import com.github.lwhite1.tablesaw.store.ColumnMetadata;
@@ -713,7 +713,7 @@ public class DateColumn extends AbstractColumn implements DateMapUtils {
         return selection;
     }
 
-    public Selection select(IntBiPredicate predicate, int value) {
+    public Selection select(IntIntPredicate predicate, int value) {
         Selection selection = new BitmapBackedSelection();
         for (int idx = 0; idx < data.size(); idx++) {
             int next = data.getInt(idx);

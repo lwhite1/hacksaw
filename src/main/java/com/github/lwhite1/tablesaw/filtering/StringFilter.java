@@ -1,12 +1,9 @@
 package com.github.lwhite1.tablesaw.filtering;
 
 import com.github.lwhite1.tablesaw.api.CategoryColumn;
-import com.github.lwhite1.tablesaw.api.ColumnType;
-import com.github.lwhite1.tablesaw.api.DateTimeColumn;
 import com.github.lwhite1.tablesaw.api.Table;
-import com.github.lwhite1.tablesaw.api.TimeColumn;
-import com.github.lwhite1.tablesaw.columns.Column;
 import com.github.lwhite1.tablesaw.columns.ColumnReference;
+import com.github.lwhite1.tablesaw.filtering.predicates.StringPredicate;
 import com.github.lwhite1.tablesaw.util.Selection;
 
 /**

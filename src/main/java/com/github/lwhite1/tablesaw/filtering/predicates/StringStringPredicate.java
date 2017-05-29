@@ -1,9 +1,9 @@
-package com.github.lwhite1.tablesaw.filtering;
+package com.github.lwhite1.tablesaw.filtering.predicates;
 
 /**
  *
  */
-public interface StringBiPredicate {
+public interface StringStringPredicate {
 
     /**
      * Returns true if valueToTest meets the criteria of this predicate when valueToCompareAgainst is considered

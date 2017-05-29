@@ -3,16 +3,17 @@ package com.github.lwhite1.tablesaw.filtering;
 import com.github.lwhite1.tablesaw.api.CategoryColumn;
 import com.github.lwhite1.tablesaw.api.Table;
 import com.github.lwhite1.tablesaw.columns.ColumnReference;
+import com.github.lwhite1.tablesaw.filtering.predicates.StringStringPredicate;
 import com.github.lwhite1.tablesaw.util.Selection;
 
 /**
  */
 public class StringBiFilter extends ColumnFilter {
 
-    private final StringBiPredicate predicate;
+    private final StringStringPredicate predicate;
     private final String value;
 
-    public StringBiFilter(ColumnReference columnReference, StringBiPredicate predicate, String value) {
+    public StringBiFilter(ColumnReference columnReference, StringStringPredicate predicate, String value) {
         super(columnReference);
         this.predicate = predicate;
         this.value = value;

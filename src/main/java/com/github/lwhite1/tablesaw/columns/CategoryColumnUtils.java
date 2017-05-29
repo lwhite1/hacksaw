@@ -1,7 +1,7 @@
 package com.github.lwhite1.tablesaw.columns;
 
 import com.github.lwhite1.tablesaw.api.CategoryColumn;
-import com.github.lwhite1.tablesaw.filtering.StringPredicate;
+import com.github.lwhite1.tablesaw.filtering.predicates.StringPredicate;
 import com.github.lwhite1.tablesaw.mapping.StringMapUtils;
 import com.github.lwhite1.tablesaw.reducing.CategoryReduceUtils;
 import com.github.lwhite1.tablesaw.util.DictionaryMap;

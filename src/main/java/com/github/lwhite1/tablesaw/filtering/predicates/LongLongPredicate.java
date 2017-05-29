@@ -1,14 +1,14 @@
-package com.github.lwhite1.tablesaw.filtering;
+package com.github.lwhite1.tablesaw.filtering.predicates;
 
 import com.github.lwhite1.tablesaw.columns.packeddata.PackedLocalDateTime;
 
 /**
  *
  */
-public interface LongBiPredicate {
+public interface LongLongPredicate {
 
-    LongBiPredicate isInYear = (packedDateTime, year) -> PackedLocalDateTime.isInYear(packedDateTime, (int) year);
-    LongBiPredicate isBefore = PackedLocalDateTime::isBefore;
+    LongLongPredicate isInYear = (packedDateTime, year) -> PackedLocalDateTime.isInYear(packedDateTime, (int) year);
+    LongLongPredicate isBefore = PackedLocalDateTime::isBefore;
 
     /**
      * Returns true if valueToTest meets the criteria of this predicate when valueToCompareAgainst is considered
