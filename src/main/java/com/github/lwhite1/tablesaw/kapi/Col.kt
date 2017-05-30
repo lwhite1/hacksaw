@@ -10,11 +10,11 @@ import com.github.lwhite1.tablesaw.util.Selection
  */
 interface Col {
 
-    fun size(): Int
+    fun size(): Int = target().size()
 
-    fun summary(): Dataframe
+    fun summary(): Dataframe = Dataframe(target().summary())
 
-    fun subset(rows: Selection): Col {
+    fun select(rows: Selection): Col {
         val c = this.emptyCopy()
         for (row in rows) {
             c.appendCell(getString(row))
@@ -25,12 +25,12 @@ interface Col {
     /**
      * Returns the count of missing values in this column
      */
-    fun countMissing(): Int
+    fun countMissing(): Int = target().countMissing()
 
     /**
      * Returns the count of unique values in this column
      */
-    fun countUnique(): Int
+    fun countUnique(): Int = target().countUnique()
 
     /**
      * Returns a column of the same type as the receiver, containing only the unique values of the receiver
@@ -40,14 +40,16 @@ interface Col {
     /**
      * Returns this column's ColumnType
      */
-    fun type(): ColumnType
+    fun type(): ColumnType = target().type()
 
-    fun name(): String
+    fun name(): String = target().name()
+
+    fun setName(name: String) = target().setName(name)
 
     /**
      * Returns a string representation of the value at the given row
      */
-    fun getString(row: Int): String
+    fun getString(row: Int): String = target().getString(row)
 
     /**
      * Returns a deep copy of the receiver
@@ -59,7 +61,7 @@ interface Col {
      */
     fun emptyCopy(rowSize: Int = 0): Col
 
-    fun clear()
+    fun clear() = target().clear()
 
     fun sortAscending()
 
@@ -68,21 +70,21 @@ interface Col {
     /**
      * Returns true if the column has no data
      */
-    fun isEmpty(): Boolean
+    fun isEmpty(): Boolean = target().isEmpty
 
-    fun appendCell(stringValue: String)
+    fun appendCell(stringValue: String) = target().appendCell(stringValue)
 
     /**
      * Returns a unique string that identifies this column
      */
-    fun id(): String
+    fun id(): String = target().id()
 
     /**
      * Returns a String containing the column's metadata in json format
      */
-    fun metadataString(): String
+    fun metadataString(): String = target().metadata()
 
-    fun columnMetadata(): ColumnMetadata
+    fun columnMetadata(): ColumnMetadata = target().columnMetadata()
 
 //    fun rowComparator(): IntComparator
 
@@ -114,7 +116,7 @@ interface Col {
         return col
     }
 
-    fun print(): String
+    fun show(): String = target().print()
 
 
     fun title(): String {

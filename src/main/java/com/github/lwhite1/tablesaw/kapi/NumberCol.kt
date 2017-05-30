@@ -1,8 +1,6 @@
 package com.github.lwhite1.tablesaw.kapi
 
-import com.github.lwhite1.tablesaw.api.ColumnType
 import com.github.lwhite1.tablesaw.api.DoubleColumn
-import com.github.lwhite1.tablesaw.store.ColumnMetadata
 import com.github.lwhite1.tablesaw.util.Selection
 
 /**
@@ -16,46 +14,15 @@ class NumberCol(val target: DoubleColumn) : Col {
 
     fun getFloat(index: Int): Float = target.getFloat(index)
 
-    override fun size(): Int = target.size()
-
-    override fun summary(): Dataframe = Dataframe(target.summary())
-
-    override fun toString(): String = target.toString()
-
-    override fun countMissing(): Int = target.countMissing()
-
-    override fun countUnique(): Int = target.countUnique()
-
     override fun unique(): Col = NumberCol(target.unique())
-
-    override fun type(): ColumnType = target.type()
-
-    override fun name(): String = target.name()
-
-    override fun getString(row: Int): String = target.getString(row)
 
     override fun copy(): Col = NumberCol(target.copy())
 
     override fun emptyCopy(rowSize: Int): Col = NumberCol(target.emptyCopy())
 
-    override fun clear() = target.clear()
-
     override fun sortAscending() = target.sortAscending()
 
     override fun sortDescending() = target.sortDescending()
-
-    override fun isEmpty(): Boolean = target.isEmpty
-
-    override fun appendCell(stringValue: String) = target.appendCell(stringValue)
-
-    override fun id(): String = target.id()
-
-    override fun metadataString(): String = target.metadata()
-
-    override fun columnMetadata(): ColumnMetadata = target.columnMetadata()
-
-    override fun print(): String = target.print()
-
 
     operator fun plus(c : NumberCol): NumberCol = NumberCol(target.add(c.target));
 

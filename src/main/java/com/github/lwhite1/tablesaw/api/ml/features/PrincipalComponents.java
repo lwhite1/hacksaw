@@ -15,7 +15,7 @@ public class PrincipalComponents {
         this.pca = new PCA(data, useCorrelationMatrix);
     }
 
-    public static PrincipalComponents create(boolean useCorrelationMatrix, DoubleColumn... columns) {
+    public static PrincipalComponents create(boolean useCorrelationMatrix, DoubleColumn[] columns) {
         double[][] data = DoubleArrays.to2dArray(columns);
         return new PrincipalComponents(data, useCorrelationMatrix);
     }

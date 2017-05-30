@@ -97,13 +97,13 @@ class NumberColTest {
     @Test
     fun sortAscending() {
         column1.sortAscending()  //TODO fix
-        println(column1.print())
+        println(column1.show())
     }
 
     @Test
     fun sortDescending() {
         column1.sortDescending()
-        println(column1.print())
+        println(column1.show())
     }
 
     @Test
@@ -142,37 +142,37 @@ class NumberColTest {
     @Test
     fun cube() {
         val column2 = column1.cube()
-        println(column2.print())
+        println(column2.show())
     }
 
     @Test
     fun cubeRoot() {
         val column2 = column1.cubeRoot()
-        println(column2.print())
+        println(column2.show())
     }
 
     @Test
     fun square() {
         val column2 = column1.square()
-        println(column2.print())
+        println(column2.show())
     }
 
     @Test
     fun sqrt() {
         val column2 = column1.sqrt()
-        println(column2.print())
+        println(column2.show())
     }
 
     @Test
     fun abs() {
         val column2 = column1.abs()
-        println(column2.print())
+        println(column2.show())
     }
 
     @Test
     fun round() {
         val column2 = column1.round()
-        println(column2.print())
+        println(column2.show())
     }
 
     @Test
