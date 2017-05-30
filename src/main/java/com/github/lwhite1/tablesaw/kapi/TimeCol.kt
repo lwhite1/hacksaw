@@ -11,6 +11,8 @@ import java.time.LocalTime
  */
 class TimeCol(val target: TimeColumn) : Col {
 
+    override fun target(): TimeColumn = target
+
     override fun size(): Int = target.size()
 
     override fun summary(): Dataframe = Dataframe(target.summary())

@@ -10,7 +10,7 @@ import com.github.lwhite1.tablesaw.util.Selection
  */
 class NumberCol(val target: DoubleColumn) : Col {
 
-    fun target(): DoubleColumn = target
+    override fun target(): DoubleColumn = target
 
     override fun toDoubleArray(): DoubleArray = target.toDoubleArray()
 
@@ -19,6 +19,8 @@ class NumberCol(val target: DoubleColumn) : Col {
     override fun size(): Int = target.size()
 
     override fun summary(): Dataframe = Dataframe(target.summary())
+
+    override fun toString(): String = target.toString()
 
     override fun countMissing(): Int = target.countMissing()
 
@@ -55,23 +57,17 @@ class NumberCol(val target: DoubleColumn) : Col {
     override fun print(): String = target.print()
 
 
-/*
-    operator fun plus(c : DoubleCol): DoubleColumn = target.add(c.target);
+    operator fun plus(c : NumberCol): NumberCol = NumberCol(target.add(c.target));
 
-    operator fun plus(value : Double): DoubleColumn = target.addToEach(value);
-*/
+//    operator fun plus(value : Double): DoubleColumn = target.addToEach(value);
 
+    operator fun minus(c : NumberCol): NumberCol = NumberCol(target.subtract(c.target));
 
+   // operator fun minus(value : Int): NumberCol = target.addToEach(-value);
 
-/*
-    operator fun minus(c : DoubleCol): DoubleColumn = target.subtract(c.target);
+    operator fun div(c: NumberCol): NumberCol = NumberCol(target.divide(c.target))
 
-    operator fun minus(value : Int): IntColumn = target.addToEach(-value);
-*/
-
-    operator fun div(c: NumberCol): DoubleColumn = target.divide(c.target)
-
-    operator fun times(c: NumberCol): DoubleColumn = target.multiply(c.target)
+    operator fun times(c: NumberCol): NumberCol = NumberCol(target.multiply(c.target))
 
     // math functions
     fun cube(): NumberCol = NumberCol(target.cube())

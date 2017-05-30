@@ -6,6 +6,8 @@ import com.github.lwhite1.tablesaw.api.DateColumn;
 import com.github.lwhite1.tablesaw.api.DoubleColumn;
 import com.github.lwhite1.tablesaw.api.Table;
 import com.github.lwhite1.tablesaw.columns.Column;
+import com.github.lwhite1.tablesaw.kapi.Col;
+import com.github.lwhite1.tablesaw.kapi.Dataframe;
 import com.google.common.collect.TreeBasedTable;
 
 import java.time.LocalDate;

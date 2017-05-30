@@ -2,6 +2,7 @@ package com.github.lwhite1.tablesaw.api.plot;
 
 import com.github.lwhite1.tablesaw.api.DoubleColumn;
 import com.github.lwhite1.tablesaw.api.ml.regression.LeastSquares;
+import com.github.lwhite1.tablesaw.kapi.NumberCol;
 import com.github.lwhite1.tablesaw.plotting.xchart.XchartScatter;
 import com.github.lwhite1.tablesaw.table.ViewGroup;
 
@@ -39,12 +40,10 @@ public class Scatter {
         XchartScatter.show(title, x, y);
     }
 
-/*
-    public static void show(String title, DoubleCol x, DoubleCol y) {
+    public static void show(String title, NumberCol x, NumberCol y) {
         XchartScatter.show(title, x.target(), y.target());
     }
 
-*/
 
     public static void fittedVsResidual(LeastSquares model) {
         XchartScatter.show("Fitted v. Residuals", "Fitted", model.fitted(), "Residuals", model.residuals());

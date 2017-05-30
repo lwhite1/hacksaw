@@ -2,6 +2,7 @@ package com.github.lwhite1.tablesaw.kapi
 
 import com.github.lwhite1.tablesaw.api.BooleanColumn
 import com.github.lwhite1.tablesaw.api.ColumnType
+import com.github.lwhite1.tablesaw.columns.Column
 import com.github.lwhite1.tablesaw.store.ColumnMetadata
 import com.github.lwhite1.tablesaw.util.Selection
 
@@ -9,6 +10,8 @@ import com.github.lwhite1.tablesaw.util.Selection
  *
  */
 class BooleanCol(val target: BooleanColumn): Col {
+
+    override fun target(): BooleanColumn = target
 
     override fun appendCell(stringValue: String) = target.appendCell(stringValue)
 

@@ -516,7 +516,7 @@ public class DoubleColumn extends AbstractColumn implements DoubleIterable, Colu
         return result;
     }
 
-    public DoubleColumn append(DoubleColumn column2) {
+    public DoubleColumn add(DoubleColumn column2) {
         DoubleColumn result = DoubleColumn.create(name() + " + " + column2.name(), size());
         for (int r = 0; r < size(); r++) {
             result.append(get(r) + column2.get(r));

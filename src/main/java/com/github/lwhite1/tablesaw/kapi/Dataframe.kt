@@ -7,6 +7,7 @@ import com.github.lwhite1.tablesaw.filtering.Filter
 import com.github.lwhite1.tablesaw.io.csv.CsvReader
 import com.github.lwhite1.tablesaw.reducing.NumericReduceFunction
 import com.github.lwhite1.tablesaw.reducing.SummaryFunction
+import com.github.lwhite1.tablesaw.table.ViewGroup
 import com.github.lwhite1.tablesaw.util.Selection
 import it.unimi.dsi.fastutil.ints.IntComparator
 
@@ -43,11 +44,8 @@ class Dataframe (val target : Table) {
 
     fun columnNames(): List<String> = target.columnNames()
 
-/*
-    fun addCol(column: Col) {
-        target.addColumn(column.target())
-    }
-*/
+    fun addCol(column: Col) = target.addColumn(column.target())
+
 
     // fun select(vararg columnName : String) : Projection = target.select(columnName)  // todo review
     fun selectWhere(): Table = target.selectWhere(column("name").isEqualTo("t"))  // todo review

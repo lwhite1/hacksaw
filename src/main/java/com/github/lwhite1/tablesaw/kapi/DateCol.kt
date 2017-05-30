@@ -16,6 +16,8 @@ import java.time.temporal.TemporalUnit
  */
 class DateCol(val target: DateColumn) : Col {
 
+    override fun target(): DateColumn = target
+
     override fun size(): Int = target.size()
 
     override fun summary(): Dataframe = Dataframe(target.summary())

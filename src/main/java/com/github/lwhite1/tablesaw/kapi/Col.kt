@@ -1,6 +1,7 @@
 package com.github.lwhite1.tablesaw.kapi
 
 import com.github.lwhite1.tablesaw.api.ColumnType
+import com.github.lwhite1.tablesaw.columns.Column
 import com.github.lwhite1.tablesaw.store.ColumnMetadata
 import com.github.lwhite1.tablesaw.util.Selection
 
@@ -123,6 +124,8 @@ interface Col {
     fun toDoubleArray(): DoubleArray {
         throw UnsupportedOperationException("Method toDoubleArray() is not supported on non-numeric columns")
     }
+
+    fun target(): Column<*>
 
 //    fun isMissing(): Selection
 

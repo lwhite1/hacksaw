@@ -11,6 +11,8 @@ import com.github.lwhite1.tablesaw.util.Selection
  */
 class CategoryCol(val target: CategoryColumn): Col {
 
+    override fun target(): CategoryColumn = target
+
     override fun appendCell(stringValue: String) = target.appendCell(stringValue)
 
     override fun size(): Int = target.size()

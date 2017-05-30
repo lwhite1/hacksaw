@@ -10,6 +10,8 @@ import java.time.LocalDateTime
  */
 class DateTimeCol(val target: DateTimeColumn) : Col {
 
+    override fun target(): DateTimeColumn = target
+
     override fun size(): Int = target.size()
 
     override fun summary(): Dataframe = Dataframe(target.summary())
