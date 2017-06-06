@@ -11,6 +11,9 @@ import com.github.lwhite1.tablesaw.table.ViewGroup
 import com.github.lwhite1.tablesaw.util.Selection
 import it.unimi.dsi.fastutil.ints.IntComparator
 
+
+fun c(columnName: String) = QueryHelper.column(columnName)
+
 /**
  *  Kotlin wrapper for Table.java
  */
@@ -20,7 +23,8 @@ class Dataframe (val target : Table) {
 
     override fun toString(): String = target.toString()
     fun show(): String = target.print()
-    fun printHtml(): String = target.printHtml()
+    fun print() = println(this.show())
+    fun asHtml(): String = target.printHtml()
 
     fun summary(): String = target.summary()
     fun shape(): String = target.shape()

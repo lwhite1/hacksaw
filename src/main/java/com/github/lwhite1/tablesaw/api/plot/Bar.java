@@ -2,6 +2,8 @@ package com.github.lwhite1.tablesaw.api.plot;
 
 import com.github.lwhite1.tablesaw.api.CategoryColumn;
 import com.github.lwhite1.tablesaw.api.DoubleColumn;
+import com.github.lwhite1.tablesaw.kapi.CategoryCol;
+import com.github.lwhite1.tablesaw.kapi.NumberCol;
 import com.github.lwhite1.tablesaw.plotting.fx.FxBar;
 import com.github.lwhite1.tablesaw.plotting.fx.FxPlot;
 import com.github.lwhite1.tablesaw.reducing.NumericSummaryTable;
@@ -21,6 +23,17 @@ public class Bar extends FxPlot {
         SwingUtilities.invokeLater(() -> {
             try {
                 initAndShowGUI(title, categoryColumn, numericColumn, 640, 480);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    public static void show(String title, CategoryCol categoryColumn, NumberCol numericColumn) throws Exception {
+
+        SwingUtilities.invokeLater(() -> {
+            try {
+                initAndShowGUI(title, categoryColumn.getTarget(), numericColumn.getTarget(), 640, 480);
             } catch (Exception e) {
                 e.printStackTrace();
             }

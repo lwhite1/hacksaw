@@ -1,6 +1,7 @@
 package com.github.lwhite1.tablesaw.api;
 
 import com.github.lwhite1.tablesaw.columns.Column;
+import com.github.lwhite1.tablesaw.columns.ColumnReference;
 import com.github.lwhite1.tablesaw.filtering.Filter;
 import com.github.lwhite1.tablesaw.io.csv.CsvReader;
 import com.github.lwhite1.tablesaw.io.csv.CsvWriter;

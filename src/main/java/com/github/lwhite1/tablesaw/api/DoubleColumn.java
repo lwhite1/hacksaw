@@ -20,6 +20,8 @@ import it.unimi.dsi.fastutil.doubles.DoubleIterator;
 import it.unimi.dsi.fastutil.doubles.DoubleOpenHashSet;
 import it.unimi.dsi.fastutil.doubles.DoubleSet;
 import it.unimi.dsi.fastutil.ints.IntComparator;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.nio.ByteBuffer;
 import java.util.regex.Matcher;
@@ -302,6 +304,10 @@ public class DoubleColumn extends AbstractColumn implements DoubleIterable, Colu
         return select(isLessThan, f);
     }
 
+    public Selection isLessThan(int f) {
+        return select(isLessThan, f);
+    }
+
     public Selection isMissing() {
         return select(isMissing);
     }
@@ -314,7 +320,15 @@ public class DoubleColumn extends AbstractColumn implements DoubleIterable, Colu
         return select(isGreaterThan, f);
     }
 
+    public Selection isGreaterThan(int f) {
+        return select(isGreaterThan, f);
+    }
+
     public Selection isGreaterThanOrEqualTo(double f) {
+        return select(isGreaterThanOrEqualTo, f);
+    }
+
+    public Selection isGreaterThanOrEqualTo(int f) {
         return select(isGreaterThanOrEqualTo, f);
     }
 
@@ -322,7 +336,15 @@ public class DoubleColumn extends AbstractColumn implements DoubleIterable, Colu
         return select(isLessThanOrEqualTo, f);
     }
 
+    public Selection isLessThanOrEqualTo(int f) {
+        return select(isLessThanOrEqualTo, f);
+    }
+
     public Selection isEqualTo(double d) {
+        return select(isEqualTo, d);
+    }
+
+    public Selection isEqualTo(int d) {
         return select(isEqualTo, d);
     }
 
@@ -734,5 +756,10 @@ public class DoubleColumn extends AbstractColumn implements DoubleIterable, Colu
             }
         }
         return returnValue;
+    }
+
+    @NotNull
+    public static DoubleColumn create(@NotNull String name, @Nullable double[] residuals) {
+        return DoubleColumn.create(name, new DoubleArrayList(residuals));
     }
 }

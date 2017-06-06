@@ -282,4 +282,6 @@ public interface Relation {
     default DateTimeColumn dateTimeColumn(String columnName) {
         return (DateTimeColumn) column(columnName);
     }
+
+    default DoubleColumn nCol(int i) {return numericColumn(i);}
 }

@@ -12,9 +12,9 @@ import com.github.lwhite1.tablesaw.util.Selection;
 public class DoubleBiFilter extends ColumnFilter {
 
     private final DoubleDoublePredicate predicate;
-    private final float value;
+    private final double value;
 
-    public DoubleBiFilter(ColumnReference columnReference, DoubleDoublePredicate predicate, float value) {
+    public DoubleBiFilter(ColumnReference columnReference, DoubleDoublePredicate predicate, double value) {
         super(columnReference);
         this.predicate = predicate;
         this.value = value;

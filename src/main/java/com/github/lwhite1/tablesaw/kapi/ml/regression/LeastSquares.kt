@@ -1,5 +1,6 @@
 package com.github.lwhite1.tablesaw.kapi.ml.regression
 
+import com.github.lwhite1.tablesaw.api.DoubleColumn
 import com.github.lwhite1.tablesaw.api.ml.regression.LeastSquares
 import com.github.lwhite1.tablesaw.kapi.NumberCol
 
@@ -17,13 +18,26 @@ class LeastSqModel(val target: LeastSquares) {
             val expVars = explanatoryVariables.map { x -> x.target() }.toTypedArray()
             return LeastSqModel(LeastSquares(responseVariable.target, *expVars))
         }
+
+        // Todo: constructor with table so we can pass columns using name only
+/*
+        fun train(dataframe:  Dataframe,
+                responseVariable: String,
+                vararg explanatoryVariables: String): LeastSqModel {
+
+            val xColumn = dataframe.target.column(responseVariable)
+
+            val expVars = explanatoryVariables.map { x -> x.target() }.toTypedArray()
+            return LeastSqModel(LeastSquares(xColumn, *expVars))
+        }
+*/
     }
 
     override fun toString(): String = target.toString()
 
-    fun residuals(): DoubleArray = target.residuals()
+    fun residuals(): NumberCol = NumberCol(DoubleColumn.create("residuals", target.residuals()))
 
-    fun fitted(): DoubleArray = target.fitted()
+    fun fitted(): NumberCol = NumberCol(DoubleColumn.create("fitted", target.fitted()))
 
     fun adjustedRSquared(): Double = target.adjustedRSquared()
 
@@ -45,7 +59,7 @@ class LeastSqModel(val target: LeastSquares) {
 
     fun predict(x: DoubleArray): Double = target.predict(x)
 
-    fun coefficients(): DoubleArray = target.coefficients()
+    fun coefficients(): NumberCol =  NumberCol(DoubleColumn.create("coefficients", target.coefficients()))
 
-    fun actuals(): DoubleArray = target.actuals()
+    fun actuals(): NumberCol =  NumberCol(DoubleColumn.create("actuals", target.actuals()))
 }

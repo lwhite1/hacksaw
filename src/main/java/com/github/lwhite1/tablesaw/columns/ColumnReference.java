@@ -103,7 +103,11 @@ public class ColumnReference {
         return new DoubleIsIn(this, doubles);
     }
 
-    public Filter isGreaterThan(float value) {
+    public Filter isGreaterThan(double value) {
+        return new DoubleBiFilter(this, DoubleColumnUtils.isGreaterThan, value);
+    }
+
+    public Filter isGreaterThan(int value) {
         return new DoubleBiFilter(this, DoubleColumnUtils.isGreaterThan, value);
     }
 

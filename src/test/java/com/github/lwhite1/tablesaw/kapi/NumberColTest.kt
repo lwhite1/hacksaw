@@ -96,7 +96,7 @@ class NumberColTest {
 
     @Test
     fun sortAscending() {
-        column1.sortAscending()  //TODO fix
+        column1.sortAscending()
         println(column1.show())
     }
 

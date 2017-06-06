@@ -10,6 +10,7 @@ class NumberCol(val target: DoubleColumn) : Col {
 
     override fun target(): DoubleColumn = target
 
+
     override fun toDoubleArray(): DoubleArray = target.toDoubleArray()
 
     fun getFloat(index: Int): Float = target.getFloat(index)
@@ -78,10 +79,19 @@ class NumberCol(val target: DoubleColumn) : Col {
     // comparisons
 
     infix fun isGreaterThan(value: Double): Selection = target.isGreaterThan(value)
-    fun isGreaterThanOrEqualTo(value: Double): Selection = target.isGreaterThanOrEqualTo(value)
-    fun isLessThanOrEqualTo(value: Double): Selection = target.isLessThanOrEqualTo(value)
-    fun isLessThan(value: Double): Selection = target.isLessThan(value)
-    fun isEqualTo(value: Double): Selection = target.isEqualTo(value)
+    infix fun isGreaterThan(value: Int): Selection = target.isGreaterThan(value)
+
+    infix fun isGreaterThanOrEqualTo(value: Double): Selection = target.isGreaterThanOrEqualTo(value)
+    infix fun isGreaterThanOrEqualTo(value: Int): Selection = target.isGreaterThanOrEqualTo(value)
+
+    infix fun isLessThanOrEqualTo(value: Double): Selection = target.isLessThanOrEqualTo(value)
+    infix fun isLessThanOrEqualTo(value: Int): Selection = target.isLessThanOrEqualTo(value)
+
+    infix fun isLessThan(value: Double): Selection = target.isLessThan(value)
+    infix fun isLessThan(value: Int): Selection = target.isLessThan(value)
+
+    infix fun isEqualTo(value: Double): Selection = target.isEqualTo(value)
+    infix fun isEqualTo(value: Int): Selection = target.isEqualTo(value)
 
     // other boolean expressions
     fun isZero(): Selection = target.isZero
